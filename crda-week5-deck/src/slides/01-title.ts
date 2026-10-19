@@ -1,8 +1,8 @@
 import { gsap } from 'gsap';
-import { group } from '../config/deck.config';
+import { group, team } from '../config/deck.config';
 import { paper } from '../content/paper';
 import type { SlideDef } from '../lib/slide';
-import { $, $$, gaussian, mulberry32, ph } from '../lib/util';
+import { $, $$, gaussian, mulberry32 } from '../lib/util';
 
 // Illustrative constellation: solid = observed rows, hollow = synthetic rows.
 const rand = mulberry32(7);
@@ -38,7 +38,7 @@ export const titleSlide: SlideDef = {
         </div>
         <div class="title-foot">
           <span class="chip chip-amber">Proposal stage · no replication results yet</span>
-          <span class="group-line">${ph(group.name)} · ${ph(group.date)}</span>
+          <span class="group-line">${[team.members.map((m) => m.name).join(' · '), group.name, group.date].filter(Boolean).join(' — ')}</span>
         </div>
       </div>
       <figure class="title-figure" aria-hidden="true">

@@ -1,18 +1,31 @@
 /**
  * ─────────────────────────────────────────────────────────────────────────────
  *  THE ONE FILE TO EDIT.
- *  Group details, speaking split, replication scope and Week 9 targets all live
- *  here. Anything we have not decided yet is marked TODO / PLACEHOLDER and is
- *  rendered on-screen with a dashed amber outline so it cannot slip through.
+ *
+ *  WHAT IS CONFIRMED vs PROPOSED (keep this block honest):
+ *   ✔ CONFIRMED  Presenters: exactly three — Anik, Alvi, Atul (that spelling).
+ *   ✔ CONFIRMED  Speaking split: Anik slides 1–3, Alvi 4–5, Atul 6, 8, 9;
+ *                everyone speaks to their own card on slide 7.
+ *   ✎ PROPOSED   Research roles (environment / experiments / analysis) and the
+ *                cross-check pairs — shown on screen as "Proposed — confirm
+ *                with team" until `rolesStatus` is set to 'confirmed'.
+ *   ✎ PROPOSED   Replication scope (datasets, models, seeds) and milestone
+ *                weeks/owners — shown as "proposed" until confirmed below.
+ *   ? UNKNOWN    Group name/number and presentation date — left null, so they
+ *                are simply not shown. `npm run validate:ready` fails until set.
+ *
+ *  `npm run validate:deck`  — development checks (passes with proposals).
+ *  `npm run validate:ready` — presentation-ready checks (fails until every
+ *                             PROPOSED/UNKNOWN item above is confirmed).
  * ─────────────────────────────────────────────────────────────────────────────
  */
 import type { DatasetKey } from '../content/paper';
 
 export type MemberId = 'A' | 'B' | 'C';
+export type Status = 'confirmed' | 'proposed';
 
 export interface Member {
   id: MemberId;
-  /** Replace with the real name, e.g. 'Priya Shah'. */
   name: string;
   role: string;
   owns: string[];
@@ -35,159 +48,125 @@ export interface Milestone {
 /** Speaking split: which member presents each slide (by slide id). */
 export type SpeakingSplit = Record<string, MemberId[]>;
 
-interface TeamPreset {
-  members: Member[];
-  speaking: SpeakingSplit;
-}
-
-// ── 1. Group ────────────────────────────────────────────────────────────────
-export const group = {
-  name: 'TODO: Group name / number',
+// ── 1. Group (null = unknown → not displayed; validate:ready fails) ──────────
+export const group: { name: string | null; date: string | null; module: string; session: string } = {
+  name: null,
+  date: null,
   module: 'ECS7029P Research Methods · 2026/27',
   session: 'Week 5 · First interim presentation',
-  date: 'TODO: presentation date',
 };
 
-// ── 2. Team size: set to 2 or 3 ─────────────────────────────────────────────
-export const MEMBER_COUNT = 3 as 2 | 3;
-
-const threePeople: TeamPreset = {
-  members: [
-    {
-      id: 'A',
-      name: 'TODO: Member A',
-      role: 'Environment & reproducibility',
-      owns: [
-        'Python 3.11 env from the authors’ pinned requirements',
-        'Run the demo notebook end-to-end',
-        'Seed, config and version logging',
-      ],
-      checks: 'B',
-      crossCheck: 'Re-runs one of B’s configs independently',
-    },
-    {
-      id: 'B',
-      name: 'TODO: Member B',
-      role: 'Experiment execution',
-      owns: [
-        'Baseline vs CRDA runs (MLP, XGBoost)',
-        'Controlled splits and seeds',
-        'Saves every config.json / results.csv',
-      ],
-      checks: 'C',
-      crossCheck: 'Recomputes C’s comparison table from raw results',
-    },
-    {
-      id: 'C',
-      name: 'TODO: Member C',
-      role: 'Analysis, documentation & delivery',
-      owns: [
-        'Our ΔMSE vs the paper’s Table 1',
-        'Obstacle and deviation log',
-        'Slides, timing and rehearsal',
-      ],
-      checks: 'A',
-      crossCheck: 'Rebuilds A’s environment from the written steps',
-    },
-  ],
-  speaking: {
-    title: ['A'],
-    problem: ['A'],
-    naive: ['A'],
-    mechanism: ['B'],
-    assumption: ['B'],
-    plan: ['C'],
-    team: ['A', 'B', 'C'],
-    targets: ['C'],
-    references: ['C'],
+// ── 2. Team — exactly three confirmed presenters ────────────────────────────
+export const members: Member[] = [
+  {
+    id: 'A',
+    name: 'Anik',
+    role: 'Environment & reproducibility',
+    owns: [
+      'Python 3.11 env from the authors’ pinned requirements',
+      'Run the demo notebook end-to-end',
+      'Seed, config and version logging',
+    ],
+    checks: 'B',
+    crossCheck: 'Re-runs one of Alvi’s configs independently',
   },
-};
-
-const twoPeople: TeamPreset = {
-  members: [
-    {
-      id: 'A',
-      name: 'TODO: Member A',
-      role: 'Environment, reproducibility & analysis',
-      owns: [
-        'Python 3.11 env + demo notebook run',
-        'Seed, config and version logging',
-        'Our ΔMSE vs the paper’s Table 1',
-      ],
-      checks: 'B',
-      crossCheck: 'Re-runs one of B’s configs independently',
-    },
-    {
-      id: 'B',
-      name: 'TODO: Member B',
-      role: 'Experiments, documentation & delivery',
-      owns: [
-        'Baseline vs CRDA runs (MLP, XGBoost)',
-        'Obstacle and deviation log',
-        'Slides, timing and rehearsal',
-      ],
-      checks: 'A',
-      crossCheck: 'Rebuilds A’s environment from the written steps',
-    },
-  ],
-  speaking: {
-    title: ['A'],
-    problem: ['A'],
-    naive: ['A'],
-    mechanism: ['A'],
-    assumption: ['B'],
-    plan: ['B'],
-    team: ['A', 'B'],
-    targets: ['B'],
-    references: ['B'],
+  {
+    id: 'B',
+    name: 'Alvi',
+    role: 'Experiment execution',
+    owns: [
+      'Baseline vs CRDA runs (MLP, XGBoost)',
+      'Controlled splits and seeds',
+      'Saves every config.json / results.csv',
+    ],
+    checks: 'C',
+    crossCheck: 'Recomputes Atul’s comparison table from raw results',
   },
+  {
+    id: 'C',
+    name: 'Atul',
+    role: 'Analysis, documentation & delivery',
+    owns: [
+      'Our ΔMSE next to the paper’s Table 1',
+      'Obstacle and deviation log',
+      'Slides, timing and rehearsal',
+    ],
+    checks: 'A',
+    crossCheck: 'Rebuilds Anik’s environment from the written steps',
+  },
+];
+
+/** Research-role allocation above: 'proposed' until the three of you agree it. */
+export const rolesStatus = 'proposed' as Status;
+
+/** Confirmed by the team brief. */
+export const speaking: SpeakingSplit = {
+  title: ['A'],
+  problem: ['A'],
+  naive: ['A'],
+  mechanism: ['B'],
+  assumption: ['B'],
+  plan: ['C'],
+  team: ['A', 'B', 'C'],
+  targets: ['C'],
+  references: ['C'],
 };
 
-export const team: TeamPreset = MEMBER_COUNT === 2 ? twoPeople : threePeople;
+export const team = { members, speaking };
 
-// ── 3. Replication scope (adjustable without touching the slides) ────────────
+// ── 3. Replication scope (proposed initial scope) ───────────────────────────
 export const scope = {
   /** First dataset is the primary target; the authors' demo also uses it. */
   datasets: ['EnergyEfficiency', 'ConcreteStrength'] as DatasetKey[],
   models: ['MLP', 'XGBoost'],
-  /** The paper averages over 15 seeds; we may start smaller and say so. */
-  seeds: 'TODO: e.g. 3 seeds first pass (paper: 15)',
-  /** Status shown on the plan slide. Do not change until work is done. */
-  status: 'Proposed — not yet started',
+  /** First-pass seeds per configuration; the paper averages 15. */
+  seeds: 3,
+  paperSeeds: 15,
+  status: 'proposed' as Status,
 };
 
-// ── 4. Targets before Week 9 ────────────────────────────────────────────────
+// ── 4. Targets before Week 9 (proposed weeks and owners) ────────────────────
 export const milestones: Milestone[] = [
   {
     title: 'Environment reproduced',
     doneWhen: 'Authors’ demo notebook runs end-to-end on our machine',
     evidence: 'pip freeze, OS / CPU note, demo output',
     owners: ['A'],
-    due: 'TODO: Week 6',
+    due: 'Week 6',
   },
   {
     title: 'Baselines logged',
     doneWhen: 'Unaugmented MLP + XGBoost on dataset 1, fixed seeds',
     evidence: 'config.json + results.csv per run',
     owners: ['B'],
-    due: 'TODO: Week 7',
+    due: 'Week 7',
   },
   {
     title: 'First CRDA comparison',
     doneWhen: 'Our ΔMSE next to the paper’s Table 1 row',
     evidence: 'Side-by-side table, Wilcoxon p-values',
-    owners: MEMBER_COUNT === 2 ? ['A', 'B'] : ['B', 'C'],
-    due: 'TODO: Week 8',
+    owners: ['B', 'C'],
+    due: 'Week 8',
   },
   {
     title: 'Obstacle log',
     doneWhen: 'Every deviation recorded with its fix or open question',
     evidence: 'Shared log, discussed at Week 9',
-    owners: MEMBER_COUNT === 2 ? ['B'] : ['C'],
+    owners: ['C'],
     due: 'Ongoing',
   },
 ];
+export const milestonesStatus = 'proposed' as Status;
 
 // ── 5. Closing research question ────────────────────────────────────────────
 export const researchQuestion =
   'Do CRDA’s reported gains hold when we re-run the authors’ own pipeline — and where do they not?';
+
+/** Open team decisions, listed by validate:ready and the README checklist. */
+export const openDecisions = (): string[] => [
+  ...(group.name ? [] : ['Group name / number (group.name)']),
+  ...(group.date ? [] : ['Presentation date (group.date)']),
+  ...(rolesStatus === 'confirmed' ? [] : ['Agree research roles and cross-check pairs (rolesStatus)']),
+  ...(scope.status === 'confirmed' ? [] : ['Agree replication scope: datasets, models, seeds (scope.status)']),
+  ...(milestonesStatus === 'confirmed' ? [] : ['Agree milestone weeks and owners (milestonesStatus)']),
+];
