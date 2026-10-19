@@ -9,24 +9,35 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --port 4173",
     "notes": "tsx scripts/export-notes.ts",
-    "pdf": "node scripts/export-pdf.mjs"
+    "pdf": "tsx scripts/export-pdf.ts",
+    "validate:deck": "tsx scripts/validate.ts",
+    "validate:ready": "tsx scripts/validate.ts --ready",
+    "test": "tsx --test tests/unit/*.test.ts",
+    "test:browser": "npm run build && tsx --test tests/browser/*.test.ts",
+    "qa:visual": "npm run build && tsx scripts/visual-qa.ts"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.2.6",
     "@fontsource-variable/inter-tight": "^5.2.6",
     "@fontsource-variable/jetbrains-mono": "^5.2.6",
+    "@openuidev/react-lang": "^0.3.0",
     "d3-scale": "^4.0.2",
     "d3-shape": "^3.2.0",
     "gsap": "^3.13.0",
     "katex": "^0.16.22",
-    "reveal.js": "^5.2.1"
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "reveal.js": "^5.2.1",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@types/d3-scale": "^4.0.9",
     "@types/d3-shape": "^3.1.7",
     "@types/katex": "^0.16.7",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "@types/reveal.js": "^5.2.0",
-    "puppeteer-core": "^23.11.1",
+    "playwright-core": "^1.63.0",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3",
     "vite": "^6.3.5"

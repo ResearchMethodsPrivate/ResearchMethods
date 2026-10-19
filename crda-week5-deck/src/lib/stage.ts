@@ -48,6 +48,28 @@ export class Stage {
     else this.active = tl.tweenTo(at, { ease: 'none', duration: at / 1.6 });
   }
 
+  /** QA/debug (read-only): where the current slide's timeline is, and where it should settle. */
+  debugState() {
+    const tl = this.current();
+    const step = this.step();
+    return {
+      step,
+      time: tl?.time() ?? null,
+      target: tl ? (tl.labels[`s${step}`] ?? tl.duration()) : null,
+      labels: tl ? { ...tl.labels } : {},
+      duration: tl?.duration() ?? 0,
+      animating: Boolean(this.active?.isActive()),
+    };
+  }
+
+  /** QA only: freeze the current slide's timeline at an exact time to capture intermediate frames. */
+  seek(time: number) {
+    const tl = this.current();
+    if (!tl) return;
+    this.kill();
+    tl.pause(time);
+  }
+
   private current() {
     return this.timelines.get(this.deck.getCurrentSlide() as HTMLElement);
   }

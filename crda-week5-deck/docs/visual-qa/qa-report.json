@@ -1,0 +1,79 @@
+{
+  "generated": "2026-10-19T13:11:07.414Z",
+  "browser": "Chromium 153.0.8010.12 (Playwright 1.63.0, headless)",
+  "motionSeconds": {
+    "title": {
+      "intro": 2.775,
+      "steps": []
+    },
+    "problem": {
+      "intro": 1.58,
+      "steps": [
+        1.5,
+        1.14,
+        2.094
+      ]
+    },
+    "naive": {
+      "intro": 2.4,
+      "steps": [
+        1.4,
+        0.9
+      ]
+    },
+    "mechanism": {
+      "intro": 2,
+      "steps": [
+        1.21,
+        1.91,
+        2.25,
+        1.85
+      ]
+    },
+    "assumption": {
+      "intro": 1.101,
+      "steps": [
+        1.34,
+        2.45,
+        2.4,
+        1.2
+      ]
+    },
+    "plan": {
+      "intro": 1.451,
+      "steps": [
+        2.2,
+        0.5
+      ]
+    },
+    "team": {
+      "intro": 1.101,
+      "steps": [
+        1.8
+      ]
+    },
+    "targets": {
+      "intro": 1.451,
+      "steps": [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.7
+      ]
+    },
+    "references": {
+      "intro": 0.84,
+      "steps": []
+    }
+  },
+  "outOfFrame1920": {},
+  "scrollbars1920": false,
+  "exploreClosed": true,
+  "fullscreenEntered": true,
+  "remoteRequests": [],
+  "consoleErrors": [],
+  "failedLoads": [],
+  "scrollbars1366x768": [],
+  "scrollbars1280x720": []
+}

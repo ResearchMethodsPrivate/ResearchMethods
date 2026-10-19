@@ -13,24 +13,11 @@ import './styles/base.css';
 import './styles/slides.css';
 import './styles/slides-2.css';
 
-import { renderSlide, type SlideDef } from './lib/slide';
+import { renderSlide } from './lib/slide';
 import { Stage, prefersReducedMotion } from './lib/stage';
-import { titleSlide } from './slides/01-title';
-import { problemSlide } from './slides/02-problem';
-import { naiveSlide } from './slides/03-naive';
-import { mechanismSlide } from './slides/04-mechanism';
-import { assumptionSlide } from './slides/05-assumption';
-import { planSlide } from './slides/06-plan';
-import { teamSlide } from './slides/07-team';
-import { targetsSlide } from './slides/08-targets';
-import { referencesSlide } from './slides/09-references';
+import { slides } from './slides/index';
 
 gsap.registerPlugin(DrawSVGPlugin);
-
-const slides: SlideDef[] = [
-  titleSlide, problemSlide, naiveSlide, mechanismSlide, assumptionSlide,
-  planSlide, teamSlide, targetsSlide, referencesSlide,
-];
 
 const container = document.getElementById('slides')!;
 container.innerHTML = slides.map((s, i) => renderSlide(s, i, slides.length)).join('');
@@ -71,9 +58,18 @@ deck.initialize().then(() => {
     if (tl) stage.register(section, tl);
   });
   deck.addKeyBinding({ keyCode: 82, key: 'R', description: 'Replay slide animation' }, () => stage.replay());
+  if (!printing) {
+    deck.addKeyBinding({ keyCode: 69, key: 'E', description: 'Explore CRDA (optional OpenUI panel)' }, async () => {
+      // Must be set before @openuidev/react-lang evaluates: stops its dev-mode
+      // devtools auto-mount, which would fetch a script from jsDelivr.
+      (globalThis as Record<symbol, unknown>)[Symbol.for('openui.devtools.autoMount')] = true;
+      const panel = await import('./explore/panel');
+      if (!panel.isOpen()) panel.open(deck);
+    });
+  }
   if (printing) stage.finishAll();
   else stage.replay();
 });
 
-// Expose for debugging / screenshots.
-(window as unknown as { deck: Reveal.Api }).deck = deck;
+// Debug/QA hook (read-only use by tests/visual-qa scripts; harmless in the talk).
+Object.assign(window as object, { deck, __crda: { stage, ids: slides.map((s) => s.id) } });

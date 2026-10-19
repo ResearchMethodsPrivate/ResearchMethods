@@ -57,9 +57,6 @@ export function polyfit(xs: number[], ys: number[], degree: number): (x: number)
 export const tex = (src: string, display = false) =>
   katex.renderToString(src, { throwOnError: false, displayMode: display, output: 'html' });
 
-/** Wraps unresolved TODO / PLACEHOLDER strings so they are visibly flagged. */
-export const ph = (s: string) =>
-  /TODO|PLACEHOLDER/.test(s) ? `<span class="placeholder">${s}</span>` : s;
 
 export const memberName = (id: MemberId) => team.members.find((m) => m.id === id)?.name ?? id;
 

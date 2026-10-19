@@ -1,101 +1,102 @@
 # CRDA · Week 5 interim presentation
 
-Browser-based, animated slide deck for **ECS7029P Research Methods: First Interim Presentation (Week 5)**.
+Animated browser slide deck for **ECS7029P Research Methods — First Interim Presentation (Week 5)**, presented by **Anik, Alvi and Atul**.
 Paper: Mohebbi, Schulte, Li & Poupart (2026), *Counterfactual Residual Data Augmentation for Regression*, ICML 2026.
 
-Scope is **Week 5 only**: the problem the paper addresses, our proposed replication, group responsibilities and targets before Week 9. There are **no replication results** in this deck, because we don't have any yet.
+Scope is **Week 5 only**: the problem the paper addresses, enough background to explain the method, the proposed replication and who does what, and targets before Week 9. The deck contains **no replication results**, because the group has not run any yet.
 
 ## Run it
 
 ```bash
-npm install
+npm ci
 ```
 
 ```bash
 npm run dev
 ```
 
-Open **http://localhost:5173/**. Press **F** for fullscreen.
+Open **http://localhost:5173/** and press **F** for fullscreen.
+
+> `npm ci` runs OpenUI’s install-time telemetry (a pseudonymous event sent to PostHog — see `docs/OPENUI_DECISION.md`). To opt out, set `OPENUI_TELEMETRY_DISABLED=1` first. In PowerShell: `$env:OPENUI_TELEMETRY_DISABLED=1; npm ci`.
 
 | Command | What it does |
 |---|---|
-| `npm run build` | Type-checks and builds a static, fully offline copy into `dist/` |
+| `npm run build` | Type-checks and builds a fully offline copy into `dist/` |
 | `npm run preview` | Serves `dist/` at http://localhost:4173/ |
-| `npm run notes` | Writes `docs/speaker-notes.md`, the rehearsal script with a timing check |
-| `npm run pdf` | After `build`, writes the static fallback `docs/crda-week5-deck.pdf` (needs Chrome or Edge installed) |
+| `npm run notes` | Writes `docs/speaker-notes.md`: the script, a timing model and a stopwatch log |
+| `npm run pdf` | After `build`, writes the static fallback `docs/crda-week5-deck.pdf` (Playwright Chromium) |
+| `npm run validate:deck` | Development checks: names, slide ↔ notes ↔ speaker ids, owners, required labels, citations, timing. Passes while items are still *proposed* |
+| `npm run validate:ready` | Presentation-ready check. **Fails until every open team decision is confirmed** (see the checklist below) |
+| `npm test` | Unit tests: the CRDA invariant `y′ = ĝ(x′) + z`, signed ΔMSE bars, the OpenUI fixture |
+| `npm run test:browser` | Real-browser tests: navigation, rapid clicks, back/forward, deep links, overview, `R`, `S`, reduced motion, print, explorer, offline |
+| `npm run qa:visual` | Screenshots of every step plus 25/50/75 % frames, other viewports, the slide-4 video and a contact sheet → `docs/visual-qa/` |
+
+Browser tests and QA use Playwright’s Chromium. If it is missing, run `npx playwright-core install chromium ffmpeg` once.
 
 ### Presenting offline
-All fonts, KaTeX and libraries are bundled, so nothing is fetched at runtime. Before the day:
-1. Run `npm run build`.
-2. Copy `dist/` onto the presenting machine.
-3. Serve it with `npm run preview`, or any static server (e.g. `npx serve dist`).
 
-Opening `dist/index.html` straight from disk can be blocked by browser module rules, so serve it instead. Bring `docs/crda-week5-deck.pdf` as a backup too.
+1. Run `npm run build`.
+2. Copy `dist/` to the presenting laptop.
+3. Serve it with `npm run preview`, or `npx serve dist` — opening `index.html` straight from disk can be blocked by browser module rules.
+
+Fonts, KaTeX and every library are bundled, so the deck makes no network requests (tested). Bring `docs/crda-week5-deck.pdf` as a backup.
 
 ## Controls
 
 | Key | Action |
 |---|---|
 | → / Space / ↓ | Next animation step, then next slide |
-| ← / ↑ | Previous step (rewinds quickly) |
-| **S** | Speaker view: notes, timer, next slide |
+| ← / ↑ | Previous step (quick rewind) |
+| **S** | Speaker view: notes with presenter names, timer, next slide |
 | **O** / Esc | Overview |
-| **R** | Replay the current slide's animation (handy on slide 4, the mechanism) |
+| **R** | Replay the current slide’s animation (useful on slide 4) |
+| **E** | Optional “Explore CRDA” panel (OpenUI); Esc or E closes it. Not a counted slide |
 | **F** | Fullscreen |
 | ? | All shortcuts |
 
-Each click on an animated slide is one hidden Reveal fragment that drives a labelled GSAP timeline step. If you go backwards, use the overview, or open a deep link, the slide jumps straight to its exact state, so nothing gets duplicated or replayed. `prefers-reduced-motion` or `?static` in the URL turns off all tweening.
+Each click is a hidden Reveal fragment that drives a labelled GSAP step (`s0`…`sN`). Going back, using the overview or opening a deep link lands on the exact state, so nothing is replayed or duplicated. `prefers-reduced-motion` or `?static` turns tweening off.
 
 ## What to edit
 
-| File | What it controls |
+| File | Controls |
 |---|---|
-| `src/config/deck.config.ts` | **Everything team-specific.** Group name, date, `MEMBER_COUNT` (2 or 3), names, roles, cross-checks, speaking split, datasets in scope, seeds, Week 9 milestones and the closing research question |
-| `src/content/notes.ts` | Speaker notes and per-slide target seconds |
-| `src/content/paper.ts` | Verified numbers from the paper and repo (Table 1, headline averages, audit questions) |
-| `src/content/references.ts` | Reference list. Dataset references follow `scope.datasets` automatically |
-| `src/slides/*.ts` | One file per slide: markup plus its GSAP timeline |
-| `src/styles/*.css` | Design tokens, layout and per-slide styles |
+| `src/config/deck.config.ts` | **Team-specific facts.** Presenters (confirmed), research roles (proposed), speaking split, scope, seeds, milestones, group name/date. The header says what is confirmed and what isn't |
+| `src/content/notes.ts` | Speaker notes and target seconds |
+| `src/content/paper.ts` | Verified numbers from the paper/repo (Table 1, headline averages, code-reading questions) |
+| `src/content/references.ts` | Reference list; dataset references follow `scope.datasets` |
+| `src/slides/*.ts` | One file per slide: markup + GSAP timeline |
+| `src/lib/crda-geometry.ts` | The tested maths behind the slide-4 sketch |
+| `src/explore/` | The optional OpenUI explorer |
 
-On screen, any value that still contains `TODO` / `PLACEHOLDER` gets a **dashed amber outline**.
+## Checklist — open team decisions (`npm run validate:ready` lists these)
 
-**Later on:** if you add your own results, put them in a new data file and label them clearly as ours. Keep `paper.ts` for the authors' reported numbers only. Week 9 belongs in a separate deck, not this one.
+Presenter names are **confirmed** and are not on this list.
 
-## Checklist: what we still need to fill in
-
-- [ ] `group.name` and `group.date` in `deck.config.ts`
-- [ ] `MEMBER_COUNT`: 2 or 3
-- [ ] Real names for Member A / B / C (`name` fields)
-- [ ] Confirm roles, owned tasks and cross-checks, and the speaking split (`team.speaking`)
-- [ ] Confirm the replication scope: `scope.datasets` (default Energy Efficiency + Concrete Strength), models, `scope.seeds`
-- [ ] If the scope changes, update the sentence on slide 6's notes ("roughly twelve to twenty-eight percent") so it matches Table 1 for the new datasets
-- [ ] Milestone due weeks (`due: 'TODO: Week 6'` …). If you add or remove milestones, update `notes.targets`
-- [ ] Rehearse with `npm run notes` and a stopwatch. The brief allows 6–8 minutes
-- [ ] Re-export the PDF after editing: `npm run build && npm run pdf`
+- [ ] Group name / number → `group.name`
+- [ ] Presentation date → `group.date`
+- [ ] Agree the research roles and cross-check pairs, then set `rolesStatus = 'confirmed'`. The slide shows “Proposed — confirm with team” until then
+- [ ] Agree the replication scope (Energy Efficiency + Concrete Strength, MLP + XGBoost, 3 seeds first pass), then set `scope.status = 'confirmed'`
+- [ ] Agree milestone weeks and owners, then set `milestonesStatus = 'confirmed'`
+- [ ] **Stopwatch rehearsal** of the full talk. The 6:55 figure is a model, not a measurement; record runs in `docs/speaker-notes.md`
+- [ ] After any edit: `npm run validate:deck && npm test && npm run build && npm run pdf`
 
 ## Timing
 
-Run `npm run notes` to regenerate the table. At 150 wpm the current notes give:
+`npm run notes` gives per-slide speech and *modelled live* time. The model includes transitions, clicks, speaker handoffs and the measured GSAP durations from `qa:visual`. Current figures: target 7:00, speech 6:00, **modelled live 6:55**, inside the 6:00–8:00 brief.
 
-| Slide | Target | Estimate |
-|---|---:|---:|
-| 1 Opening | 25s | 26s |
-| 2 The problem | 50s | 46s |
-| 3 Why naive augmentation is hard | 45s | 41s |
-| 4 The CRDA idea | 75s | 76s |
-| 5 What must be true | 55s | 56s |
-| 6 What we will replicate | 55s | 56s |
-| 7 Who does what | 50s | 53s |
-| 8 Targets before Week 9 | 50s | 49s |
-| 9 References | 10s | 9s |
-| **Total** | **6:55** | **6:52** |
+## Evidence
+
+- `docs/VISUAL_REVIEW.md` — what was rendered and inspected, what was fixed, and what is still unverified.
+- `docs/OPENUI_DECISION.md` — the OpenUI integration and the risks it brings.
+- `docs/visual-qa/` — screenshots, intermediate frames, slide-4 video, contact sheet, `qa-report.json`.
 
 ## Source integrity
 
-- Every equation and number traces back to `paper.pdf` (abstract, Assumption 3.1, Algorithm 1, §3.3, §6, Table 1) or to the official repo (`README`, `experiments/*/config.json`, `src/experiment.py`, `src/filter.py`).
-- The −22.9% / −6.4% headline and the Table 1 bars are labelled **"Reported by the original paper — not yet replicated by our group"**.
-- The plots on slides 1, 2 and 4, the housing row on slide 3 and the feature chips on slide 5 are **illustrative**, and each is labelled that way on the slide.
-- The two "audit questions" on slide 6 come from our own reading of the repo. They are framed as things to check, not as findings:
-  - The Table 1 configs use `ignore_filter: true`.
-  - The augmented MSE is the average of 10 CV-fold models.
-- Reference URLs were checked live on 19 Oct 2026.
+- Equations and numbers come from `paper.pdf` (abstract, Assumption 3.1, Algorithm 1, §3.3, §6, Tables 1–2) or the official repo (`src/utils/config.py`, `experiments/*/config.json`, `src/experiment.py`).
+- The −22.9 % / −6.4 % headline and the Table 1 bars are labelled **“Original authors’ reported results — not our group’s reproduced results.”**
+- The plots on slides 1, 2 and 4, the housing row on slide 3 and the feature chips on slide 5 are invented and labelled **illustrative**. Slide 4 uses the repo’s default ±10 % perturbation range; the garage example appears only as the paper’s analogy.
+- The two code-reading items on slide 6 are lines found in the authors’ repo; what they *imply* is framed as open questions.
+
+## AI assistance disclosure
+
+Claude (an AI assistant) helped to build this deck’s code, animations and tests, to draft speaker-note wording, and to cross-check paper claims against the PDF and repository. It did not run any CRDA experiments, and the deck doesn't claim the group has. The presenters are responsible for checking the content, confirming the proposed roles, scope and dates, and rehearsing the delivery.

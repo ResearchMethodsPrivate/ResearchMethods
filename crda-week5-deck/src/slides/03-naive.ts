@@ -17,15 +17,15 @@ const tile = (cls: string) => `
 export const naiveSlide: SlideDef = {
   id: 'naive',
   steps: 2,
-  source: 'Row: illustrative, invented values · Approaches as characterised by Mohebbi et al. (2026), §2',
+  source: 'Row: illustrative, invented values · Approaches as characterised by Mohebbi et al. (2026), §2 & Table 2',
   html: () => `
     <header class="slide-head">
       <p class="kicker">02 — Why not just augment?</p>
-      <h2>Images have safe transformations. Tables don’t.</h2>
+      <h2>Images have label-safe transformations. Tables rarely do.</h2>
     </header>
     <div class="split split-even naive-grid">
       <div class="panel panel-img">
-        <h3>Images: a <span class="accent">label-preserving</span> symmetry</h3>
+        <h3>Images: <span class="accent">label-preserving</span> for suitable transforms</h3>
         <div class="tile-stage">
           <svg viewBox="-80 -80 580 580" aria-label="A handwritten seven rotated in both directions keeps its label.">
             <g transform="translate(210 210)">
@@ -35,10 +35,11 @@ export const naiveSlide: SlideDef = {
             </g>
           </svg>
         </div>
-        <p class="verdict ok"><span class="tag">label</span> “7” <span class="check">✓ still true after rotating</span></p>
+        <p class="verdict ok"><span class="tag">label</span> “7” <span class="check">✓ small rotations keep it a 7</span></p>
+        <p class="caveat">…but rotate a 6 by 180° and it reads as a 9</p>
       </div>
       <div class="panel panel-tab">
-        <h3>Tabular regression: <span class="warn">no obvious symmetry</span></h3>
+        <h3>Tabular regression: <span class="warn">no known label-safe transform</span></h3>
         <div class="row-table" role="table" aria-label="Illustrative house row and a naively perturbed copy">
           <div class="rt-row rt-head" role="row">
             <span role="columnheader">Floor area</span><span role="columnheader">Beds</span><span role="columnheader">Garage</span><span role="columnheader">Location</span><span role="columnheader" class="rt-target">Price&nbsp;(target)</span>
@@ -51,25 +52,26 @@ export const naiveSlide: SlideDef = {
           </div>
         </div>
         <p class="rt-note"><span class="tag tag-cyan">naive copy</span> floor area +20%, price copied over</p>
-        <p class="verdict bad">✗ Bigger house, same price — the label no longer fits the row</p>
+        <p class="verdict bad">✗ Unjustified label: nothing tells us what this house would sell for</p>
         <p class="illus">Illustrative example — invented values</p>
       </div>
     </div>
     <div class="existing">
       <div class="ex-item"><span class="ex-k">Interpolate rows</span> SMOTE-style, C-Mixup <span class="ex-cite">(Chawla et al., 2002; Yao et al., 2022)</span></div>
       <div class="ex-item"><span class="ex-k">Generate rows</span> CTGAN, TabDDPM — target treated as just another column <span class="ex-cite">(Xu et al., 2019; Kotelnikov et al., 2023)</span></div>
-      <div class="ex-item ex-gap"><span class="ex-k">Authors’ argument</span> neither keeps each row’s <em>own</em> residual noise</div>
+      <div class="ex-item ex-gap"><span class="ex-k">Authors’ critique</span> can help in places, but don’t keep each row’s <em>own</em> residual noise; can raise MSE in their benchmarks</div>
     </div>`,
   build: (root) => {
     const tl = gsap.timeline({ paused: true });
     const main = $(root, '.main-tile');
-    hide(tl, [$(root, '.rt-naive'), $(root, '.rt-note'), $(root, '.panel-tab .verdict'), $(root, '.panel-tab .illus')]);
+    hide(tl, [$(root, '.rt-naive'), $(root, '.rt-note'), $(root, '.panel-tab .verdict'), $(root, '.panel-tab .illus'), $(root, '.caveat')]);
     hide(tl, $$(root, '.ex-item'), { y: 18 });
     tl.fromTo(main, { opacity: 0, scale: 0.85, transformOrigin: '50% 50%' }, { opacity: 1, scale: 1, duration: 0.6, ease: 'power2.out' })
       .fromTo($(root, '.seven'), { drawSVG: '0%' }, { drawSVG: '100%', duration: 0.8, ease: 'power2.inOut' }, 0.3)
       .fromTo($$(root, '.ghost'), { opacity: 0, rotation: 0, svgOrigin: '0 0' },
         { opacity: 0.35, rotation: (i) => (i === 0 ? -16 : 16), svgOrigin: '0 0', duration: 0.9, ease: 'power3.out', stagger: 0.15 }, 1.0)
       .fromTo($(root, '.panel-img .verdict'), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5 }, 1.5)
+      .to($(root, '.caveat'), { opacity: 1, duration: 0.5 }, 1.9)
       .fromTo([$(root, '.panel-tab h3'), $(root, '.rt-head'), $(root, '.rt-orig')], { opacity: 0, y: 16 },
         { opacity: 1, y: 0, stagger: 0.12, duration: 0.5 }, 0.6)
       .addLabel('s0')

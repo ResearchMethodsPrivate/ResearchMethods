@@ -1,18 +1,19 @@
 import { gsap } from 'gsap';
-import { milestones, researchQuestion } from '../config/deck.config';
+import { milestones, milestonesStatus, researchQuestion } from '../config/deck.config';
 import type { SlideDef } from '../lib/slide';
-import { $, $$, hide, memberName, ph } from '../lib/util';
+import { $, $$, hide, memberName } from '../lib/util';
 
 const n = milestones.length;
 
 export const targetsSlide: SlideDef = {
   id: 'targets',
   steps: n + 1,
-  source: 'Targets and dates: editable in src/config/deck.config.ts · all milestones currently planned',
+  source: 'Weeks and owners proposed, pending team agreement · all milestones planned, none started',
   html: () => `
     <header class="slide-head">
       <p class="kicker">07 — Targets before Week 9</p>
       <h2>What we will bring to the next update</h2>
+      ${milestonesStatus === 'confirmed' ? '' : '<p class="head-chip"><span class="chip chip-amber">Proposed targets — weeks and owners to confirm</span></p>'}
     </header>
     <div class="track" style="--n:${n}">
       <div class="track-ends"><span>Week 5 · today</span><span>Week 9 · progress update</span></div>
@@ -22,11 +23,11 @@ export const targetsSlide: SlideDef = {
     <div class="ms-cards" style="--n:${n}">
       ${milestones.map((m, i) => `
         <article class="ms">
-          <p class="ms-top"><span class="ms-k">${i + 1}</span><span class="ms-due">${ph(m.due)}</span></p>
+          <p class="ms-top"><span class="ms-k">${i + 1}</span><span class="ms-due">${m.due === 'Ongoing' ? m.due : `by ${m.due}`}</span></p>
           <p class="ms-title">${m.title}</p>
           <p class="ms-row"><span class="lbl">Done when</span>${m.doneWhen}</p>
           <p class="ms-row"><span class="lbl">Evidence</span>${m.evidence}</p>
-          <p class="ms-owner">${m.owners.map((o) => `<span>${ph(memberName(o))}</span>`).join('')}</p>
+          <p class="ms-owner">${m.owners.map((o) => `<span>${memberName(o)}</span>`).join('')}</p>
         </article>`).join('')}
     </div>
     <blockquote class="rq"><span class="rq-k">Our research question</span>${researchQuestion}</blockquote>`,

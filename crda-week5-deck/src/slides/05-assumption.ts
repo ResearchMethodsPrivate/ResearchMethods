@@ -43,7 +43,7 @@ export const assumptionSlide: SlideDef = {
     <div class="assume-bar">
       <div class="assume-eq">${tex('P(Z \\mid X_P, X_R) \\;=\\; P(Z \\mid X_R)', true)}</div>
       <p class="assume-gloss">Given the fixed features, the residual carries no information about the perturbed ones.
-        <span class="chip chip-amber">Assumption 3.1 — assumed and screened for, not guaranteed</span></p>
+        <span class="chip chip-amber">(A) Theory · Assumption 3.1 — assumed, not guaranteed by the algorithm</span></p>
     </div>
     <div class="assume-grid">
       <div class="dags">
@@ -58,16 +58,19 @@ export const assumptionSlide: SlideDef = {
           <svg viewBox="-10 -20 380 360" aria-label="Causal diagram where a hidden confounder U breaks the assumption">${dagB}</svg>
           <figcaption><span class="bad">✗ breaks</span> hidden U drives X<sub>P</sub> and Y; Z absorbs U.</figcaption>
         </figure>
+        <p class="dag-legend"><span>→ causal effect</span><span class="lg-ok">┈ allowed dependence</span><span class="lg-bad">━ violates 3.1</span><span class="lg-src">after paper Fig. 1</span></p>
       </div>
       <div class="screen">
+        <p class="tier">(B) Heuristic screens — evidence, not proof</p>
         <div class="feat-row">${features.map((f) => `<span class="feat" data-f="${f}">${f}</span>`).join('')}<span class="feat-note">illustrative features</span></div>
         <div class="screen-step s-pc"><span class="screen-k">PC causal-graph check</span> drop features with an edge to ${tex('\\hat z')}</div>
         <div class="screen-step s-corr"><span class="screen-k">Pearson screen</span> drop features correlated with ${tex('\\hat z')} (repo default |r| ≥ 0.1)</div>
         <div class="screen-out">survivors → ${tex('X_P')}</div>
         <div class="gate">
-          <p class="gate-h">Wilcoxon safety gate</p>
-          <p>10-fold CV, augmented vs. unaugmented errors</p>
+          <p class="gate-h">(C) Predictive gate · Wilcoxon signed-rank</p>
+          <p>10-fold CV errors, augmented vs. unaugmented</p>
           <p class="gate-rule"><span class="ok">p &lt; 0.05 → use CRDA</span><span class="bad">otherwise → keep baseline</span></p>
+          <p class="gate-note">Evidence on validation folds — not a guarantee on new data</p>
         </div>
       </div>
     </div>
@@ -78,14 +81,16 @@ export const assumptionSlide: SlideDef = {
   build: (root) => {
     const tl = gsap.timeline({ paused: true });
     const feat = (ids: string[]) => ids.map((f) => $(root, `.feat[data-f="${f}"]`));
-    hide(tl, [$(root, '.dag-a'), $(root, '.dag-b')], { y: 20 });
-    hide(tl, [$(root, '.feat-row'), $(root, '.s-pc'), $(root, '.s-corr'), $(root, '.screen-out'), $(root, '.gate'), $(root, '.fail-strip')], { y: 14 });
+    hide(tl, [$(root, '.dag-a'), $(root, '.dag-b'), $(root, '.dag-legend')], { y: 20 });
+    hide(tl, [$(root, '.tier'), $(root, '.feat-row'), $(root, '.s-pc'), $(root, '.s-corr'), $(root, '.screen-out'), $(root, '.gate'), $(root, '.fail-strip')], { y: 14 });
     tl.fromTo($(root, '.assume-eq'), { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.8, ease: 'power2.out' })
       .fromTo($(root, '.assume-gloss'), { opacity: 0 }, { opacity: 1, duration: 0.6 }, '-=0.3')
       .addLabel('s0')
       // Step 1 — diagram (a)
-      .to($(root, '.dag-a'), { opacity: 1, y: 0, duration: 0.5 })
-      .fromTo($$(root, '.dag-a .dag-edge'), { drawSVG: '0%', opacity: 0 }, { drawSVG: '100%', opacity: 1, stagger: 0.12, duration: 0.5 }, '<0.1')
+      .to([$(root, '.dag-a'), $(root, '.dag-legend')], { opacity: 1, y: 0, duration: 0.5 })
+      .fromTo($$(root, '.dag-a .dag-edge:not(.dep-ok)'), { drawSVG: '0%', opacity: 0 }, { drawSVG: '100%', opacity: 1, stagger: 0.12, duration: 0.5 }, '<0.1')
+      // dotted "allowed dependence" edge fades in: DrawSVG would overwrite its dash pattern
+      .fromTo($(root, '.dag-a .dep-ok'), { opacity: 0 }, { opacity: 1, duration: 0.5 })
       .addLabel('s1')
       // Step 2 — diagram (b): U appears and the X_P–Z dependency lights up
       .to($(root, '.dag-b'), { opacity: 1, y: 0, duration: 0.5 })
@@ -95,7 +100,7 @@ export const assumptionSlide: SlideDef = {
       .fromTo($(root, '.dep-bad'), { drawSVG: '0%', opacity: 0 }, { drawSVG: '100%', opacity: 1, duration: 0.6 })
       .addLabel('s2')
       // Step 3 — screening funnel (illustrative chips)
-      .to($(root, '.feat-row'), { opacity: 1, y: 0, duration: 0.4 })
+      .to([$(root, '.tier'), $(root, '.feat-row')], { opacity: 1, y: 0, duration: 0.4 })
       .to($(root, '.s-pc'), { opacity: 1, y: 0, duration: 0.4 })
       .to(feat(pcDrop), { opacity: 0.18, textDecoration: 'line-through', duration: 0.4 })
       .to($(root, '.s-corr'), { opacity: 1, y: 0, duration: 0.4 })
