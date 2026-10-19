@@ -1,6 +1,6 @@
 import { team } from '../config/deck.config';
 import { notes } from '../content/notes';
-import { memberName, ph } from './util';
+import { memberName } from './util';
 
 export interface SlideDef {
   /** Matches keys in notes.ts and the speaking split in deck.config.ts. */
@@ -23,7 +23,7 @@ export interface SlideDef {
 
 const presenterLine = (id: string) => {
   const ids = team.speaking[id] ?? [];
-  return ids.map((m) => ph(memberName(m))).join(' · ');
+  return ids.map((m) => memberName(m)).join(' · ');
 };
 
 const renderNotes = (id: keyof typeof notes) => {

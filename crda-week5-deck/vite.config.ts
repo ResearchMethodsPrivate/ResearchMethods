@@ -6,4 +6,6 @@ export default defineConfig({
   base: './',
   server: { port: 5173, open: false },
   build: { target: 'es2022', chunkSizeWarningLimit: 1500 },
+  // React (automatic runtime) is used only by the lazy-loaded OpenUI explorer.
+  esbuild: { jsx: 'automatic' },
 });

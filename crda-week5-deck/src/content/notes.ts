@@ -1,56 +1,65 @@
 /**
  * Speaker notes + target timings. Shown in the speaker view (press S) and
- * exported by `npm run notes` to docs/speaker-notes.md with a timing check.
+ * exported by `npm run notes` to docs/speaker-notes.md with a timing model.
  *
  * Lines starting with "[" are stage cues (when to click) and are not counted
- * towards spoken time. {A} {B} {C} are replaced with names from deck.config.ts.
- * If you change the milestones in deck.config.ts, update `targets` below too.
+ * towards spoken time. {A} {B} {C} are replaced with names from deck.config.ts
+ * (A = Anik, B = Alvi, C = Atul). If you change the milestones in
+ * deck.config.ts, update `targets` below too (validate:deck checks the count).
  */
-import { team } from '../config/deck.config';
+import { rolesStatus, team } from '../config/deck.config';
 
 export interface SlideNotes {
   title: string;
+  /** Target LIVE seconds, including clicks, motion and handoffs. */
   seconds: number;
   lines: string[];
 }
 
+const handoff: Record<string, string> = { A: 'Alvi?', B: 'Atul?', C: '' };
+
 const teamLines = (): string[] => {
+  const proposed = rolesStatus !== 'confirmed';
   const lines = team.members.flatMap((m) => [
     `[{${m.id}}]`,
-    `I’m looking after ${m.role.toLowerCase()}: ${m.owns
+    `${proposed ? 'The proposal is that I take' : 'I’m taking'} ${m.role.toLowerCase()}: ${m.owns
       .map((o) => o.replace(/^./, (c) => c.toLowerCase()))
-      .join('; ')}.`,
+      .join('; ')}. ${handoff[m.id]}`.trim(),
   ]);
   return [
-    '[Cards appear one by one — each person speaks to their own card]',
+    '[Cards appear — Atul opens, then each person speaks to their own card]',
+    '[{C}]',
+    proposed
+      ? 'Here’s how we propose to split the work — we’re still confirming it. Anik?'
+      : 'Here’s how we’ve split the work. Anik?',
     ...lines,
-    '[Click — cross-check arrows draw]',
-    'The arrows matter as much as the boxes. Each of us independently checks someone else’s work, so no result rests on one person’s laptop. We’ve also tried to keep the load even: each of us owns one stage of the pipeline end to end, and the speaking is split fairly evenly too. And to be clear, all of this is planned — nothing here is finished yet.',
+    '[{C}] [Click — cross-check arrows draw]',
+    'And the arrows: each of us re-checks someone else’s work, so no result rests on one laptop. None of this is done yet; it’s the plan.',
   ];
 };
 
 export const notes = {
   title: {
     title: 'Opening',
-    seconds: 25,
+    seconds: 30,
     lines: [
       '[Hook types in, then the paper details]',
-      'Hi, I’m {A}. The question that drew us to this paper is a simple one: can a model learn more when you just can’t collect more data?',
-      'The paper is “Counterfactual Residual Data Augmentation for Regression”, or CRDA, by Mohebbi, Schulte, Li and Poupart, at ICML this year. In the next seven minutes: the problem, the idea, and how we’ll test whether it reproduces.',
+      'Hi, I’m Anik, and with me are Alvi and Atul. The question that drew us to this paper is simple: can a model learn more when you can’t collect more data?',
+      'The paper is “Counterfactual Residual Data Augmentation for Regression” — CRDA — by Mohebbi and colleagues, at ICML this year. We’ll cover the problem, the idea, and how we plan to test whether it reproduces.',
     ],
   },
   problem: {
     title: 'The problem',
-    seconds: 50,
+    seconds: 45,
     lines: [
       '[Points fade in]',
-      'Quick bit of vocabulary first. Regression just means predicting a number — say, how much energy a building needs for heating — from a row of features.',
+      'First, regression just means predicting a number — say a building’s heating load — from a row of features.',
       '[Click — fitted curve draws]',
       'Here are ten noisy observations and a model fitted to them.',
       '[Click — residual lines drop]',
-      'The residual is the gap between what we observed and what the model predicted: the part it couldn’t explain.',
+      'The residual is the gap between what we observed and what the model predicted — keep an eye on it, because the whole method is built around reusing it.',
       '[Click — the larger cloud appears]',
-      'With plenty of data, the model would settle on this underlying trend. With ten points, it wobbles around it. That’s the setting the paper targets: small tabular datasets where every new sample costs time or money, and the measurements are noisy. Just to be clear, this plot is an illustrative sketch we generated, not the paper’s data.',
+      'With plenty of data the model would settle on this trend; with ten points it wobbles. That’s the paper’s setting: small, noisy tables where more data is expensive. This plot is our own illustrative sketch, not the paper’s data.',
     ],
   },
   naive: {
@@ -58,27 +67,27 @@ export const notes = {
     seconds: 45,
     lines: [
       '[Image tile rotates — label stays]',
-      'So why not augment, like we do with images? Rotate a photo of a seven and it’s still a seven. The label survives, so you get a free training example.',
-      '[Click — floor area changes, price doesn’t]',
-      'Tables don’t have that symmetry. Take this made-up house: nudge the floor area up by twenty percent, keep the price, and the row is now just wrong.',
+      'So why not augment like we do with images? Rotate a seven slightly and it’s still a seven — as long as the transformation suits the label. Turn a six upside down and it’s a nine.',
+      '[Click — floor area changes, price is copied]',
+      'Tables don’t come with transformations like that. Nudge this made-up house’s floor area up twenty percent and copy the old price: nothing justifies that label.',
       '[Click — existing approaches]',
-      'Existing options either interpolate between rows, like SMOTE or C-Mixup, or train a generative model that treats price as just another column. The authors argue neither keeps each row’s own noise intact, and that’s the gap CRDA goes after. {B} will take you through how.',
+      'Interpolation and generative models can help in places, but the authors argue they don’t keep each row’s own noise, and report they can raise error on their benchmarks. That’s the gap CRDA targets. Alvi?',
     ],
   },
   mechanism: {
     title: 'The CRDA idea',
-    seconds: 75,
+    seconds: 80,
     lines: [
-      '[Curve draws, one house is highlighted]',
-      'Thanks. This is the core idea, and it’s simpler than the name. Step one: train an ordinary model, an MLP or XGBoost, on the data we have. That’s this curve, g-hat.',
+      '[Curve draws, one sample is highlighted]',
+      'Thanks, Anik. The core idea is simpler than the name. Step one: train an ordinary model — an MLP or XGBoost. That’s this curve, g-hat.',
       '[Click — residual vector]',
-      'Step two: for every training row, work out its residual. Using the paper’s own house example: this house sold for more than the model expected, maybe because of a bidding war. That gap is z.',
-      '[Click — feature is perturbed]',
-      'Step three: nudge only features that were judged safe to change — say, the garage finish — by a random factor within plus or minus p. Location and size stay fixed. The model gives a new price for this slightly different house.',
-      '[Click — same residual is added back]',
-      'Step four, the key move: add the same residual back on. So we get a counterfactual house: different garage, updated price, same bidding war. In other words: what would this exact house have sold for if only the garage had been different?',
+      'Step two: work out each row’s residual. This point sits above the curve, so its residual z is positive.',
+      '[Click — numeric feature is scaled]',
+      'Step three: take a numeric feature that passed the screens and scale it by one plus delta, with delta between minus p and plus p. The repo’s default p is ten percent; this draw is plus nine. Everything else stays fixed, and the model gives a new prediction.',
+      '[Click — the same residual is carried across]',
+      'Step four, the key move: carry the same residual across and add it back. New label equals new prediction plus old residual. The paper’s analogy: change a house’s garage, keep the bidding war that pushed its price up.',
       '[Click — repeat M times]',
-      'Repeat that M times per row and you have an augmented training set. We never invent new noise; we reuse the noise we actually observed. This is a one-dimensional sketch — the real method can perturb several selected features at once.',
+      'Repeat that M times per row and you’ve got an augmented training set — reusing noise we actually observed instead of inventing it. These points are a sketch, not paper data.',
     ],
   },
   assumption: {
@@ -86,15 +95,15 @@ export const notes = {
     seconds: 55,
     lines: [
       '[Equation appears]',
-      'That only works if one thing holds: once we know the fixed features, the residual mustn’t tell us anything about the features we perturb. That’s the paper’s Assumption 3.1, and it’s an assumption, not a guarantee.',
+      'That only works if, given the fixed features, the residual tells us nothing about the ones we perturb. That’s Assumption 3.1 — assumed, not guaranteed.',
       '[Click — diagram (a)]',
-      'Here it holds: the perturbed feature affects price, but not the noise.',
+      'Here it holds: the feature moves the target, not the noise.',
       '[Click — diagram (b), confounder appears]',
-      'Here it breaks: a hidden factor U drives both the feature and the price, so the residual soaks up U, and changing the feature drags the noise with it.',
+      'Here it breaks: a hidden factor U drives both, so the residual soaks up U.',
       '[Click — screening pipeline]',
-      'So CRDA screens features first, with a PC causal-discovery check and a correlation check against the residual.',
+      'CRDA can’t see the true graph, so it screens features with two heuristics: a PC causal-discovery check, which drops any feature linked to the residual in a learned graph, and a simple correlation check against the residual.',
       '[Click — Wilcoxon gate]',
-      'Then it keeps the augmentation only if ten-fold cross-validation shows a significant improvement on a Wilcoxon test; otherwise it falls back to the plain model. The authors call the screens a first line of defence, not proof. Over to {C} for what we’ll actually do.',
+      'Then a separate gate keeps the augmentation only if cross-validation shows a significant improvement. That’s evidence, not a guarantee, and neither screen proves the causal story. Atul?',
     ],
   },
   plan: {
@@ -102,34 +111,34 @@ export const notes = {
     seconds: 55,
     lines: [
       '[Plan steps appear]',
-      'Thanks. Our aim is to test whether the results reproduce, not to improve the method. We’ll install the authors’ repository exactly as pinned and run their demo. Then we narrow the scope to two datasets, comparing plain and CRDA-augmented MLP and XGBoost on the same splits and seeds.',
+      'Thanks, Alvi. We want to test whether the results reproduce, not improve the method. We’ll install the authors’ repo as pinned, run their demo, then compare plain and CRDA models on a proposed starting scope of two datasets, same splits and seeds. Both are small — about a thousand rows or fewer — which is exactly where the paper claims the biggest gains, and they run quickly enough for us to repeat.',
       '[Click — reported numbers count up]',
-      'These are the paper’s numbers, not ours: across nine datasets they report about 23 percent lower MSE for MLPs and about 6 percent for XGBoost. On our two datasets, Table 1 reports drops of roughly twelve to twenty-eight percent, so that’s the bar we’ll hold our runs up against.',
-      '[Click — audit questions]',
-      'Reading the code, we already have two questions: the main table forces augmentation on, and the augmented score averages ten fold-models. We’ll pin those down, because they change what “reproduced” should mean. All of this is proposed; none of it has been run yet.',
+      'These are the authors’ numbers, not ours: about 23 percent lower MSE for MLPs and 6 for XGBoost on average. On our two datasets Table 1 reports twelve to twenty-eight percent — that’s our bar.',
+      '[Click — code-reading questions]',
+      'Reading their code, two questions already: the main table’s configs force augmentation on, and the augmented score averages ten fold-models. Both affect what “reproduced” means.',
     ],
   },
   team: {
     title: 'Who does what',
-    seconds: 50,
+    seconds: 55,
     lines: teamLines(),
   },
   targets: {
     title: 'Targets before Week 9',
-    seconds: 50,
+    seconds: 45,
     lines: [
       '[Timeline draws]',
-      'So what will we bring to Week 9? Four targets, each with evidence we can actually show.',
+      'So, four proposed targets for Week 9, each with evidence we can show.',
       '[Click]',
-      'One: the environment reproduced, with the demo running and the exact package versions written down.',
+      'One: the environment reproduced, with exact package versions.',
       '[Click]',
-      'Two: baseline runs logged, with fixed seeds and every config saved.',
+      'Two: baseline runs logged, with fixed seeds and saved configs.',
       '[Click]',
-      'Three: our first CRDA comparison, side by side with the paper’s Table 1, including the Wilcoxon p-values.',
+      'Three: our first CRDA comparison next to the paper’s Table 1, with p-values.',
       '[Click]',
-      'Four: an honest obstacle log — every place we had to deviate, and why. We’d rather come back with a smaller comparison we fully understand than a big table we can’t explain.',
+      'Four: an honest log of every deviation and why. We’d rather bring back a small comparison we fully understand than a big table we can’t explain.',
       '[Click — research question]',
-      'Which brings us back to the question we actually want to answer: do the reported gains hold when we re-run the authors’ own pipeline, and where do they not? Thank you.',
+      'Which leaves our real question: do the reported gains hold when we re-run the authors’ own pipeline — and where don’t they? Thank you.',
     ],
   },
   references: {
@@ -137,7 +146,7 @@ export const notes = {
     seconds: 10,
     lines: [
       '[Leave up during questions]',
-      'Our sources are here: the paper, the authors’ code and project page, the datasets and the methods we mentioned. Happy to take questions.',
+      'Our sources are here — the paper, the authors’ code, the datasets and methods we mentioned. Happy to take questions.',
     ],
   },
 } satisfies Record<string, SlideNotes>;
