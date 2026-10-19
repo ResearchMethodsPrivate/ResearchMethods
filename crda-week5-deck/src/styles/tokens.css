@@ -1,0 +1,29 @@
+/* Design tokens — cinematic academic, projector-first (dark only by design). */
+:root {
+  --bg: #04060d;
+  --bg-1: #080d1b;
+  --panel: rgba(16, 24, 46, 0.62);
+  --panel-line: rgba(130, 160, 230, 0.18);
+  --grid: rgba(130, 160, 230, 0.07);
+
+  --ink: #eef1f8;
+  --ink-dim: #a7b1ca;
+  --ink-faint: #6a7694;
+
+  --cyan: #63e3ff;
+  --cyan-soft: rgba(99, 227, 255, 0.13);
+  --violet: #b59cff;
+  --violet-soft: rgba(181, 156, 255, 0.15);
+  --amber: #ffc76e;
+  --amber-soft: rgba(255, 199, 110, 0.12);
+  --red: #ff7383;
+  --green: #79e9bb;
+
+  --f-display: 'Inter Tight Variable', 'Inter Variable', system-ui, sans-serif;
+  --f-body: 'Inter Variable', system-ui, sans-serif;
+  --f-mono: 'JetBrains Mono Variable', ui-monospace, 'Cascadia Mono', monospace;
+
+  --pad-x: 120px;
+  --pad-top: 72px;
+  --radius: 18px;
+}
