@@ -1,8 +1,8 @@
 import { gsap } from 'gsap';
-import { team, type MemberId } from '../config/deck.config';
+import { rolesStatus, team, type MemberId } from '../config/deck.config';
 import { notes } from '../content/notes';
 import type { SlideDef } from '../lib/slide';
-import { $, $$, hide, ph } from '../lib/util';
+import { $, $$, hide } from '../lib/util';
 
 const order = Object.keys(notes);
 const speaksFor = (id: MemberId) => {
@@ -18,26 +18,31 @@ const cx = (i: number) => i * (cardW + GAP) + cardW / 2;
 const arcs = team.members.map((m, i) => {
   const j = team.members.findIndex((t) => t.id === m.checks);
   const dir = j > i ? 1 : -1;
-  // Leave each card 70px off-centre, arrive 20px off-centre, so arcs never share an endpoint.
-  const x1 = cx(i) + 70 * dir, x2 = cx(j) - 20 * dir;
-  const depth = 26 + Math.abs(j - i) * 40 + (dir < 0 && n === 2 ? 40 : 0);
+  // Neighbour arcs leave 70px right of centre and land 20px left of the next centre.
+  // The long wrap-around arc (e.g. C → A) starts/ends on the far side of the cards,
+  // outside both short arcs, so no two arrows cross.
+  const wrap = dir < 0;
+  const x1 = wrap ? cx(i) + 40 : cx(i) + 70;
+  const x2 = wrap ? cx(j) - 40 : cx(j) - 20;
+  const depth = wrap ? 112 : 56;
   return `<path class="xarc" d="M${x1} 6 C ${x1} ${depth + 30}, ${x2} ${depth + 30}, ${x2} 14" marker-end="url(#x-arr)" />`;
 });
 
 export const teamSlide: SlideDef = {
   id: 'team',
   steps: 1,
-  source: 'Editable in src/config/deck.config.ts · every task: planned',
+  source: 'Presenters confirmed · research roles and cross-checks proposed, pending team agreement · every task: planned',
   html: () => `
     <header class="slide-head">
       <p class="kicker">06 — Who does what</p>
       <h2>Clear ownership, balanced load, every result cross-checked</h2>
+      ${rolesStatus === 'confirmed' ? '' : '<p class="head-chip"><span class="chip chip-amber">Proposed roles — confirm with team</span></p>'}
     </header>
     <div class="cards cards-${n}">
       ${team.members.map((m) => `
         <article class="card" data-id="${m.id}">
-          <div class="card-top"><span class="card-id">${m.id}</span><span class="status">Planned</span></div>
-          <p class="card-name">${ph(m.name)}</p>
+          <div class="card-top"><span class="card-id">${m.id}</span><span class="status">${rolesStatus === 'confirmed' ? 'Planned' : 'Proposed'}</span></div>
+          <p class="card-name">${m.name}</p>
           <p class="card-role">${m.role}</p>
           <ul class="card-owns">${m.owns.map((o) => `<li>${o}</li>`).join('')}</ul>
           <p class="card-check"><span class="lbl">Cross-check</span>${m.crossCheck}</p>

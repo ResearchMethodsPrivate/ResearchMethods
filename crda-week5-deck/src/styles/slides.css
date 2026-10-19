@@ -121,27 +121,29 @@
 .plot-mech .lbl-shift, .plot-mech .lbl-gp { fill: var(--ink-dim); font-size: 24px; }
 .plot-mech .lbl-syn { fill: var(--violet); font-size: 24px; }
 .plot-mech .lbl-more { fill: var(--violet); font-size: 26px; }
-.plot-mech figcaption { margin-top: 4px; }
-.mech-steps { display: flex; flex-direction: column; gap: 18px; justify-content: center; }
+.plot-mech figcaption { margin-top: 2px; display: grid; gap: 4px; }
+.plot-mech figcaption .illus { margin: 0 !important; }
+.plot-mech .analogy { font-size: 21px; color: var(--ink-dim); }
+.plot-mech .analogy strong { color: var(--ink); font-weight: 600; }
+.plot-mech .band { fill: rgba(99, 227, 255, 0.08); stroke: rgba(99, 227, 255, 0.35); stroke-dasharray: 5 6; }
+.plot-mech .lbl-band { fill: var(--cyan); font-size: 21px; }
+.mech-steps { display: flex; flex-direction: column; gap: 12px; justify-content: center; }
 .mstep {
   display: grid;
-  grid-template-columns: 52px 1fr;
-  gap: 18px;
+  grid-template-columns: 48px 1fr;
+  gap: 16px;
   align-items: start;
-  padding: 18px 22px;
+  padding: 13px 20px;
   border-radius: 14px;
   border: 1px solid var(--panel-line);
   background: var(--panel);
 }
 .mstep-k {
-  width: 48px; height: 48px; border-radius: 50%;
+  width: 44px; height: 44px; border-radius: 50%;
   display: grid; place-items: center;
-  font-family: var(--f-mono); font-size: 24px; color: var(--bg); background: var(--cyan);
+  font-family: var(--f-mono); font-size: 22px; color: var(--bg); background: var(--cyan);
 }
-.mstep[data-k='4'] .mstep-k { background: var(--violet); }
-.mstep-h { font-size: 27px; font-weight: 600; margin-bottom: 6px !important; }
-.mstep-eq { font-size: 30px; }
-.mstep-sub { font-size: 22px; color: var(--ink-dim); margin-top: 4px !important; }
-.fixed-chip { display: flex; flex-wrap: wrap; gap: 10px; }
-.fixed-chip .chip { font-size: 19px; }
-.fixed-chip .katex { font-size: 1em; color: inherit; }
+.mstep[data-k='4'] .mstep-k, .mstep[data-k='5'] .mstep-k { background: var(--violet); }
+.mstep-h { font-size: 25px; font-weight: 600; margin-bottom: 4px !important; }
+.mstep-eq { font-size: 27px; }
+.mstep-sub { font-size: 20px; color: var(--ink-dim); margin-top: 4px !important; }
