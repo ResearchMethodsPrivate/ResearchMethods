@@ -1,0 +1,147 @@
+/* Slides 1–4 */
+
+/* ── 1 · Title ─────────────────────────────────────────────── */
+.title-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 64px;
+  align-items: center;
+  flex: 1;
+}
+.title-copy { display: flex; flex-direction: column; gap: 40px; }
+.hook {
+  font-size: 100px !important;
+  font-weight: 600 !important;
+  line-height: 1.02 !important;
+  letter-spacing: -0.035em !important;
+}
+.hook .w { display: inline-block; }
+.hook .accent { color: var(--cyan); }
+.paper-card {
+  border-top: 1px solid var(--panel-line);
+  padding: 24px 0 0;
+  display: grid;
+  gap: 10px;
+}
+.paper-title { font-family: var(--f-display); font-size: 38px; font-weight: 600; letter-spacing: -0.01em; }
+.paper-authors { font-size: 28px; color: var(--ink); }
+.paper-meta { font-size: 23px; color: var(--ink-dim); }
+.paper-meta strong { color: var(--cyan); font-weight: 600; }
+.title-foot { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+.group-line { font-family: var(--f-mono); font-size: 22px; color: var(--ink-dim); }
+.title-figure { margin: 0; }
+.title-figure svg { width: 100%; height: auto; overflow: visible; }
+.title-figure .obs circle { fill: var(--cyan); filter: drop-shadow(0 0 8px rgba(99, 227, 255, 0.6)); }
+.title-figure .syn circle { fill: none; stroke: var(--violet); stroke-width: 2.5; }
+.title-figure figcaption { font-family: var(--f-mono); font-size: 20px; color: var(--ink-faint); margin-top: 12px; text-align: right; }
+.dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; vertical-align: -1px; }
+.dot-obs { background: var(--cyan); }
+.dot-syn { border: 2.5px solid var(--violet); box-sizing: border-box; }
+
+/* ── 2 · Problem ───────────────────────────────────────────── */
+.pill-list { display: grid; gap: 14px; }
+.pill-list li {
+  font-size: 32px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 14px 22px;
+  border: 1px solid var(--panel-line);
+  border-radius: 14px;
+  background: var(--panel);
+}
+.pill-num { font-family: var(--f-mono); font-size: 22px; color: var(--cyan); }
+.defs { display: grid; gap: 22px; margin: 0; }
+.def { padding: 0; }
+.def dt { font-family: var(--f-mono); font-size: 22px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 6px; }
+.def-res dt { color: var(--amber); }
+.def dd { margin: 0; font-size: 28px; }
+.def-eq { margin-top: 12px; font-size: 34px; }
+.plot-problem .sparse circle { fill: var(--cyan); stroke: var(--bg); stroke-width: 2; filter: drop-shadow(0 0 6px rgba(99, 227, 255, 0.55)); }
+.plot-problem .fit-sparse { fill: none; stroke: var(--cyan); stroke-width: 4; stroke-linecap: round; filter: drop-shadow(0 0 10px rgba(99, 227, 255, 0.45)); }
+.plot-problem .resid line { stroke: var(--amber); stroke-width: 3; }
+.plot-problem .dense circle { fill: var(--ink-faint); opacity: 0.6; }
+.plot-problem .fit-dense { fill: none; stroke: var(--violet); stroke-width: 4; stroke-linecap: round; }
+.plot-problem .lbl-sparse text { fill: var(--cyan); }
+.plot-problem .lbl-sparse line { stroke: var(--cyan); stroke-width: 4; }
+.plot-problem .lbl-dense line { stroke: var(--violet); stroke-width: 4; }
+.plot-problem .lbl-resid { fill: var(--amber); }
+.plot-problem .lbl-dense text { fill: var(--violet); }
+
+/* ── 3 · Naive augmentation ───────────────────────────────── */
+.naive-grid { flex: 0 0 auto; }
+.naive-grid .panel { display: flex; flex-direction: column; gap: 18px; }
+.tile-stage { display: flex; justify-content: center; }
+.tile-stage svg { height: 290px; width: auto; overflow: visible; }
+.tile-bg { fill: #0b1226; stroke: var(--panel-line); stroke-width: 2; }
+.tile-px rect { fill: rgba(130, 160, 230, 0.05); }
+.seven { fill: none; stroke: var(--ink); stroke-width: 36; stroke-linecap: round; stroke-linejoin: round; }
+.ghost .tile-bg { fill: none; stroke: var(--violet); stroke-dasharray: 10 10; }
+.ghost .tile-px { display: none; }
+.ghost .seven { stroke: var(--violet); }
+.verdict { font-size: 28px; }
+.verdict.ok .check { color: var(--green); margin-left: 8px; }
+.verdict.bad { color: var(--red); font-weight: 500; }
+.row-table { display: grid; gap: 10px; margin-top: 6px; }
+.rt-row { display: grid; grid-template-columns: 1.15fr 0.7fr 0.9fr 1fr 1.3fr; gap: 10px; align-items: center; }
+.rt-row span { font-size: 27px; padding: 10px 12px; border-radius: 10px; background: rgba(130, 160, 230, 0.06); }
+.rt-head span { font-family: var(--f-mono); font-size: 19px; background: none; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.06em; padding: 0 12px; }
+.rt-row .rt-target { font-weight: 600; }
+.rt-head .rt-target { color: var(--amber); }
+.rt-row:not(.rt-head) .rt-target { background: var(--amber-soft); }
+.rt-naive span { background: rgba(130, 160, 230, 0.03); border: 1px dashed var(--panel-line); }
+.rt-note { font-size: 24px; color: var(--ink-dim); }
+.existing { display: grid; grid-template-columns: 1fr 1.35fr 1fr; gap: 24px; margin-top: 28px; }
+.ex-item { font-size: 24px; color: var(--ink-dim); border-top: 1px solid var(--panel-line); padding-top: 14px; line-height: 1.35; }
+.ex-k { display: block; font-family: var(--f-mono); font-size: 19px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); margin-bottom: 6px; }
+.ex-gap .ex-k { color: var(--amber); }
+.ex-gap { color: var(--ink); }
+.ex-cite { font-size: 20px; color: var(--ink-faint); }
+
+/* ── 4 · Mechanism ─────────────────────────────────────────── */
+.mech-grid { display: grid; grid-template-columns: 1fr 620px; gap: 48px; flex: 1; min-height: 0; }
+.slide-mechanism .slide-head { margin-bottom: 20px; }
+.plot-mech .g-curve { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linecap: round; filter: drop-shadow(0 0 8px rgba(238, 241, 248, 0.25)); }
+.plot-mech .lbl-g { fill: var(--ink); font-size: 30px; font-family: var(--f-display); font-style: italic; }
+.plot-mech .bg circle { fill: var(--ink-faint); opacity: 0.55; }
+.plot-mech .obs { fill: var(--cyan); stroke: var(--bg); stroke-width: 3; filter: drop-shadow(0 0 10px rgba(99, 227, 255, 0.7)); }
+.plot-mech .obs-j { opacity: 1; }
+.plot-mech .proj { fill: var(--bg); stroke: var(--ink); stroke-width: 3; }
+.plot-mech .zvec { stroke: var(--cyan); stroke-width: 5; stroke-linecap: round; }
+.plot-mech .zcopy .zvec { stroke: var(--violet); }
+.plot-mech .zvec-thin { stroke-width: 2.5; stroke: var(--violet); opacity: 0.7; }
+.plot-mech .z-j { stroke: var(--cyan); }
+.plot-mech .guide { stroke: var(--ink-faint); stroke-width: 2; stroke-dasharray: 6 8; }
+.plot-mech .shift { stroke: var(--ink-dim); stroke-width: 3; }
+.plot-mech .syn { fill: var(--bg); stroke: var(--violet); stroke-width: 4; filter: drop-shadow(0 0 10px rgba(181, 156, 255, 0.55)); }
+.plot-mech .lbl-obs, .plot-mech .lbl-z { fill: var(--cyan); font-size: 26px; }
+.plot-mech .lbl-z { font-size: 34px; font-family: var(--f-display); font-style: italic; }
+.plot-mech .lbl-z-sub { fill: var(--ink-dim); font-size: 22px; }
+.plot-mech .lbl-shift, .plot-mech .lbl-gp { fill: var(--ink-dim); font-size: 24px; }
+.plot-mech .lbl-syn { fill: var(--violet); font-size: 24px; }
+.plot-mech .lbl-more { fill: var(--violet); font-size: 26px; }
+.plot-mech figcaption { margin-top: 4px; }
+.mech-steps { display: flex; flex-direction: column; gap: 18px; justify-content: center; }
+.mstep {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 18px;
+  align-items: start;
+  padding: 18px 22px;
+  border-radius: 14px;
+  border: 1px solid var(--panel-line);
+  background: var(--panel);
+}
+.mstep-k {
+  width: 48px; height: 48px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: var(--f-mono); font-size: 24px; color: var(--bg); background: var(--cyan);
+}
+.mstep[data-k='4'] .mstep-k { background: var(--violet); }
+.mstep-h { font-size: 27px; font-weight: 600; margin-bottom: 6px !important; }
+.mstep-eq { font-size: 30px; }
+.mstep-sub { font-size: 22px; color: var(--ink-dim); margin-top: 4px !important; }
+.fixed-chip { display: flex; flex-wrap: wrap; gap: 10px; }
+.fixed-chip .chip { font-size: 19px; }
+.fixed-chip .katex { font-size: 1em; color: inherit; }
