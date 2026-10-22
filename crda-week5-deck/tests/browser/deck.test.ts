@@ -115,7 +115,7 @@ test('R replays to the current step; S opens the speaker view with the presenter
   await w.page.context().close();
 });
 
-test('?static and prefers-reduced-motion never tween; ?print-pdf lays out 9 pages without the explorer', async () => {
+test('?static and prefers-reduced-motion never tween; ?print-pdf lays out every slide as a page, without the explorer', async () => {
   const s = await openDeck(browser, served.url + `?static#/${MECH}`);
   await s.page.keyboard.press('ArrowRight');
   assert.equal((await state(s.page)).animating, false);

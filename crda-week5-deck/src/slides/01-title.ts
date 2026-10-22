@@ -37,7 +37,7 @@ export const titleSlide: SlideDef = {
           <p class="paper-meta">${paper.affiliations.join(' · ')} — <strong>${paper.venue}</strong></p>
         </div>
         <div class="title-foot">
-          <span class="chip chip-amber">Proposal stage · no replication results yet</span>
+          <span class="chip chip-amber">Authors’ demo run on 3 laptops · Table 1 not yet replicated</span>
           <span class="group-line">${[team.members.map((m) => m.name).join(' · '), group.name, group.date].filter(Boolean).join(' — ')}</span>
         </div>
       </div>

@@ -3,7 +3,7 @@
 Animated browser slide deck for **ECS7029P Research Methods — First Interim Presentation (Week 5)**, presented by **Anik, Alvi and Atul**.
 Paper: Mohebbi, Schulte, Li & Poupart (2026), *Counterfactual Residual Data Augmentation for Regression*, ICML 2026.
 
-Scope is **Week 5 only**: the problem the paper addresses, enough background to explain the method, the proposed replication and who does what, and targets before Week 9. The deck contains **no replication results**, because the group has not run any yet.
+Scope is **Week 5 only**: the problem the paper addresses, enough background to explain the method, the proposed replication and who does what, and targets before Week 9. The deck contains **no Table 1 replication results**. Its only results are our one-seed runs of the authors’ demo on three laptops (slide 6, evidence in `docs/demo-reports/`).
 
 ## Run it
 
@@ -77,14 +77,16 @@ Presenter names are **confirmed** and are not on this list.
 - [ ] Agree the research roles and cross-check pairs, then set `rolesStatus = 'confirmed'`. The slide shows “Proposed — confirm with team” until then
 - [ ] Agree the replication scope (Energy Efficiency + Concrete Strength, MLP + XGBoost, 3 seeds first pass), then set `scope.status = 'confirmed'`
 - [ ] Agree milestone weeks and owners, then set `milestonesStatus = 'confirmed'`
-- [ ] **Stopwatch rehearsal** of the full talk. The 6:55 figure is a model, not a measurement; record runs in `docs/speaker-notes.md`
+- [ ] **Stopwatch rehearsal** of the full talk. The ~7:18 figure is a model, not a measurement; record runs in `docs/speaker-notes.md`
 - [ ] After any edit: `npm run validate:deck && npm test && npm run build && npm run pdf`
 
 ## Timing
 
-`npm run notes` gives per-slide speech and *modelled live* time. The model includes transitions, clicks, speaker handoffs and the measured GSAP durations from `qa:visual`. Current figures: target 7:00, speech 6:00, **modelled live 6:55**, inside the 6:00–8:00 brief.
+`npm run notes` gives per-slide speech and *modelled live* time. The model includes transitions, clicks, speaker handoffs and the measured GSAP durations from `qa:visual`. Current figures (10 slides): target 7:20, speech 6:14, **modelled live 7:18**, inside the 6:00–8:00 brief. The demo slide (6) is shared by all three presenters, one row each.
 
 ## Evidence
+
+- `docs/demo-reports/` — the three laptops' reports from running the authors' demo (22 Oct 2026): Anik (MacBook M2), Alvi (Windows, Ryzen 7 + RTX 3070), Atul (MacBook M5 Pro). The slide-6 numbers in `src/content/machines.ts` are copied from these, and `npm test` checks them.
 
 - `docs/VISUAL_REVIEW.md` — what was rendered and inspected, what was fixed, and what is still unverified.
 - `docs/OPENUI_DECISION.md` — the OpenUI integration and the risks it brings.

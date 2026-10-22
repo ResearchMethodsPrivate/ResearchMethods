@@ -6,6 +6,7 @@
 import {
   group, members, milestones, openDecisions, rolesStatus, scope, speaking, team,
 } from '../src/config/deck.config';
+import { machines } from '../src/content/machines';
 import { notes, type SlideNotes } from '../src/content/notes';
 import { datasets } from '../src/content/paper';
 import { references } from '../src/content/references';
@@ -66,6 +67,15 @@ const need = (id: string, re: RegExp, what: string) => { if (!re.test(rendered[i
 need('plan', /Original authors’ reported results/, 'the "Original authors’ reported results" label');
 need('plan', /not our group’s reproduced results/, 'the "not our group’s reproduced results" label');
 ['title', 'problem', 'naive', 'mechanism', 'assumption'].forEach((id) => need(id, /illustrative/i, 'an "illustrative" label on its graphic'));
+need('demo', /not Table 1/, 'the "not Table 1" scope label');
+need('demo', /authors’ own notebook output/i, 'the authors’ reference row');
+const needText = (id: string, text: string, what: string) => { if (!(rendered[id] ?? '').includes(text)) fail(`Slide "${id}" is missing ${what}`); };
+machines.forEach((m) => {
+  needText('demo', m.cpu, `the CPU of ${m.owner}'s laptop`);
+  needText('demo', m.gpu, `the GPU of ${m.owner}'s laptop`);
+  needText('demo', m.ram, `the RAM of ${m.owner}'s laptop`);
+});
+need('demo', /Pinned by the authors/, 'the pinned-versions line');
 need('mechanism', /p = 0\.1/, 'the repo-default perturbation range');
 need('mechanism', /numeric feature/, 'the numeric-feature wording');
 if (/garage finish \(|×\s*1\.45|garage finish ×/i.test(rendered.mechanism)) fail('Slide 4 still presents garage finish as the perturbed numeric feature');
