@@ -9,9 +9,9 @@ const scoped = scope.datasets.map((k) => datasets[k]);
 const dsNames = scoped.map((d) => d.label).join(' + ');
 const scopeTag = scope.status === 'confirmed' ? '' : ' <span class="tag-proposed">proposed</span>';
 
-const plan = [
-  ['Install & audit', 'authors’ repo, Python 3.11, pinned <code>requirements.txt</code>'],
-  ['Run the demo', '<code>demo/demonstration.ipynb</code> — Energy Efficiency'],
+const plan: [string, string, boolean?][] = [
+  ['Install & audit', 'authors’ repo, Python 3.11, pinned <code>requirements.txt</code>', true],
+  ['Run the demo', '<code>demo/demonstration.ipynb</code> — Energy Efficiency', true],
   [`Initial scope${scopeTag}`, `${dsNames} · ${scope.models.join(' & ')}`],
   ['Controlled comparison', `unaugmented vs CRDA, identical splits; ${scope.seeds} seeds first pass (paper: ${scope.paperSeeds})`],
   ['Compare with published', 'our ΔMSE next to Table 1, matching their protocol'],
@@ -47,9 +47,9 @@ export const planSlide: SlideDef = {
     <div class="split split-55 plan-grid">
       <div class="col">
         <ol class="plan-list">
-          ${plan.map(([h, d], i) => `<li><span class="plan-k">${i + 1}</span><div><p class="plan-h">${h}</p><p class="plan-d">${d}</p></div></li>`).join('')}
+          ${plan.map(([h, d, done], i) => `<li class="${done ? 'plan-done' : ''}"><span class="plan-k">${done ? '✓' : i + 1}</span><div><p class="plan-h">${h}</p><p class="plan-d">${d}</p></div></li>`).join('')}
         </ol>
-        <p class="stamp">Proposed plan — nothing run yet</p>
+        <p class="stamp">Steps 1–2 done on 3 laptops · steps 3–6 proposed</p>
       </div>
       <aside class="reported">
         <p class="reported-h">Original authors’ reported results — <strong>not our group’s reproduced results</strong></p>

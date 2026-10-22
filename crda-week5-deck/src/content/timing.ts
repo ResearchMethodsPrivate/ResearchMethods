@@ -45,8 +45,8 @@ export function slideTimings(): SlideTiming[] {
     const clicks = n.lines.filter((l) => /^\[Click/.test(l)).length;
     const prev = i > 0 ? speaking[ids[i - 1]]?.join() : undefined;
     const handoffs = i > 0 && prev !== speaking[id]?.join() ? 1 : 0;
-    // The team slide passes the word twice more inside the slide.
-    const inner = id === 'team' ? Math.max(0, (speaking[id]?.length ?? 1) - 1) : 0;
+    // Slides shared by several speakers pass the word inside the slide.
+    const inner = Math.max(0, (speaking[id]?.length ?? 1) - 1);
     const m = measured[id];
     const motionWait = m ? m.intro * TIMING.introWait + m.steps.reduce((a, b) => a + b, 0) * TIMING.stepWait : 0;
     const overhead = TIMING.transition + clicks * TIMING.click + (handoffs + inner) * TIMING.handoff + motionWait;
