@@ -1,6 +1,6 @@
 # OpenUI decision
 
-**Decision: integrated, as an optional, isolated “Explore CRDA” panel (key `E`). It is not one of the nine counted Week 5 slides.** GSAP + Reveal.js still drive every slide and all motion; OpenUI renders only the bounded explanatory panel.
+**Decision: integrated, as an optional, isolated “Explore CRDA” panel (key `E`). It is not one of the ten counted Week 5 slides.** GSAP + Reveal.js still drive every slide and all motion; OpenUI renders only the bounded explanatory panel.
 
 ## What OpenUI is (checked against thesysdev/openui, 19 Oct 2026)
 
@@ -25,7 +25,7 @@ There is no model call, no API key and no network access. The program is a stati
 
 - **Lazy**: React + OpenUI ship as a separate ≈124 KB-gzip chunk, loaded only on the first `E` press. The slides never import it.
 - **Navigation untouched**: while the panel is open, Reveal’s keyboard is disabled. `Esc` or `E` closes it and the slide position is unchanged (browser test).
-- **No export contamination**: the `E` binding isn't registered in `?print-pdf`, and the PDF has 9 pages with no panel (browser test).
+- **No export contamination**: the `E` binding isn't registered in `?print-pdf`, and the PDF has one page per slide (10) with no panel (browser test).
 - **Accessibility**: `role="dialog"`, `aria-modal`, labelled title, focus moves to Close and returns afterwards, tabs and radio toggles use ARIA roles.
 - **Offline**: zero remote requests with the panel open (browser test).
 
@@ -37,4 +37,4 @@ There is no model call, no API key and no network access. The program is a stati
 
 ## If you would rather not ship it
 
-Delete `src/explore/` and the `E` binding in `src/main.ts`, then remove `@openuidev/react-lang react react-dom zod`. The nine slides, the PDF and the tests for everything else don't depend on it.
+Delete `src/explore/` and the `E` binding in `src/main.ts`, then remove `@openuidev/react-lang react react-dom zod`. The ten slides, the PDF and the tests for everything else don't depend on it.
