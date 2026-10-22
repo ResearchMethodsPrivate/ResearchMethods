@@ -1,6 +1,6 @@
 /**
  * Deck validation.
- *   npm run validate:deck   development checks — passes while roles/scope are proposed
+ *   npm run validate:deck   development checks — also passes while roles/scope/group details are still open
  *   npm run validate:ready  presentation-ready — also fails on every open team decision
  */
 import {

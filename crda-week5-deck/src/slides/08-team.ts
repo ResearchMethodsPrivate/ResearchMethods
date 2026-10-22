@@ -31,7 +31,9 @@ const arcs = team.members.map((m, i) => {
 export const teamSlide: SlideDef = {
   id: 'team',
   steps: 1,
-  source: 'Presenters confirmed · research roles and cross-checks proposed, pending team agreement · research tasks planned',
+  source: rolesStatus === 'confirmed'
+    ? 'Presenters, roles and cross-checks agreed by the group · research tasks planned'
+    : 'Presenters confirmed · research roles and cross-checks proposed, pending team agreement · research tasks planned',
   html: () => `
     <header class="slide-head">
       <p class="kicker">07 — Who does what</p>
