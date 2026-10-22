@@ -5,12 +5,13 @@ import { naiveSlide } from './03-naive';
 import { mechanismSlide } from './04-mechanism';
 import { assumptionSlide } from './05-assumption';
 import { planSlide } from './06-plan';
-import { teamSlide } from './07-team';
-import { targetsSlide } from './08-targets';
-import { referencesSlide } from './09-references';
+import { demoSlide } from './07-demo';
+import { teamSlide } from './08-team';
+import { targetsSlide } from './09-targets';
+import { referencesSlide } from './10-references';
 
 /** Presentation order. Notes keys and the speaking split must match these ids. */
 export const slides: SlideDef[] = [
   titleSlide, problemSlide, naiveSlide, mechanismSlide, assumptionSlide,
-  planSlide, teamSlide, targetsSlide, referencesSlide,
+  planSlide, demoSlide, teamSlide, targetsSlide, referencesSlide,
 ];

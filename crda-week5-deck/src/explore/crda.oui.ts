@@ -22,11 +22,11 @@ assumption = Tab("Assumption", [toggle])
 toggle = AssumptionToggle("Holds: the perturbed features move the target Y but not the noise Z; Z may still depend on the fixed features.", "Breaks: a hidden U drives both the perturbed feature and Y, so the residual Z absorbs U and becomes dependent on it.", "Residual invariance — P(Z | perturbed, fixed) = P(Z | fixed) — is assumed, not guaranteed. The PC and Pearson screens are heuristics; the Wilcoxon gate is evidence on validation folds.")
 claims = Tab("Claims vs plan", [cvp])
 cvp = ClaimsVsPlan([c1, c2, c3, c4], ${JSON.stringify([
-  'Install the authors’ repo as pinned (Python 3.11) and run their demo',
+  'Done 22 Oct: authors’ repo installed as pinned (Python 3.11) and their demo run on 3 laptops',
   `Proposed scope: ${scope.datasets.map((d) => datasets[d].label).join(' + ')} · ${scope.models.join(' & ')}`,
   `Unaugmented vs CRDA on identical splits, ${scope.seeds} seeds first (paper: ${scope.paperSeeds})`,
   'Compare our ΔMSE with Table 1 and log every deviation',
-])}, "Proposed — nothing run yet")
+])}, "Demo run on 3 laptops · Table 1 comparison not started")
 c1 = Claim("Average MSE change, MLP (9 datasets)", ${q(fmtDelta(paper.headline.mlp))}, "Abstract; §5.2")
 c2 = Claim("Average MSE change, XGBoost (9 datasets)", ${q(fmtDelta(paper.headline.xgb))}, "Abstract; §5.2")
 c3 = Claim("Energy Efficiency, n = ${ee[0]}: MLP / XGB", ${q(`${fmtDelta(ee[2])} / ${fmtDelta(ee[1])}`)}, "Table 1")

@@ -19,10 +19,10 @@ Nothing was blocked: local URLs loaded normally, so no administrator-policy work
 
 | Evidence | Count | How |
 |---|---:|---|
-| Every Reveal fragment / GSAP step at 1920×1080 (`NN-id-sK.png`, s0 = intro end) | 30 | real `ArrowRight` key presses, waiting until the timeline sits exactly on its step label **and** Reveal’s fade has finished |
-| Intermediate frames at 25 / 50 / 75 % of every animated segment (`NN-id-sK-PP.jpg`) | 90 | exact `timeline.pause(t)` seeks — genuine in-between frames, not end states |
+| Every Reveal fragment / GSAP step at 1920×1080 (`NN-id-sK.png`, s0 = intro end) | 35 | real `ArrowRight` key presses, waiting until the timeline sits exactly on its step label **and** Reveal’s fade has finished |
+| Intermediate frames at 25 / 50 / 75 % of every animated segment (`NN-id-sK-PP.jpg`) | 105 | exact `timeline.pause(t)` seeks — genuine in-between frames, not end states |
 | Slide 4 residual carry, mid-flight (`04-mechanism-mid-copy.png`) | 1 | seek to 40 % of the carry segment |
-| Final state of every slide at 1366×768 and 1280×720 (`vp-*/`) | 18 | deep-link to last fragment |
+| Final state of every slide at 1366×768 and 1280×720 (`vp-*/`) | 20 | deep-link to last fragment |
 | Fullscreen (`fullscreen.png`) | 1 | `F` key; `document.fullscreenElement` confirmed non-null |
 | OpenUI explorer (`explore-*.png`) | 3 | `E` key, then real clicks on tabs/toggles |
 | Real-time clip of slide 4 (`04-mechanism.webm`, 26 s, 1920×1080, 25 fps) | 1 | Playwright video; enters from slide 3, five clicks with 3.2–4.4 s natural pauses |
@@ -31,7 +31,15 @@ Nothing was blocked: local URLs loaded normally, so no administrator-policy work
 
 Regenerate everything with `npm run qa:visual` (≈ 2 min). It also writes the measured animation durations to `src/content/motion.json`, which the timing model uses.
 
-## Images I actually looked at
+## Update, 22 Oct 2026: new slide 6 ("Our first check") and done states
+
+The deck grew from 9 to 10 slides (laptops + results slide, plan steps 1–2 ticked, target 1 done). Everything above was regenerated with `npm run qa:visual`, so file names after slide 6 moved up by one (for example `team` is now `08-team-*`). Results of the re-run: zero remote requests, zero console errors, zero failed loads, no out-of-frame elements, no scrollbars at 1920×1080, 1366×768 or 1280×720; 16/16 unit tests and 7/7 browser tests pass; the PDF has 10 pages and page 7 was re-rendered and read.
+
+**New problems found on the new slide and fixed:** the amber “differs · baseline already 2.7 % lower” badge wrapped onto two lines and spilled out of its pill, and the deviations text crowded the footer. The badge text was shortened and set to no-wrap, the source footer shortened, row padding trimmed.
+
+**Inspected by eye this round:** `07-demo-s4`, `07-demo-s2-50` (mid-animation), the contact sheet, and the plan, targets and title slides. **Not re-inspected** after regeneration: every other frame from the earlier list below, which was inspected on the previous 9-slide build; those slides' code did not change except renumbered kickers.
+
+## Images I actually looked at (previous 9-slide build)
 
 Inspected by eye (multimodal): the contact sheet; every slide-4 step (s0–s4) plus `04-mechanism-mid-copy` and `04-mechanism-s4-50`; slide 2 `s1-50`; slide 3 `s2`; slide 5 `s4`; slide 6 `s2`; slide 7 `s1`; slide 8 `s5`; title `s0`; all three explorer captures; `vp-1280x720/05`; a 3×3 render of every PDF page; a 12-frame sheet extracted from the slide-4 video.
 
@@ -62,7 +70,7 @@ Inspected by eye (multimodal): the contact sheet; every slide-4 step (s0–s4) p
 
 ## Remaining concerns / not verified
 
-1. **No human has rehearsed it.** The 6:55 figure is a *model* (words at 150 wpm, plus measured motion, clicks, transitions and handoffs). Anik, Alvi and Atul need a stopwatch run; there's a log table in `docs/speaker-notes.md`.
+1. **No human has rehearsed it.** The ~7:18 figure is a *model* (words at 150 wpm, plus measured motion, clicks, transitions and handoffs). Anik, Alvi and Atul need a stopwatch run; there's a log table in `docs/speaker-notes.md`.
 2. **Real projector not tested.** Colour and contrast were judged on screenshots only. The amber footnotes (≈19–21 px at 1080p) are the smallest text — check them from the back of the room.
 3. **Headless only.** Fullscreen was confirmed headless; headed Chrome/Edge on the presenting laptop has not been tried. The speaker-view popup works, but its layout wasn't reviewed visually.
 4. The ~80 intermediate JPEGs listed above were checked automatically, not by eye.

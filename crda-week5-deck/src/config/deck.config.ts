@@ -43,6 +43,8 @@ export interface Milestone {
   owners: MemberId[];
   /** e.g. 'Week 6'. */
   due: string;
+  /** Set once the evidence exists. Only true for things that have actually happened. */
+  done?: { on: string };
 }
 
 /** Speaking split: which member presents each slide (by slide id). */
@@ -64,7 +66,7 @@ export const members: Member[] = [
     role: 'Environment & reproducibility',
     owns: [
       'Python 3.11 env from the authors’ pinned requirements',
-      'Run the demo notebook end-to-end',
+      'Environment notes for every platform we use',
       'Seed, config and version logging',
     ],
     checks: 'B',
@@ -107,6 +109,7 @@ export const speaking: SpeakingSplit = {
   mechanism: ['B'],
   assumption: ['B'],
   plan: ['C'],
+  demo: ['A', 'B', 'C'],
   team: ['A', 'B', 'C'],
   targets: ['C'],
   references: ['C'],
@@ -129,10 +132,11 @@ export const scope = {
 export const milestones: Milestone[] = [
   {
     title: 'Environment reproduced',
-    doneWhen: 'Authors’ demo notebook runs end-to-end on our machine',
-    evidence: 'pip freeze, OS / CPU note, demo output',
+    doneWhen: 'Authors’ demo runs end-to-end on our laptops',
+    evidence: 'Exact versions + CPU/OS logged; 3 laptops (docs/demo-reports/)',
     owners: ['A'],
     due: 'Week 6',
+    done: { on: '22 Oct' },
   },
   {
     title: 'Baselines logged',

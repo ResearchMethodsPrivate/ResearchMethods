@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-19T13:11:07.414Z",
+  "generated": "2026-10-22T09:41:23.871Z",
   "browser": "Chromium 153.0.8010.12 (Playwright 1.63.0, headless)",
   "motionSeconds": {
     "title": {
@@ -44,6 +44,15 @@
       "steps": [
         2.2,
         0.5
+      ]
+    },
+    "demo": {
+      "intro": 0.7,
+      "steps": [
+        0.85,
+        0.85,
+        0.85,
+        0.6
       ]
     },
     "team": {

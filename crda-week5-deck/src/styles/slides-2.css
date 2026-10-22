@@ -179,3 +179,38 @@
 
 /* Proposed/confirmation chip under slide titles */
 .head-chip { margin-top: 14px !important; }
+
+/* ── Done states (plan steps, targets) ─────────────────────── */
+.plan-done .plan-k { background: var(--cyan); color: var(--bg); border-color: var(--cyan); font-weight: 700; }
+.ms-done { border-color: rgba(121, 233, 187, 0.55); background: linear-gradient(160deg, rgba(121, 233, 187, 0.09), var(--panel) 60%); }
+.ms-done-tag { color: var(--green) !important; font-weight: 600; }
+
+/* ── 6b · Our first check (demo on three laptops) ──────────── */
+.slide-demo .slide-head { margin-bottom: 22px; }
+.slide-demo .head-chip { margin-top: 12px !important; }
+.dm { display: grid; gap: 10px; }
+.dm-row { display: grid; grid-template-columns: 560px 150px 1fr 1fr; gap: 26px; align-items: center; }
+.dm-head { font-family: var(--f-mono); font-size: 19px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); padding: 0 22px; }
+.dm-ref { border: 1px dashed var(--panel-line); border-radius: 14px; padding: 10px 22px; }
+.dm-m { border: 1px solid var(--panel-line); border-radius: 14px; padding: 9px 22px; background: var(--panel); }
+.dm-name { font-family: var(--f-display); font-size: 31px; font-weight: 600; letter-spacing: -0.01em; }
+.dm-ref .dm-name { font-size: 26px; font-weight: 500; color: var(--ink-dim); }
+.dm-hw { font-size: 21px; color: var(--ink-dim); line-height: 1.28; }
+.dm-gpu { color: var(--ink-faint); }
+.dm-time { font-family: var(--f-mono); font-size: 24px; color: var(--ink); }
+.dm-res p { margin: 0; }
+.dm-mse { font-family: var(--f-mono); font-size: 27px; color: var(--ink); white-space: nowrap; }
+.dm-mse span { color: var(--ink-faint); }
+.dm-delta { font-size: 25px; font-weight: 600; color: var(--cyan); }
+.dm-delta span { font-family: var(--f-mono); font-size: 19px; font-weight: 400; color: var(--ink-dim); margin-left: 10px; }
+.dm-delta-diff { color: var(--amber); }
+.dm-ref .dm-mse, .dm-ref .dm-delta { color: var(--ink-dim); }
+.badge { display: inline-block; white-space: nowrap; font-family: var(--f-mono); font-size: 18px; padding: 2px 12px; border-radius: 999px; margin-top: 4px; border: 1px solid; }
+.badge-ok { color: var(--green); border-color: rgba(121, 233, 187, 0.5); background: rgba(121, 233, 187, 0.08); }
+.badge-diff { color: var(--amber); border-color: rgba(255, 199, 110, 0.55); background: var(--amber-soft); }
+.dm-foot { display: grid; grid-template-columns: 0.8fr 1.6fr; gap: 40px; margin-top: 12px; padding-top: 14px; border-top: 1px solid var(--panel-line); font-size: 22px; color: var(--ink-dim); }
+.dm-foot .lbl { display: block; font-family: var(--f-mono); font-size: 18px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--violet); margin-bottom: 4px; }
+.dm-pins { color: var(--ink); }
+.dm-dev ul { display: grid; gap: 4px; }
+.dm-dev li { color: var(--ink); padding-left: 20px; position: relative; line-height: 1.3; }
+.dm-dev li::before { content: '!'; position: absolute; left: 2px; color: var(--amber); font-family: var(--f-mono); }
