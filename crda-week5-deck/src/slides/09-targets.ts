@@ -8,7 +8,9 @@ const n = milestones.length;
 export const targetsSlide: SlideDef = {
   id: 'targets',
   steps: n + 1,
-  source: 'Weeks and owners proposed, pending team agreement · target 1 done (22 Oct); targets 2–4 planned, not started',
+  source: milestonesStatus === 'confirmed'
+    ? 'Weeks and owners agreed by the group · target 1 done (22 Oct); targets 2–4 planned, not started'
+    : 'Weeks and owners proposed, pending team agreement · target 1 done (22 Oct); targets 2–4 planned, not started',
   html: () => `
     <header class="slide-head">
       <p class="kicker">08 — Targets before Week 9</p>
