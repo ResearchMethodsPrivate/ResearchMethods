@@ -2,17 +2,16 @@
  * ─────────────────────────────────────────────────────────────────────────────
  *  THE ONE FILE TO EDIT.
  *
- *  WHAT IS CONFIRMED vs PROPOSED (keep this block honest):
- *   ✔ CONFIRMED  Presenters: exactly three — Anik, Alvi, Atul (that spelling).
- *   ✔ CONFIRMED  Speaking split: Anik slides 1–3, Alvi 4–5, Atul 6, 8, 9;
- *                everyone speaks to their own card on slide 7.
- *   ✎ PROPOSED   Research roles (environment / experiments / analysis) and the
- *                cross-check pairs — shown on screen as "Proposed — confirm
- *                with team" until `rolesStatus` is set to 'confirmed'.
- *   ✎ PROPOSED   Replication scope (datasets, models, seeds) and milestone
- *                weeks/owners — shown as "proposed" until confirmed below.
- *   ? UNKNOWN    Group name/number and presentation date — left null, so they
- *                are simply not shown. `npm run validate:ready` fails until set.
+ *  WHAT IS CONFIRMED (keep this block honest):
+ *   ✔ Presenters: exactly three — Anik, Alvi, Atul (that spelling).
+ *   ✔ Speaking split: Anik slides 1–3, Alvi 4–5, Atul 6–7 and 9–10; everyone
+ *     speaks to their own row/card on slides 7 and 8.
+ *   ✔ Group name "Triple A" and presentation date 23 October 2026.
+ *   ✔ Research roles + cross-check pairs, replication scope, and milestone
+ *     weeks/owners — confirmed 22 Oct 2026 by Alvi, relaying the group's
+ *     decision to keep them exactly as listed below. (Anik and Atul: shout if
+ *     that isn't right; set the matching `*Status` back to 'proposed' and the
+ *     slides will show "Proposed" labels again.)
  *
  *  `npm run validate:deck`  — development checks (passes with proposals).
  *  `npm run validate:ready` — presentation-ready checks (fails until every
@@ -52,8 +51,8 @@ export type SpeakingSplit = Record<string, MemberId[]>;
 
 // ── 1. Group (null = unknown → not displayed; validate:ready fails) ──────────
 export const group: { name: string | null; date: string | null; module: string; session: string } = {
-  name: null,
-  date: null,
+  name: 'Triple A',
+  date: '23 October 2026',
   module: 'ECS7029P Research Methods · 2026/27',
   session: 'Week 5 · First interim presentation',
 };
@@ -98,8 +97,8 @@ export const members: Member[] = [
   },
 ];
 
-/** Research-role allocation above: 'proposed' until the three of you agree it. */
-export const rolesStatus = 'proposed' as Status;
+/** Research-role allocation above. Confirmed 22 Oct 2026 (see header). */
+export const rolesStatus = 'confirmed' as Status;
 
 /** Confirmed by the team brief. */
 export const speaking: SpeakingSplit = {
@@ -117,7 +116,7 @@ export const speaking: SpeakingSplit = {
 
 export const team = { members, speaking };
 
-// ── 3. Replication scope (proposed initial scope) ───────────────────────────
+// ── 3. Replication scope (confirmed initial scope) ──────────────────────────
 export const scope = {
   /** First dataset is the primary target; the authors' demo also uses it. */
   datasets: ['EnergyEfficiency', 'ConcreteStrength'] as DatasetKey[],
@@ -125,10 +124,10 @@ export const scope = {
   /** First-pass seeds per configuration; the paper averages 15. */
   seeds: 3,
   paperSeeds: 15,
-  status: 'proposed' as Status,
+  status: 'confirmed' as Status,
 };
 
-// ── 4. Targets before Week 9 (proposed weeks and owners) ────────────────────
+// ── 4. Targets before Week 9 (confirmed weeks and owners) ───────────────────
 export const milestones: Milestone[] = [
   {
     title: 'Environment reproduced',
@@ -160,7 +159,7 @@ export const milestones: Milestone[] = [
     due: 'Ongoing',
   },
 ];
-export const milestonesStatus = 'proposed' as Status;
+export const milestonesStatus = 'confirmed' as Status;
 
 // ── 5. Closing research question ────────────────────────────────────────────
 export const researchQuestion =

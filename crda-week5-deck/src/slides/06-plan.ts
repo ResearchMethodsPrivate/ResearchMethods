@@ -49,7 +49,7 @@ export const planSlide: SlideDef = {
         <ol class="plan-list">
           ${plan.map(([h, d, done], i) => `<li class="${done ? 'plan-done' : ''}"><span class="plan-k">${done ? '✓' : i + 1}</span><div><p class="plan-h">${h}</p><p class="plan-d">${d}</p></div></li>`).join('')}
         </ol>
-        <p class="stamp">Steps 1–2 done on 3 laptops · steps 3–6 proposed</p>
+        <p class="stamp">Steps 1–2 done on 3 laptops · steps 3–6 planned</p>
       </div>
       <aside class="reported">
         <p class="reported-h">Original authors’ reported results — <strong>not our group’s reproduced results</strong></p>
@@ -58,7 +58,7 @@ export const planSlide: SlideDef = {
           <div><span class="big big-x" data-to="${paper.headline.xgb}">${fmtDelta(paper.headline.xgb)}</span><span class="big-l">XGBoost</span></div>
         </div>
         <p class="big-cap">average test-MSE change across 9 benchmark datasets</p>
-        <svg class="bars" viewBox="0 -4 ${BW} ${chartH}" role="img" aria-label="Paper Table 1 MSE changes for the proposed datasets; left of zero is lower error">
+        <svg class="bars" viewBox="0 -4 ${BW} ${chartH}" role="img" aria-label="Paper Table 1 MSE changes for our chosen datasets; left of zero is lower error">
           <line class="zero" x1="${sc.zeroX}" x2="${sc.zeroX}" y1="0" y2="${chartH - 40}" />
           ${planRows.map((r, i) => `
             <g transform="translate(0 ${i * rowH})">

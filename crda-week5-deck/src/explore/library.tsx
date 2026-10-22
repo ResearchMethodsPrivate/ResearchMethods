@@ -97,7 +97,7 @@ export const Claim = defineComponent({
 
 export const ClaimsVsPlan = defineComponent({
   name: 'ClaimsVsPlan',
-  description: 'Original authors’ reported results beside our proposed (not yet run) reproduction',
+  description: 'Original authors’ reported results beside our planned (not yet run) reproduction',
   props: z.object({ claims: z.array(Claim.ref), plan: z.array(z.string()), status: z.string() }),
   component: ({ props, renderNode }) => (
     <div className="ox-cvp" data-openui="ClaimsVsPlan">
@@ -107,7 +107,7 @@ export const ClaimsVsPlan = defineComponent({
         <ul>{renderNode(props.claims)}</ul>
       </section>
       <section>
-        <h3>Our proposed reproduction</h3>
+        <h3>Our planned reproduction</h3>
         <p className="ox-warn">{props.status}</p>
         <ol>{props.plan.map((p) => <li key={p}>{p}</li>)}</ol>
       </section>

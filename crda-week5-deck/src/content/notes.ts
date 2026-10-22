@@ -7,7 +7,7 @@
  * (A = Anik, B = Alvi, C = Atul). If you change the milestones in
  * deck.config.ts, update `targets` below too (validate:deck checks the count).
  */
-import { rolesStatus, team } from '../config/deck.config';
+import { rolesStatus, scope, team } from '../config/deck.config';
 
 export interface SlideNotes {
   title: string;
@@ -45,7 +45,7 @@ export const notes = {
     seconds: 28,
     lines: [
       '[Hook types in, then the paper details]',
-      'Hi, I’m Anik, and with me are Alvi and Atul. The question that drew us to this paper is simple: can a model learn more when you can’t collect more data?',
+      'Hi, I’m Anik, and with me are Alvi and Atul — we’re group Triple A. The question that drew us to this paper is simple: can a model learn more when you can’t collect more data?',
       'The paper is “Counterfactual Residual Data Augmentation for Regression” — CRDA — by Mohebbi and colleagues, at ICML this year. We’ll cover the problem, the idea, and our plan to test it.',
     ],
   },
@@ -112,7 +112,7 @@ export const notes = {
     seconds: 48,
     lines: [
       '[Plan steps appear]',
-      'Thanks, Alvi. We want to test whether the results reproduce, not improve the method. The first two steps are already done — more on that next. From there, our proposed starting scope is two small datasets, comparing plain and CRDA models on the same splits and seeds.',
+      `Thanks, Alvi. We want to test whether the results reproduce, not improve the method. The first two steps are already done — more on that next. From there, our ${scope.status === 'confirmed' ? 'starting' : 'proposed starting'} scope is two small datasets, comparing plain and CRDA models on the same splits and seeds.`,
       '[Click — reported numbers count up]',
       'These are the authors’ numbers, not ours: about 23 percent lower MSE for MLPs and 6 for XGBoost on average. On our two datasets Table 1 reports twelve to twenty-eight percent — that’s our bar.',
       '[Click — code-reading questions]',

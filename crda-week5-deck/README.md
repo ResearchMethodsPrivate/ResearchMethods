@@ -25,7 +25,7 @@ Open **http://localhost:5173/** and press **F** for fullscreen.
 | `npm run preview` | Serves `dist/` at http://localhost:4173/ |
 | `npm run notes` | Writes `docs/speaker-notes.md`: the script, a timing model and a stopwatch log |
 | `npm run pdf` | After `build`, writes the static fallback `docs/crda-week5-deck.pdf` (Playwright Chromium) |
-| `npm run validate:deck` | Development checks: names, slide ↔ notes ↔ speaker ids, owners, required labels, citations, timing. Passes while items are still *proposed* |
+| `npm run validate:deck` | Development checks: names, slide ↔ notes ↔ speaker ids, owners, required labels, citations, timing. Passes even while team decisions are open |
 | `npm run validate:ready` | Presentation-ready check. **Fails until every open team decision is confirmed** (see the checklist below) |
 | `npm test` | Unit tests: the CRDA invariant `y′ = ĝ(x′) + z`, signed ΔMSE bars, the OpenUI fixture |
 | `npm run test:browser` | Real-browser tests: navigation, rapid clicks, back/forward, deep links, overview, `R`, `S`, reduced motion, print, explorer, offline |
@@ -60,7 +60,7 @@ Each click is a hidden Reveal fragment that drives a labelled GSAP step (`s0`…
 
 | File | Controls |
 |---|---|
-| `src/config/deck.config.ts` | **Team-specific facts.** Presenters (confirmed), research roles (proposed), speaking split, scope, seeds, milestones, group name/date. The header says what is confirmed and what isn't |
+| `src/config/deck.config.ts` | **Team-specific facts.** Presenters, research roles, speaking split, scope, seeds, milestones, group name/date. The header says what is confirmed and what isn't |
 | `src/content/notes.ts` | Speaker notes and target seconds |
 | `src/content/paper.ts` | Verified numbers from the paper/repo (Table 1, headline averages, code-reading questions) |
 | `src/content/references.ts` | Reference list; dataset references follow `scope.datasets` |
@@ -68,17 +68,19 @@ Each click is a hidden Reveal fragment that drives a labelled GSAP step (`s0`…
 | `src/lib/crda-geometry.ts` | The tested maths behind the slide-4 sketch |
 | `src/explore/` | The optional OpenUI explorer |
 
-## Checklist — open team decisions (`npm run validate:ready` lists these)
+## Checklist — team decisions (`npm run validate:ready` lists any still open)
 
-Presenter names are **confirmed** and are not on this list.
+Presenter names, group name and date, roles, scope and milestones are all **confirmed** (22 Oct 2026) and `npm run validate:ready` passes.
 
-- [ ] Group name / number → `group.name`
-- [ ] Presentation date → `group.date`
-- [ ] Agree the research roles and cross-check pairs, then set `rolesStatus = 'confirmed'`. The slide shows “Proposed — confirm with team” until then
-- [ ] Agree the replication scope (Energy Efficiency + Concrete Strength, MLP + XGBoost, 3 seeds first pass), then set `scope.status = 'confirmed'`
-- [ ] Agree milestone weeks and owners, then set `milestonesStatus = 'confirmed'`
-- [ ] **Stopwatch rehearsal** of the full talk. The ~7:18 figure is a model, not a measurement; record runs in `docs/speaker-notes.md`
+- [x] Group name → `group.name` = Triple A
+- [x] Presentation date → `group.date` = 23 October 2026
+- [x] Research roles and cross-check pairs (Anik environment, Alvi experiments, Atul analysis/delivery) → `rolesStatus = 'confirmed'`
+- [x] Replication scope (Energy Efficiency + Concrete Strength, MLP + XGBoost, 3 seeds first pass) → `scope.status = 'confirmed'`
+- [x] Milestone weeks and owners → `milestonesStatus = 'confirmed'`
+- [ ] **Stopwatch rehearsal** of the full talk. The ~7:20 figure is a model, not a measurement; record runs in `docs/speaker-notes.md`
 - [ ] After any edit: `npm run validate:deck && npm test && npm run build && npm run pdf`
+
+If the group changes its mind about any of these, set the matching `*Status` back to `'proposed'` in `src/config/deck.config.ts` and the slides show "Proposed" labels again.
 
 ## Timing
 
