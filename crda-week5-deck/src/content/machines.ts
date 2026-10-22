@@ -11,6 +11,8 @@ import type { MemberId } from '../config/deck.config';
 export interface ModelResult { before: number; after: number; p: number }
 export interface Machine {
   owner: MemberId;
+  /** Short tag shown next to the presenter's name, so the audience can match name to machine. */
+  label: string;
   /** Marketing name as reported by the OS. */
   cpu: string;
   gpu: string;
@@ -32,6 +34,7 @@ export const authors: { mlp: ModelResult; xgb: ModelResult } = {
 export const machines: Machine[] = [
   {
     owner: 'A',
+    label: 'M2',
     cpu: 'Apple M2 (8 cores)',
     gpu: 'Apple M2 integrated',
     ram: '8 GB',
@@ -43,6 +46,7 @@ export const machines: Machine[] = [
   },
   {
     owner: 'B',
+    label: 'Ryzen 7 · RTX 3070',
     cpu: 'AMD Ryzen 7 5800H (8 cores)',
     gpu: 'NVIDIA RTX 3070 Laptop',
     ram: '64 GB',
@@ -54,6 +58,7 @@ export const machines: Machine[] = [
   },
   {
     owner: 'C',
+    label: 'M5 Pro',
     cpu: 'Apple M5 Pro',
     gpu: 'Apple M5 Pro integrated (16-core)',
     ram: '24 GB',

@@ -71,6 +71,7 @@ need('demo', /not Table 1/, 'the "not Table 1" scope label');
 need('demo', /authors’ own notebook output/i, 'the authors’ reference row');
 const needText = (id: string, text: string, what: string) => { if (!(rendered[id] ?? '').includes(text)) fail(`Slide "${id}" is missing ${what}`); };
 machines.forEach((m) => {
+  needText('demo', m.label, `the machine tag of ${m.owner}'s laptop`);
   needText('demo', m.cpu, `the CPU of ${m.owner}'s laptop`);
   needText('demo', m.gpu, `the GPU of ${m.owner}'s laptop`);
   needText('demo', m.ram, `the RAM of ${m.owner}'s laptop`);

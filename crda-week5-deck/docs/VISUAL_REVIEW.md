@@ -37,6 +37,8 @@ The deck grew from 9 to 10 slides (laptops + results slide, plan steps 1–2 tic
 
 **New problems found on the new slide and fixed:** the amber “differs · baseline already 2.7 % lower” badge wrapped onto two lines and spilled out of its pill, and the deviations text crowded the footer. The badge text was shortened and set to no-wrap, the source footer shortened, row padding trimmed.
 
+**Later the same day:** each presenter's name on slide 6 got a small machine tag (M2 · Ryzen 7 · RTX 3070 · M5 Pro) so the audience can match names to laptops; the spoken lines no longer say "MacBook" (the reports only name the chips). Evidence was regenerated again; `07-demo-s4` was re-inspected, with no overlaps and no out-of-frame elements.
+
 **Inspected by eye this round:** `07-demo-s4`, `07-demo-s2-50` (mid-animation), the contact sheet, and the plan, targets and title slides. **Not re-inspected** after regeneration: every other frame from the earlier list below, which was inspected on the previous 9-slide build; those slides' code did not change except renumbered kickers.
 
 ## Images I actually looked at (previous 9-slide build)
