@@ -40,7 +40,7 @@ export const demoSlide: SlideDef = {
       ${machines.map((m) => `
       <div class="dm-row dm-m" role="row">
         <div class="dm-who">
-          <p class="dm-name">${memberName(m.owner)}</p>
+          <p class="dm-name">${memberName(m.owner)} <span class="dm-chip">${m.label}</span></p>
           <p class="dm-hw">${m.cpu} · ${m.ram}</p>
           <p class="dm-hw dm-gpu">GPU: ${m.gpu} — not used</p>
           <p class="dm-hw">${m.os} · Python ${m.python}</p>

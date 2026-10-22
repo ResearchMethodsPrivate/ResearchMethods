@@ -194,6 +194,7 @@
 .dm-ref { border: 1px dashed var(--panel-line); border-radius: 14px; padding: 10px 22px; }
 .dm-m { border: 1px solid var(--panel-line); border-radius: 14px; padding: 9px 22px; background: var(--panel); }
 .dm-name { font-family: var(--f-display); font-size: 31px; font-weight: 600; letter-spacing: -0.01em; }
+.dm-chip { font-family: var(--f-mono); font-size: 20px; font-weight: 400; letter-spacing: 0; color: var(--cyan); border: 1px solid rgba(99, 227, 255, 0.45); background: var(--cyan-soft); border-radius: 999px; padding: 1px 12px; margin-left: 10px; vertical-align: 3px; }
 .dm-ref .dm-name { font-size: 26px; font-weight: 500; color: var(--ink-dim); }
 .dm-hw { font-size: 21px; color: var(--ink-dim); line-height: 1.28; }
 .dm-gpu { color: var(--ink-faint); }
