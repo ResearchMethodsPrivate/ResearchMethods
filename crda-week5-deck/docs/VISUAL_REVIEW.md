@@ -39,6 +39,8 @@ The deck grew from 9 to 10 slides (laptops + results slide, plan steps 1–2 tic
 
 **Later the same day:** each presenter's name on slide 6 got a small machine tag (M2 · Ryzen 7 · RTX 3070 · M5 Pro) so the audience can match names to laptops; the spoken lines no longer say "MacBook" (the reports only name the chips). Evidence was regenerated again; `07-demo-s4` was re-inspected, with no overlaps and no out-of-frame elements.
 
+**Team details confirmed (22 Oct 2026):** group name “Triple A”, date 23 October 2026, and the roles, scope and milestones kept as listed, so the “Proposed” chips and badges are gone (team cards now say “Planned”). Evidence was regenerated; the title, plan (`06-plan-s2`), team (`08-team-s1`) and targets (`09-targets-s5`) slides were re-inspected with no overlaps or clipping, and `npm run validate:ready` now passes.
+
 **Inspected by eye this round:** `07-demo-s4`, `07-demo-s2-50` (mid-animation), the contact sheet, and the plan, targets and title slides. **Not re-inspected** after regeneration: every other frame from the earlier list below, which was inspected on the previous 9-slide build; those slides' code did not change except renumbered kickers.
 
 ## Images I actually looked at (previous 9-slide build)

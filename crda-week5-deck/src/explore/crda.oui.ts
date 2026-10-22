@@ -23,7 +23,7 @@ toggle = AssumptionToggle("Holds: the perturbed features move the target Y but n
 claims = Tab("Claims vs plan", [cvp])
 cvp = ClaimsVsPlan([c1, c2, c3, c4], ${JSON.stringify([
   'Done 22 Oct: authors’ repo installed as pinned (Python 3.11) and their demo run on 3 laptops',
-  `Proposed scope: ${scope.datasets.map((d) => datasets[d].label).join(' + ')} · ${scope.models.join(' & ')}`,
+  `${scope.status === 'confirmed' ? 'Scope' : 'Proposed scope'}: ${scope.datasets.map((d) => datasets[d].label).join(' + ')} · ${scope.models.join(' & ')}`,
   `Unaugmented vs CRDA on identical splits, ${scope.seeds} seeds first (paper: ${scope.paperSeeds})`,
   'Compare our ΔMSE with Table 1 and log every deviation',
 ])}, "Demo run on 3 laptops · Table 1 comparison not started")
