@@ -86,7 +86,7 @@ Presenter names are **confirmed** and are not on this list.
 
 ## Evidence
 
-- `docs/demo-reports/` — the three laptops' reports from running the authors' demo (22 Oct 2026): Anik (MacBook M2), Alvi (Windows, Ryzen 7 + RTX 3070), Atul (MacBook M5 Pro). The slide-6 numbers in `src/content/machines.ts` are copied from these, and `npm test` checks them.
+- `docs/demo-reports/` — the three laptops' reports from running the authors' demo (22 Oct 2026): Anik (Mac, M2), Alvi (Windows, Ryzen 7 + RTX 3070), Atul (Mac, M5 Pro). The slide-6 numbers in `src/content/machines.ts` are copied from these, and `npm test` checks them.
 
 - `docs/VISUAL_REVIEW.md` — what was rendered and inspected, what was fixed, and what is still unverified.
 - `docs/OPENUI_DECISION.md` — the OpenUI integration and the risks it brings.
