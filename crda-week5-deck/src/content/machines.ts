@@ -36,7 +36,7 @@ export const machines: Machine[] = [
     owner: 'A',
     label: 'M2',
     cpu: 'Apple M2 (8 cores)',
-    gpu: 'Apple M2 integrated',
+    gpu: 'Apple M2 (built in)',
     ram: '8 GB',
     os: 'macOS 14.6.1',
     python: '3.11.5',
@@ -60,7 +60,7 @@ export const machines: Machine[] = [
     owner: 'C',
     label: 'M5 Pro',
     cpu: 'Apple M5 Pro',
-    gpu: 'Apple M5 Pro integrated (16-core)',
+    gpu: 'Apple M5 Pro (built in)',
     ram: '24 GB',
     os: 'macOS 27.0.1',
     python: '3.11.17',
@@ -87,6 +87,6 @@ export const matchesAuthors = (r: ModelResult, ref: ModelResult) =>
 
 /** Deviations found while getting the demo to run — first entries of the obstacle log. */
 export const deviations = [
-  'Pinned scipy 1.15.3 won’t load on macOS 27 → used 1.16.0 on Atul’s Mac; numbers unchanged',
-  'Windows XGBoost: unaugmented baseline already differs (0.00127 vs 0.00130); cause unknown',
+  'A library version wouldn’t run on new macOS; a newer one gave the same results',
+  'Windows XGBoost differs, even for the plain model (0.00127 vs 0.00130); we don’t know why yet',
 ];

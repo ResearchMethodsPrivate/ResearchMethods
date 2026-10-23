@@ -39,6 +39,7 @@
 .dag-legend { grid-column: 1 / -1; display: flex; flex-wrap: nowrap; gap: 8px 20px; font-family: var(--f-mono); font-size: 18px; color: var(--ink-dim); margin: 0; }
 .dag-legend .lg-ok { color: var(--green); }
 .dag-legend .lg-bad { color: var(--red); }
+.dag-key { flex-wrap: wrap !important; }
 .dag-legend .lg-src { color: var(--ink-faint); margin-left: auto; }
 .tier { font-family: var(--f-mono); font-size: 19px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cyan); }
 .tier .feat-note { text-transform: none; letter-spacing: 0; }
@@ -173,7 +174,9 @@
 
 /* ── 9 · References ────────────────────────────────────────── */
 .refs { columns: 2; column-gap: 64px; counter-reset: ref; }
-.refs li { break-inside: avoid; font-size: 21px; line-height: 1.38; color: var(--ink-dim); margin-bottom: 14px; padding-left: 40px; position: relative; }
+.ref-group { margin-bottom: 18px; }
+.ref-group h3 { font-family: var(--f-mono); font-size: 20px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); margin-bottom: 10px; break-after: avoid; }
+.refs li { break-inside: avoid; font-size: 22px; line-height: 1.38; color: var(--ink-dim); margin-bottom: 14px; padding-left: 40px; position: relative; }
 .refs li::before { counter-increment: ref; content: counter(ref); position: absolute; left: 0; font-family: var(--f-mono); font-size: 19px; color: var(--cyan); }
 .refs li em { color: var(--ink); }
 
@@ -194,6 +197,8 @@
 .dm-ref { border: 1px dashed var(--panel-line); border-radius: 14px; padding: 10px 22px; }
 .dm-m { border: 1px solid var(--panel-line); border-radius: 14px; padding: 9px 22px; background: var(--panel); }
 .dm-name { font-family: var(--f-display); font-size: 31px; font-weight: 600; letter-spacing: -0.01em; }
+.slide-demo .head-chip { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; }
+.dm-key-inline { font-size: 22px; color: var(--ink-dim); }
 .dm-chip { font-family: var(--f-mono); font-size: 20px; font-weight: 400; letter-spacing: 0; color: var(--cyan); border: 1px solid rgba(99, 227, 255, 0.45); background: var(--cyan-soft); border-radius: 999px; padding: 1px 12px; margin-left: 10px; vertical-align: 3px; }
 .dm-ref .dm-name { font-size: 26px; font-weight: 500; color: var(--ink-dim); }
 .dm-hw { font-size: 21px; color: var(--ink-dim); line-height: 1.28; }

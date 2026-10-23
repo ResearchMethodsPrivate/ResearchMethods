@@ -33,11 +33,12 @@ export const titleSlide: SlideDef = {
         </h1>
         <div class="paper-card">
           <p class="paper-title">${paper.title}</p>
+          <p class="paper-plain">A way to make extra training data when you only have a little.</p>
           <p class="paper-authors">${paper.authors.join(' · ')}</p>
-          <p class="paper-meta">${paper.affiliations.join(' · ')} — <strong>${paper.venue}</strong></p>
+          <p class="paper-meta">${paper.affiliations.join(' · ')} — <strong>ICML 2026</strong>, a leading machine-learning conference</p>
         </div>
         <div class="title-foot">
-          <span class="chip chip-amber">Authors’ demo run on 3 laptops · Table 1 not yet replicated</span>
+          <span class="chip chip-amber">We ran the authors’ demo on 3 laptops · we have not yet repeated their main results</span>
           <span class="group-line">${[team.members.map((m) => m.name).join(' · '), group.name, group.date].filter(Boolean).join(' — ')}</span>
         </div>
       </div>
@@ -46,7 +47,7 @@ export const titleSlide: SlideDef = {
           <g class="obs">${observed.map((p) => `<circle cx="${p.x}" cy="${p.y}" r="7" />`).join('')}</g>
           <g class="syn">${synthetic.map((p) => `<circle cx="${p.x}" cy="${p.y}" r="6" />`).join('')}</g>
         </svg>
-        <figcaption><span class="dot dot-obs"></span> observed &nbsp; <span class="dot dot-syn"></span> synthetic · illustrative</figcaption>
+        <figcaption><span class="dot dot-obs"></span> real data &nbsp; <span class="dot dot-syn"></span> extra data CRDA makes · illustration</figcaption>
       </figure>
     </div>`,
   build: (root) => {

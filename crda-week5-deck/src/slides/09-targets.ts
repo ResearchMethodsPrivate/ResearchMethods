@@ -14,7 +14,7 @@ export const targetsSlide: SlideDef = {
   html: () => `
     <header class="slide-head">
       <p class="kicker">08 — Targets before Week 9</p>
-      <h2>What we will bring to the next update</h2>
+      <h2>What we will show at the Week 9 update</h2>
       ${milestonesStatus === 'confirmed' ? '' : '<p class="head-chip"><span class="chip chip-amber">Targets 2–4 proposed — weeks and owners to confirm</span></p>'}
     </header>
     <div class="track" style="--n:${n}">
@@ -27,8 +27,8 @@ export const targetsSlide: SlideDef = {
         <article class="ms ${m.done ? 'ms-done' : ''}">
           <p class="ms-top"><span class="ms-k">${i + 1}</span>${m.done ? `<span class="ms-due ms-done-tag">✓ Done ${m.done.on}</span>` : `<span class="ms-due">${m.due === 'Ongoing' ? m.due : `by ${m.due}`}</span>`}</p>
           <p class="ms-title">${m.title}</p>
-          <p class="ms-row"><span class="lbl">Done when</span>${m.doneWhen}</p>
-          <p class="ms-row"><span class="lbl">Evidence</span>${m.evidence}</p>
+          <p class="ms-row"><span class="lbl">We are done when</span>${m.doneWhen}</p>
+          <p class="ms-row"><span class="lbl">Proof</span>${m.evidence}</p>
           <p class="ms-owner">${m.owners.map((o) => `<span>${memberName(o)}</span>`).join('')}</p>
         </article>`).join('')}
     </div>

@@ -37,63 +37,62 @@ const marker = (id: string, color: string) => `
     <path d="M0 0 L10 5 L0 10 z" fill="${color}" /></marker>`;
 
 const steps = [
-  { k: '1', h: 'Fit a baseline predictor', eq: '\\hat g \\leftarrow \\text{MLP or XGBoost on } \\mathcal{D}_{\\text{train}}' },
-  { k: '2', h: 'Compute the original residual', eq: 'z_i = y_i - \\hat g(x_i)' },
-  { k: '3', h: 'Scale selected numeric features', eq: "x'_{i,P} = x_{i,P}\\,(1+\\delta),\\;\\; \\delta \\sim \\mathcal{U}[-p,\\,p]",
-    sub: `${tex('x_{i,R}')} held fixed · repo default p&nbsp;=&nbsp;0.1 · shown: δ&nbsp;=&nbsp;+0.09` },
-  { k: '4', h: 'Reuse the same residual', eq: "y'_i = \\hat g(x'_i) + z_i" },
-  { k: '5', h: 'Repeat M times per row', eq: '\\mathcal{D}_{\\text{aug}} = \\{(x\'_i,\\, y\'_i)\\}' },
+  { k: '1', h: 'Train a normal model', sub: `${tex('\\hat g')} = the model’s guess (a neural network or XGBoost)` },
+  { k: '2', h: 'See how wrong it was on a real row', eq: 'z = y - \\hat g(x)', sub: 'z = the gap (the residual)' },
+  { k: '3', h: 'Nudge one number a little', eq: "x' = x \\times (1+\\delta)", sub: 'δ is random, at most ±10%. Shown: +9%. Everything else stays the same.' },
+  { k: '4', h: 'Add the same gap back', eq: "y' = \\hat g(x') + z", sub: 'new label = new guess + the old gap' },
+  { k: '5', h: 'Repeat to get extra rows', sub: 'The new rows keep real-world noise.' },
 ];
 
 export const mechanismSlide: SlideDef = {
   id: 'mechanism',
   steps: 4,
   className: 'slide-mechanism',
-  source: 'Mohebbi et al. (2026), Alg. 1 & §4.1; repo default p from src/utils/config.py · Plot: illustrative sketch',
+  source: 'Method: Mohebbi et al. (2026), Algorithm 1 · ±10% is the authors’ code default · Plot: illustration',
   html: () => `
     <header class="slide-head">
       <p class="kicker">03 — The CRDA idea</p>
-      <h2>Move a safe numeric feature. Keep the observed noise.</h2>
+      <h2>Nudge one number. Keep the same mistake.</h2>
     </header>
     <div class="mech-grid">
       <figure class="plot plot-mech">
-        <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Illustrative sketch: an observed sample above the fitted curve, its residual, a numeric feature scaled by 9 percent, and the same residual re-attached to form a synthetic sample.">
+        <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Illustration: a real row above the model’s curve, its gap, an input nudged by 9 percent, and the same gap added back to make a new row.">
           <defs>${marker('arr-cyan', 'var(--cyan)')}${marker('arr-violet', 'var(--violet)')}${marker('arr-dim', 'var(--ink-dim)')}</defs>
           <rect class="band" x="${bandLo}" y="${axisY - 46}" width="${bandHi - bandLo}" height="46" rx="6" />
-          <text class="lbl-band" x="${(bandLo + bandHi) / 2}" y="${axisY + 34}" text-anchor="middle">±10% range (p = 0.1)</text>
+          <text class="lbl-band" x="${(bandLo + bandHi) / 2}" y="${axisY + 34}" text-anchor="middle">allowed: up to ±10%</text>
           <g class="axes">
             <line x1="${M.l}" y1="${axisY}" x2="${W - M.r}" y2="${axisY}" />
             <line x1="${M.l}" y1="${M.t}" x2="${M.l}" y2="${axisY}" />
-            <text x="${W - M.r}" y="${axisY + 70}" text-anchor="end">x<tspan baseline-shift="sub" font-size="20">P</tspan>: numeric feature (e.g. wall area)</text>
-            <text x="${M.l - 24}" y="${M.t + 8}" text-anchor="end" transform="rotate(-90 ${M.l - 24} ${M.t + 8})">target y (e.g. heating load)</text>
+            <text x="${W - M.r}" y="${axisY + 70}" text-anchor="end">the number we nudge (for example: wall area)</text>
+            <text x="${M.l - 24}" y="${M.t + 8}" text-anchor="end" transform="rotate(-90 ${M.l - 24} ${M.t + 8})">result (for example: heating needed)</text>
           </g>
           <g class="bg">${bg.map((p) => `<circle cx="${sx(p.x)}" cy="${sy(p.y)}" r="6" />`).join('')}</g>
           <path class="g-curve" d="${curve}" />
-          <text class="lbl-g" x="${sx(4.78)}" y="${sy(g(4.78)) + 52}">ĝ(x)</text>
+          <text class="lbl-g" x="${sx(4.78)}" y="${sy(g(4.78)) + 52}">model’s guess</text>
 
           <!-- step 1: residual of sample i -->
           <circle class="proj proj-i" cx="${sx(sampleI.x)}" cy="${sy(g(sampleI.x))}" r="7" />
           <line class="zvec z-i" x1="${zI.x1}" y1="${zI.y1}" x2="${zI.x2}" y2="${zI.y2}" marker-end="url(#arr-cyan)" />
-          <text class="lbl-z" x="${zI.x1 - 20}" y="${(zI.y1 + zI.tipY) / 2 + 12}" text-anchor="end">z<tspan baseline-shift="sub" font-size="22">i</tspan></text>
+          <text class="lbl-z" x="${zI.x1 - 20}" y="${(zI.y1 + zI.tipY) / 2 + 12}" text-anchor="end">gap</text>
 
           <!-- step 2: scale x_P by (1 + δ) -->
           <line class="guide guide-i" x1="${sx(sampleI.x)}" y1="${sy(g(sampleI.x))}" x2="${sx(sampleI.x)}" y2="${axisY}" />
           <line class="guide guide-p" x1="${sx(cf.x)}" y1="${sy(g(cf.x))}" x2="${sx(cf.x)}" y2="${axisY}" />
           <line class="shift" x1="${sx(sampleI.x)}" y1="${axisY - 22}" x2="${sx(cf.x)}" y2="${axisY - 22}" marker-end="url(#arr-dim)" />
-          <text class="lbl-shift" x="${sx(cf.x) + 14}" y="${axisY - 14}">×(1 + 0.09)</text>
+          <text class="lbl-shift" x="${sx(cf.x) + 14}" y="${axisY - 14}">+9%</text>
           <circle class="proj proj-p" cx="${sx(cf.x)}" cy="${sy(g(cf.x))}" r="7" />
-          <text class="lbl-gp" x="${sx(cf.x) + 16}" y="${sy(g(cf.x)) + 36}">ĝ(x′)</text>
+          <text class="lbl-gp" x="${sx(cf.x) + 16}" y="${sy(g(cf.x)) + 36}">new guess</text>
 
           <!-- step 3: the SAME residual vector, carried to x′ -->
           <g class="zcopy">
             <line class="zvec" x1="${zI.x1}" y1="${zI.y1}" x2="${zI.x2}" y2="${zI.y2}" marker-end="url(#arr-violet)" />
           </g>
           <circle class="syn syn-p" cx="${sx(cf.x)}" cy="${sy(cf.y)}" r="${R_SYN}" />
-          <text class="lbl-syn" x="${sx(cf.x)}" y="${sy(cf.y) - 30}" text-anchor="middle">synthetic: y′ = ĝ(x′) + z<tspan baseline-shift="sub" font-size="18">i</tspan></text>
+          <text class="lbl-syn" x="${sx(cf.x)}" y="${sy(cf.y) - 30}" text-anchor="middle">new row: new guess + same gap</text>
 
           <!-- observed sample i (on top) -->
           <circle class="obs obs-i" cx="${sx(sampleI.x)}" cy="${sy(observedY(sampleI))}" r="${R_OBS}" />
-          <text class="lbl-obs" x="${sx(sampleI.x) - 22}" y="${sy(observedY(sampleI)) - 22}" text-anchor="end">observed sample i</text>
+          <text class="lbl-obs" x="${sx(sampleI.x) - 22}" y="${sy(observedY(sampleI)) - 22}" text-anchor="end">real row</text>
 
           <!-- step 4: repeat M times -->
           <g class="more">
@@ -101,18 +100,18 @@ export const mechanismSlide: SlideDef = {
             <circle class="obs obs-j" cx="${sx(sampleJ.x)}" cy="${sy(observedY(sampleJ))}" r="10" />
             ${extras.map((c) => `<g class="more-pt"><line class="zvec zvec-thin" x1="${sx(c.x)}" y1="${sy(g(c.x))}" x2="${sx(c.x)}" y2="${sy(c.y)}" /><circle class="syn" cx="${sx(c.x)}" cy="${sy(c.y)}" r="8" /></g>`).join('')}
           </g>
-          <text class="lbl-more" x="${W - M.r}" y="${M.t + 24}" text-anchor="end">repeat M times per row → 𝒟<tspan baseline-shift="sub" font-size="20">aug</tspan></text>
+          <text class="lbl-more" x="${W - M.r}" y="${M.t + 24}" text-anchor="end">repeat to get extra rows</text>
         </svg>
         <figcaption>
-          <span class="illus">Illustrative sketch — invented points, not paper data. One feature shown; CRDA may scale several screened numeric features.</span>
-          <span class="analogy"><strong>Paper’s analogy (§1):</strong> change a house’s garage finish, keep its “bidding-war” residual.</span>
+          <span class="illus">Illustration with made-up points, not data from the paper. The real method can nudge several inputs at once.</span>
+          <span class="analogy"><strong>Think of a house:</strong> change the garage, keep the bidding war that pushed the price up.</span>
         </figcaption>
       </figure>
       <ol class="mech-steps">
         ${steps.map((s) => `
           <li class="mstep" data-k="${s.k}">
             <span class="mstep-k">${s.k}</span>
-            <div><p class="mstep-h">${s.h}</p><div class="mstep-eq">${tex(s.eq)}</div>${s.sub ? `<p class="mstep-sub">${s.sub}</p>` : ''}</div>
+            <div><p class="mstep-h">${s.h}</p><div class="mstep-eq">${tex(s.eq ?? '')}</div>${s.sub ? `<p class="mstep-sub">${s.sub}</p>` : ''}</div>
           </li>`).join('')}
       </ol>
     </div>`,
