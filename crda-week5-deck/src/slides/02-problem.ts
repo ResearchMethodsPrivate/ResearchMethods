@@ -2,7 +2,7 @@ import { gsap } from 'gsap';
 import { scaleLinear } from 'd3-scale';
 import { line, curveMonotoneX } from 'd3-shape';
 import type { SlideDef } from '../lib/slide';
-import { $, $$, gaussian, mulberry32, polyfit, tex } from '../lib/util';
+import { $, $$, gaussian, mulberry32, polyfit } from '../lib/util';
 
 // Illustrative data-generating process (ours, not the paper's).
 const truth = (x: number) => 0.55 * Math.sin(1.25 * x) + 0.32 * x;
@@ -32,28 +32,28 @@ export const problemSlide: SlideDef = {
   html: () => `
     <header class="slide-head">
       <p class="kicker">01 — The problem</p>
-      <h2>Small, noisy tables are hard to learn from</h2>
+      <h2>With only a little messy data, a model learns the wrong pattern</h2>
     </header>
     <div class="split split-40">
       <div class="col">
         <ul class="pill-list">
-          <li><span class="pill-num">01</span> Few samples</li>
-          <li><span class="pill-num">02</span> Costly to collect more</li>
-          <li><span class="pill-num">03</span> Noisy observations</li>
+          <li><span class="pill-num">01</span> Only a few examples</li>
+          <li><span class="pill-num">02</span> Getting more is expensive</li>
+          <li><span class="pill-num">03</span> Measurements are noisy</li>
         </ul>
         <dl class="defs">
-          <div class="def def-reg"><dt>Regression</dt><dd>Predict a <em>number</em> from a row of features — e.g. a building’s heating load from its geometry.</dd></div>
-          <div class="def def-res"><dt>Residual</dt><dd>What the model got wrong for that row: observed − predicted.</dd>
-            <div class="def-eq">${tex('z_i = y_i - \\hat g(x_i)')}</div></div>
+          <div class="def def-reg"><dt>Regression</dt><dd>Predicting a <em>number</em>, such as how much heating a building needs.</dd></div>
+          <div class="def def-noise"><dt>Noise</dt><dd>Random errors in the measurements.</dd></div>
+          <div class="def def-res"><dt>Residual</dt><dd>The gap: how far off the model’s guess was.</dd></div>
         </dl>
       </div>
       <figure class="plot plot-problem">
-        <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Illustrative scatter plot: ten noisy points, a wiggly fitted curve and residuals; a larger cloud reveals the underlying trend.">
+        <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Illustration: ten noisy points with a wiggly fitted curve and the gaps between them; a larger cloud shows the real trend.">
           <g class="axes">
             <line x1="${M.l}" y1="${H - M.b}" x2="${W - M.r}" y2="${H - M.b}" />
             <line x1="${M.l}" y1="${M.t}" x2="${M.l}" y2="${H - M.b}" />
-            <text x="${W - M.r}" y="${H - M.b + 48}" text-anchor="end">feature x</text>
-            <text x="${M.l - 20}" y="${M.t + 6}" text-anchor="end" transform="rotate(-90 ${M.l - 20} ${M.t + 6})">target y</text>
+            <text x="${W - M.r}" y="${H - M.b + 48}" text-anchor="end">input (for example: building size)</text>
+            <text x="${M.l - 20}" y="${M.t + 6}" text-anchor="end" transform="rotate(-90 ${M.l - 20} ${M.t + 6})">result (for example: heating needed)</text>
           </g>
           <g class="dense">${dense.map((p) => `<circle cx="${sx(p.x)}" cy="${sy(p.y)}" r="4" />`).join('')}</g>
           <path class="fit-dense" d="${path(fitDense)}" />
@@ -61,12 +61,12 @@ export const problemSlide: SlideDef = {
           <path class="fit-sparse" d="${path(fitSparse)}" />
           <g class="sparse">${sparse.map((p) => `<circle cx="${sx(p.x)}" cy="${sy(p.y)}" r="9" />`).join('')}</g>
           <g class="plot-labels">
-            <g class="lbl-sparse"><line x1="${M.l + 30}" x2="${M.l + 70}" y1="${M.t + 12}" y2="${M.t + 12}" /><text x="${M.l + 84}" y="${M.t + 20}">model fitted to 10 points</text></g>
-            <text class="lbl-resid" x="${sx(sparse[3].x) + 16}" y="${(sy(sparse[3].y) + sy(fitSparse(sparse[3].x))) / 2 + 8}">residual</text>
-            <g class="lbl-dense"><line x1="${M.l + 30}" x2="${M.l + 70}" y1="${M.t + 56}" y2="${M.t + 56}" /><text x="${M.l + 84}" y="${M.t + 64}">fit to 150 points from the same process</text></g>
+            <g class="lbl-sparse"><line x1="${M.l + 30}" x2="${M.l + 70}" y1="${M.t + 12}" y2="${M.t + 12}" /><text x="${M.l + 84}" y="${M.t + 20}">model learned from 10 examples</text></g>
+            <text class="lbl-resid" x="${sx(sparse[3].x) + 16}" y="${(sy(sparse[3].y) + sy(fitSparse(sparse[3].x))) / 2 + 8}">gap (residual)</text>
+            <g class="lbl-dense"><line x1="${M.l + 30}" x2="${M.l + 70}" y1="${M.t + 56}" y2="${M.t + 56}" /><text x="${M.l + 84}" y="${M.t + 64}">model learned from 150 examples</text></g>
           </g>
         </svg>
-        <figcaption class="illus">Illustrative example — synthetic points, real least-squares fits</figcaption>
+        <figcaption class="illus">Illustration with made-up points</figcaption>
       </figure>
     </div>`,
   build: (root) => {

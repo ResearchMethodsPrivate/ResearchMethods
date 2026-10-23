@@ -24,6 +24,8 @@
   gap: 10px;
 }
 .paper-title { font-family: var(--f-display); font-size: 38px; font-weight: 600; letter-spacing: -0.01em; }
+.paper-plain { font-size: 28px; color: var(--cyan); }
+.paper-plain { font-size: 28px; color: var(--cyan); }
 .paper-authors { font-size: 28px; color: var(--ink); }
 .paper-meta { font-size: 23px; color: var(--ink-dim); }
 .paper-meta strong { color: var(--cyan); font-weight: 600; }
@@ -146,4 +148,5 @@
 .mstep[data-k='4'] .mstep-k, .mstep[data-k='5'] .mstep-k { background: var(--violet); }
 .mstep-h { font-size: 25px; font-weight: 600; margin-bottom: 4px !important; }
 .mstep-eq { font-size: 27px; }
+.mstep-eq:empty { display: none; }
 .mstep-sub { font-size: 20px; color: var(--ink-dim); margin-top: 4px !important; }

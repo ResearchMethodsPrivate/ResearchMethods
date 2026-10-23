@@ -14,7 +14,6 @@ const core: string[] = [
   `Mohebbi, H. <em>et al.</em> (2026) <em>CRDA project page</em>. Available at: https://crda-project.github.io/ (${ACCESSED}).`,
   'Chawla, N.V., Bowyer, K.W., Hall, L.O. and Kegelmeyer, W.P. (2002) ‘SMOTE: synthetic minority over-sampling technique’, <em>Journal of Artificial Intelligence Research</em>, 16, pp. 321–357.',
   'Kotelnikov, A., Baranchuk, D., Rubachev, I. and Babenko, A. (2023) ‘TabDDPM: modelling tabular data with diffusion models’, <em>Proceedings of the 40th ICML</em>, PMLR 202, pp. 17564–17579.',
-  'Pearl, J. (2009) <em>Causality: Models, Reasoning, and Inference</em>. 2nd edn. Cambridge: Cambridge University Press.',
   'Spirtes, P., Glymour, C. and Scheines, R. (2000) <em>Causation, Prediction, and Search</em>. 2nd edn. Cambridge, MA: MIT Press.',
   'Wilcoxon, F. (1945) ‘Individual comparisons by ranking methods’, <em>Biometrics Bulletin</em>, 1(6), pp. 80–83.',
   'Xu, L., Skoularidou, M., Cuesta-Infante, A. and Veeramachaneni, K. (2019) ‘Modeling tabular data using conditional GAN’, <em>Advances in Neural Information Processing Systems</em>, 32.',
@@ -35,8 +34,11 @@ const scopedDatasetRefs = [...new Set(scope.datasets.map((k) => datasets[k].refK
 
 const firstAuthor = (s: string) => s.replace(/<[^>]+>/g, '').toLowerCase();
 
-/** Core refs plus the datasets in scope, alphabetical except the paper and repo stay first. */
-export const references: string[] = [
-  ...core.slice(0, 3),
-  ...[...core.slice(3), ...scopedDatasetRefs].sort((a, b) => firstAuthor(a).localeCompare(firstAuthor(b))),
+/** Grouped for the slide: the paper and its code first, then methods we mention, then data. */
+export const referenceGroups: { title: string; items: string[] }[] = [
+  { title: 'The paper and its code', items: core.slice(0, 3) },
+  { title: 'Other methods we mention', items: core.slice(3).sort((a, b) => firstAuthor(a).localeCompare(firstAuthor(b))) },
+  { title: 'Data we use', items: scopedDatasetRefs.sort((a, b) => firstAuthor(a).localeCompare(firstAuthor(b))) },
 ];
+
+export const references: string[] = referenceGroups.flatMap((g) => g.items);

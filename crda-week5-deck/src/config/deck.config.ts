@@ -62,38 +62,38 @@ export const members: Member[] = [
   {
     id: 'A',
     name: 'Anik',
-    role: 'Environment & reproducibility',
+    role: 'Setting up the code',
     owns: [
-      'Python 3.11 env from the authors’ pinned requirements',
-      'Environment notes for every platform we use',
-      'Seed, config and version logging',
+      'Python 3.11 setup from the authors’ exact versions',
+      'Notes on what works on each kind of computer',
+      'Records of settings and versions',
     ],
     checks: 'B',
-    crossCheck: 'Re-runs one of Alvi’s configs independently',
+    crossCheck: 'Re-runs one of Alvi’s experiments',
   },
   {
     id: 'B',
     name: 'Alvi',
-    role: 'Experiment execution',
+    role: 'Running the experiments',
     owns: [
-      'Baseline vs CRDA runs (MLP, XGBoost)',
-      'Controlled splits and seeds',
-      'Saves every config.json / results.csv',
+      'Plain vs CRDA runs (neural network, XGBoost)',
+      'Same data splits and settings every time',
+      'Saves every settings and results file',
     ],
     checks: 'C',
-    crossCheck: 'Recomputes Atul’s comparison table from raw results',
+    crossCheck: 'Re-calculates Atul’s comparison table from the raw results',
   },
   {
     id: 'C',
     name: 'Atul',
-    role: 'Analysis, documentation & delivery',
+    role: 'Comparing and presenting',
     owns: [
-      'Our ΔMSE next to the paper’s Table 1',
-      'Obstacle and deviation log',
+      'Our results next to the paper’s table',
+      'List of problems and differences',
       'Slides, timing and rehearsal',
     ],
     checks: 'A',
-    crossCheck: 'Rebuilds Anik’s environment from the written steps',
+    crossCheck: 'Rebuilds Anik’s setup from his written steps',
   },
 ];
 
@@ -130,31 +130,31 @@ export const scope = {
 // ── 4. Targets before Week 9 (confirmed weeks and owners) ───────────────────
 export const milestones: Milestone[] = [
   {
-    title: 'Environment reproduced',
-    doneWhen: 'Authors’ demo runs end-to-end on our laptops',
-    evidence: 'Exact versions + CPU/OS logged; 3 laptops (docs/demo-reports/)',
+    title: 'Code set up and running',
+    doneWhen: 'The authors’ demo runs on our laptops',
+    evidence: 'Exact versions and laptop details written down (3 laptops)',
     owners: ['A'],
     due: 'Week 6',
     done: { on: '22 Oct' },
   },
   {
-    title: 'Baselines logged',
-    doneWhen: 'Unaugmented MLP + XGBoost on dataset 1, fixed seeds',
-    evidence: 'config.json + results.csv per run',
+    title: 'Plain-model results saved',
+    doneWhen: 'Plain neural network and XGBoost results on dataset 1, with fixed settings',
+    evidence: 'Settings and results files for every run',
     owners: ['B'],
     due: 'Week 7',
   },
   {
     title: 'First CRDA comparison',
-    doneWhen: 'Our ΔMSE next to the paper’s Table 1 row',
-    evidence: 'Side-by-side table, Wilcoxon p-values',
+    doneWhen: 'Our improvement next to the paper’s table',
+    evidence: 'Side-by-side table with p-values',
     owners: ['B', 'C'],
     due: 'Week 8',
   },
   {
-    title: 'Obstacle log',
-    doneWhen: 'Every deviation recorded with its fix or open question',
-    evidence: 'Shared log, discussed at Week 9',
+    title: 'Problem log',
+    doneWhen: 'Every difference or problem written down, with what we did',
+    evidence: 'Shared list, discussed at Week 9',
     owners: ['C'],
     due: 'Ongoing',
   },
@@ -163,7 +163,7 @@ export const milestonesStatus = 'confirmed' as Status;
 
 // ── 5. Closing research question ────────────────────────────────────────────
 export const researchQuestion =
-  'Do CRDA’s reported gains hold when we re-run the authors’ own pipeline — and where do they not?';
+  'Do the authors’ improvements hold up when we re-run their own code — and where do they not?';
 
 /** Open team decisions, listed by validate:ready and the README checklist. */
 export const openDecisions = (): string[] => [
