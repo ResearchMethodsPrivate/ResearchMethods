@@ -41,6 +41,17 @@ Browser tests and QA use Playwright’s Chromium. If it is missing, run `npx pla
 
 Fonts, KaTeX and every library are bundled, so the deck makes no network requests (tested). Bring `docs/crda-week5-deck.pdf` as a backup.
 
+## Publish on GitHub Pages (optional backup)
+
+The repo has a workflow, `.github/workflows/pages.yml`, that installs, validates, tests and builds the deck on GitHub, then publishes it.
+
+- **Site address:** https://researchmethodsprivate.github.io/ResearchMethods/ (the deck opens straight away; `#/6` style links open a specific slide).
+- **One-time setup, by a repo owner:** repo **Settings → Pages → Build and deployment → Source: GitHub Actions**. Do this before merging, or re-run the workflow afterwards.
+- **After that:** every merge to `main` that touches `crda-week5-deck/` redeploys. You can also run it by hand: **Actions → Deploy deck to GitHub Pages → Run workflow**.
+- **Pull requests** only build and test; they never publish.
+- The site is public while the repo is public. Pages on a private repo needs a paid GitHub plan.
+- Keep the offline copy as your main plan. Pages needs internet and, with the first load, a few seconds.
+
 ## Controls
 
 | Key | Action |
