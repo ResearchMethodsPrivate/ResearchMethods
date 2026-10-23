@@ -1,0 +1,69 @@
+# Builds the Week 5 deck (crda-week5-deck/) and publishes it to GitHub Pages.
+#   pull request -> install, validate, test and build only (nothing is published)
+#   push to main  -> the same, then deploy to Pages
+#   manual run    -> Actions tab > "Deploy deck to GitHub Pages" > Run workflow
+# One-time setup: Settings > Pages > Build and deployment > Source: GitHub Actions.
+name: Deploy deck to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'crda-week5-deck/**'
+      - '.github/workflows/pages.yml'
+  pull_request:
+    paths:
+      - 'crda-week5-deck/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: crda-week5-deck
+    env:
+      # OpenUI's install script sends anonymous telemetry unless told not to.
+      OPENUI_TELEMETRY_DISABLED: '1'
+      DO_NOT_TRACK: '1'
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: crda-week5-deck/package-lock.json
+
+      - run: npm ci
+      - run: npm run validate:deck
+      - run: npm test
+      - run: npm run build
+
+      - name: Upload site
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: crda-week5-deck/dist
+
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
