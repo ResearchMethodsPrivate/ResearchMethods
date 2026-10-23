@@ -2,12 +2,14 @@
  * Speaker notes + target timings. Shown in the speaker view (press S) and
  * exported by `npm run notes` to docs/speaker-notes.md with a timing model.
  *
+ * Written in plain, everyday English on purpose (lecturer feedback: keep the
+ * talk and slides simple for a general audience).
+ *
  * Lines starting with "[" are stage cues (when to click) and are not counted
  * towards spoken time. {A} {B} {C} are replaced with names from deck.config.ts
  * (A = Anik, B = Alvi, C = Atul). If you change the milestones in
  * deck.config.ts, update `targets` below too (validate:deck checks the count).
  */
-import { rolesStatus, scope, team } from '../config/deck.config';
 
 export interface SlideNotes {
   title: string;
@@ -16,150 +18,139 @@ export interface SlideNotes {
   lines: string[];
 }
 
-const handoff: Record<string, string> = { A: 'Alvi?', B: 'Atul?', C: '' };
-
-const teamLines = (): string[] => {
-  const proposed = rolesStatus !== 'confirmed';
-  const lines = team.members.flatMap((m) => [
-    `[{${m.id}}]`,
-    `${proposed ? 'The proposal is that I take' : 'I’m taking'} ${m.role.toLowerCase()}: ${m.owns
-      .slice(0, 2)
-      .map((o) => o.replace(/^./, (c) => c.toLowerCase()))
-      .join('; ')}. ${handoff[m.id]}`.trim(),
-  ]);
-  return [
-    '[Cards appear — Atul opens, then each person speaks to their own card]',
-    '[{C}]',
-    proposed
-      ? 'Here’s how we propose to split the work — we’re still confirming it. Anik?'
-      : 'Here’s how we’ve split the work. Anik?',
-    ...lines,
-    '[{C}] [Click — cross-check arrows draw]',
-    'And the arrows: each of us re-checks someone else’s work, so no result rests on one laptop. The research tasks themselves are still the plan.',
-  ];
-};
-
 export const notes = {
   title: {
     title: 'Opening',
-    seconds: 28,
+    seconds: 30,
     lines: [
       '[Hook types in, then the paper details]',
-      'Hi, I’m Anik, and with me are Alvi and Atul — we’re group Triple A. The question that drew us to this paper is simple: can a model learn more when you can’t collect more data?',
-      'The paper is “Counterfactual Residual Data Augmentation for Regression” — CRDA — by Mohebbi and colleagues, at ICML this year. We’ll cover the problem, the idea, and our plan to test it.',
+      'Hi, I’m Anik, and with me are Alvi and Atul — we’re group Triple A. Here’s the question that drew us to this paper: can a model learn more when we can’t collect more data?',
+      'The paper is “Counterfactual Residual Data Augmentation for Regression”, or CRDA, from ICML this year. We’ll cover the problem, the idea, and our plan to test it.',
     ],
   },
   problem: {
     title: 'The problem',
-    seconds: 40,
+    seconds: 38,
     lines: [
       '[Points fade in]',
-      'First, regression just means predicting a number — say a building’s heating load — from a row of features.',
-      '[Click — fitted curve draws]',
-      'Here are ten noisy observations and a model fitted to them.',
-      '[Click — residual lines drop]',
-      'The residual is the gap between what we observed and what the model predicted.',
-      '[Click — the larger cloud appears]',
-      'With plenty of data the model would settle on this trend; with ten points it wobbles. That’s the paper’s setting: small, noisy tables where more data is expensive. This plot is our own illustrative sketch, not the paper’s data.',
+      'Regression just means predicting a number, like how much heating a building needs.',
+      '[Click — curve draws]',
+      'Here are ten noisy examples, and a model that learned from them.',
+      '[Click — gaps drop]',
+      'The gap between each point and the curve is the residual: how far off the guess was.',
+      '[Click — bigger cloud]',
+      'With lots of data, the model finds the real trend. With ten examples, it wobbles. That’s the problem: little data, noisy measurements, and more data is expensive. This plot is a made-up illustration.',
     ],
   },
   naive: {
-    title: 'Why naive augmentation is hard',
+    title: 'Why simple copying fails',
     seconds: 40,
     lines: [
       '[Image tile rotates — label stays]',
-      'Why not augment like we do with images? Rotate a seven slightly and it’s still a seven — but turn a six upside down and it’s a nine. The transformation has to suit the label.',
-      '[Click — floor area changes, price is copied]',
-      'Tables don’t. Nudge this made-up house’s floor area up twenty percent and copy the price: nothing justifies that label.',
-      '[Click — existing approaches]',
-      'Interpolation and generative models can help in places, but the authors argue they don’t keep each row’s own noise, and report they can raise error on their benchmarks. That’s the gap CRDA targets. Alvi?',
+      'Why not just copy the data, like we do with pictures? Rotate a 7 a little and it’s still a 7. But turn a 6 upside down and it becomes a 9.',
+      '[Click — house row]',
+      'Tables don’t have a safe trick like that. Make this made-up house 20% bigger and keep the price, and the price is now wrong.',
+      '[Click — other fixes]',
+      'Other methods blend rows together, or make them up with another model. They can help, but the authors say they lose each row’s own noise, and sometimes make results worse. That’s the gap CRDA goes after. Alvi?',
     ],
   },
   mechanism: {
     title: 'The CRDA idea',
-    seconds: 66,
+    seconds: 62,
     lines: [
-      '[Curve draws, one sample is highlighted]',
-      'Thanks, Anik. The core idea is simpler than the name. Step one: train an ordinary model — an MLP or XGBoost. That’s this curve, g-hat.',
-      '[Click — residual vector]',
-      'Step two: work out each row’s residual. This point sits above the curve, so its residual z is positive.',
-      '[Click — numeric feature is scaled]',
-      'Step three: take a numeric feature that passed the screens and scale it by one plus delta, with delta between minus p and plus p. The repo’s default p is ten percent; this draw is plus nine. Everything else stays fixed.',
-      '[Click — the same residual is carried across]',
-      'Step four, the key move: carry the same residual across and add it back. New label equals new prediction plus old residual. The paper’s analogy: change a house’s garage, keep the bidding war that pushed its price up.',
-      '[Click — repeat M times]',
-      'Repeat that M times per row for an augmented training set — reusing noise we actually observed.',
+      '[Curve draws, one real row appears]',
+      'Thanks, Anik. The idea is simple. First, train a normal model. That’s this curve.',
+      '[Click 1 — the cyan arrow]',
+      'For each real row, we measure how wrong the model was. That gap is the residual.',
+      '[Click 2 — the strip and the arrow]',
+      'Now nudge one number in that row by a small amount, up to 10%. Here it’s 9%. The model gives a new guess.',
+      '[Click 3 — purple arrow carried across]',
+      'The key move: add the same gap back. New label equals new guess plus old gap. So the new row keeps real-world noise.',
+      '[Click 4 — more purple dots]',
+      'Repeat that to get extra training rows.',
     ],
   },
   assumption: {
-    title: 'What must be true',
-    seconds: 48,
+    title: 'When it can go wrong',
+    seconds: 46,
     lines: [
       '[Equation appears]',
-      'That only works if, given the fixed features, the residual tells us nothing about the ones we perturb. That’s Assumption 3.1 — assumed, not guaranteed.',
-      '[Click — diagram (a)]',
-      'Here it holds: the feature moves the target, not the noise.',
-      '[Click — diagram (b), confounder appears]',
-      'Here it breaks: a hidden factor U drives both, so the residual soaks up U.',
-      '[Click — screening pipeline]',
-      'CRDA can’t see the true graph, so it screens features with two heuristics: a PC causal-discovery check and a simple correlation check, both against the residual.',
-      '[Click — Wilcoxon gate]',
-      'Then a separate gate keeps the augmentation only if cross-validation shows a significant improvement. That’s evidence, not a guarantee, and neither screen proves the causal story. Atul?',
+      'This only works if one thing is true: the noise doesn’t depend on the number we nudge. That’s an assumption, not a guarantee.',
+      '[Click 1 — left diagram]',
+      'Left is fine: the number affects the result, not the noise.',
+      '[Click 2 — right diagram, hidden factor appears]',
+      'Right is broken: a hidden factor affects both, so the noise moves when we nudge.',
+      '[Click 3 — the two checks]',
+      'So CRDA runs two rough checks to pick safe numbers to nudge.',
+      '[Click 4 — the final test]',
+      'Then a final test: keep the extra rows only if they clearly help. That’s evidence, not proof. Atul?',
     ],
   },
   plan: {
-    title: 'What we will replicate',
-    seconds: 48,
+    title: 'Our plan',
+    seconds: 46,
     lines: [
       '[Plan steps appear]',
-      `Thanks, Alvi. We want to test whether the results reproduce, not improve the method. The first two steps are already done — more on that next. From there, our ${scope.status === 'confirmed' ? 'starting' : 'proposed starting'} scope is two small datasets, comparing plain and CRDA models on the same splits and seeds.`,
+      'Thanks, Alvi. We want to check whether the authors’ results hold up. We’re not trying to improve their method. The first two steps are done, more on that next. Then we compare plain and CRDA models on two small datasets.',
       '[Click — reported numbers count up]',
-      'These are the authors’ numbers, not ours: about 23 percent lower MSE for MLPs and 6 for XGBoost on average. On our two datasets Table 1 reports twelve to twenty-eight percent — that’s our bar.',
-      '[Click — code-reading questions]',
-      'Reading their code, two questions: the main table’s configs force augmentation on, and the augmented score averages ten fold-models. Both affect what “reproduced” means.',
+      'These are the authors’ numbers, not ours. On average, CRDA cut the error by about 23% for neural networks and 6% for XGBoost. On our two datasets, their table shows drops of 12% to 28%. That’s our bar.',
+      '[Click — code questions]',
+      'Reading their code, we found two questions. One: the main table switches CRDA on even when the safety test says no. Two: the final score averages 10 models, not one. Both change what “reproduced” means.',
     ],
   },
   demo: {
     title: 'Our first check',
-    seconds: 68,
+    seconds: 64,
     lines: [
-      '[Table header and the authors’ own output appear]',
+      '[Table header and the authors’ own result appear]',
       '[{C}]',
-      'Steps one and two are done: each of us ran the authors’ demo on our own laptop — same pinned libraries, one dataset, one seed, CPU only. The top row is the authors’ own stored output. Anik?',
+      'Steps one and two are done: each of us ran the authors’ demo on our own laptop, with the same fixed library versions. One dataset, one run, CPU only. The top row is the authors’ own saved result. Anik?',
       '[Click — Anik’s row]',
       '[{A}]',
       'I’m on an M2 Mac: forty seconds, and both results match the authors’ exactly. Alvi?',
       '[Click — Alvi’s row]',
       '[{B}]',
-      'Mine’s Windows — a Ryzen 7, and a 3070 the demo doesn’t use. The MLP matches, but the XGBoost baseline already differs from the authors’ before CRDA starts. We don’t know why yet. Atul?',
+      'Mine’s Windows, with a Ryzen 7 and a 3070 that the demo doesn’t use. The MLP matches the authors. XGBoost is a bit different, and it was already different before CRDA ran. We don’t know why yet. Atul?',
       '[Click — Atul’s row]',
       '[{C}]',
-      'Mine’s an M5 Pro Mac, and both results match too. So the MLP reproduces on all three laptops, XGBoost on two.',
-      '[Click — pinned versions and deviations]',
-      'One obstacle so far: a pinned library won’t load on the newest macOS, so we upgraded it — numbers unchanged. Both findings go in our obstacle log. One seed — not Table 1.',
+      'Mine’s an M5 Pro Mac. Both results match. So the MLP matched on all three laptops, and XGBoost on two.',
+      '[Click — library versions and problems]',
+      'One problem so far: a library version wouldn’t run on the newest macOS, so we used a newer one. The numbers didn’t change. Both findings go in our problem log. This is one run, not the paper’s main results.',
     ],
   },
   team: {
     title: 'Who does what',
-    seconds: 48,
-    lines: teamLines(),
+    seconds: 50,
+    lines: [
+      '[Cards appear — Atul opens, then each person speaks to their own card]',
+      '[{C}]',
+      'Here’s how we’ve split the work. Anik?',
+      '[{A}]',
+      'I’m setting up the code, and keeping notes on what works on each kind of computer. Alvi?',
+      '[{B}]',
+      'I’m running the experiments: plain model versus CRDA, same data splits, every setting saved. Atul?',
+      '[{C}]',
+      'I’m comparing our results with the paper’s table, keeping the problem log, and handling the slides and rehearsals.',
+      '[Click — arrows draw]',
+      'The arrows show who double-checks whom, so no result depends on one laptop. The research tasks themselves are still ahead of us.',
+    ],
   },
   targets: {
     title: 'Targets before Week 9',
-    seconds: 44,
+    seconds: 42,
     lines: [
       '[Timeline draws]',
-      'So, four targets for Week 9, each with evidence we can show.',
+      'So, four targets for Week 9, each with proof we can show.',
       '[Click]',
-      'One is already done: the environment, with exact versions logged on all three laptops.',
+      'One is done: the code is set up and running, with exact versions written down on all three laptops.',
       '[Click]',
-      'Two: baseline runs logged, with fixed seeds and saved configs.',
+      'Two: saved results for the plain models, with fixed settings.',
       '[Click]',
-      'Three: our first CRDA comparison next to the paper’s Table 1, with p-values.',
+      'Three: our first CRDA comparison next to the paper’s table, with p-values.',
       '[Click]',
-      'Four: an honest log of every deviation and why — we already have two entries.',
+      'Four: an honest list of every difference we hit and why. We already have two.',
       '[Click — research question]',
-      'Which leaves our real question: do the reported gains hold when we re-run the authors’ own pipeline — and where don’t they? Thank you.',
+      'Which leaves our real question: do the authors’ improvements hold up when we re-run their own code, and where don’t they? Thank you.',
     ],
   },
   references: {
@@ -167,7 +158,7 @@ export const notes = {
     seconds: 10,
     lines: [
       '[Leave up during questions]',
-      'Our sources are here — the paper, the authors’ code, the datasets and methods we mentioned. Happy to take questions.',
+      'These are our sources: the paper and its code, the other methods we mentioned, and the data we use. Happy to take questions.',
     ],
   },
 } satisfies Record<string, SlideNotes>;

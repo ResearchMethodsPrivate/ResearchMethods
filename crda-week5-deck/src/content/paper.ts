@@ -63,6 +63,6 @@ export const datasets: Record<DatasetKey, DatasetInfo> = {
 
 /** Things we noticed while auditing the repo; framed as questions, not findings. */
 export const auditQuestions = [
-  'Table 1 configs set ignore_filter: true, so ΔMSE is measured with augmentation forced on — the Wilcoxon decision is only logged',
-  'Code scores the augmented model as the average of 10 CV-fold models; Alg. 1 describes one retrained model',
+  'Their main table switches CRDA on even when the safety test says no',
+  'Their final score averages 10 models, not one as the paper describes',
 ];

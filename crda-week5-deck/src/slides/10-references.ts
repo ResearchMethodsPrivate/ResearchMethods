@@ -1,5 +1,5 @@
 import { gsap } from 'gsap';
-import { references } from '../content/references';
+import { referenceGroups } from '../content/references';
 import type { SlideDef } from '../lib/slide';
 import { $$ } from '../lib/util';
 
@@ -13,9 +13,9 @@ export const referencesSlide: SlideDef = {
   html: () => `
     <header class="slide-head">
       <p class="kicker">References</p>
-      <h2>Sources</h2>
+      <h2>Where our information comes from</h2>
     </header>
-    <ol class="refs">${references.map((r) => `<li>${link(r)}</li>`).join('')}</ol>`,
+    <div class="refs">${referenceGroups.map((g) => `<div class="ref-group"><h3>${g.title}</h3><ol>${g.items.map((r) => `<li>${link(r)}</li>`).join('')}</ol></div>`).join('')}</div>`,
   build: (root) =>
     gsap.timeline({ paused: true })
       .fromTo($$(root, '.refs li'), { opacity: 0, y: 10 }, { opacity: 1, y: 0, stagger: 0.04, duration: 0.4 })

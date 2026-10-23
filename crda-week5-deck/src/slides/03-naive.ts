@@ -17,15 +17,15 @@ const tile = (cls: string) => `
 export const naiveSlide: SlideDef = {
   id: 'naive',
   steps: 2,
-  source: 'Row: illustrative, invented values · Approaches as characterised by Mohebbi et al. (2026), §2 & Table 2',
+  source: 'House row: made-up values · Other methods as described by Mohebbi et al. (2026), §2 and Table 2',
   html: () => `
     <header class="slide-head">
       <p class="kicker">02 — Why not just augment?</p>
-      <h2>Images have label-safe transformations. Tables rarely do.</h2>
+      <h2>Copying a picture is easy. Copying a table row is not.</h2>
     </header>
     <div class="split split-even naive-grid">
       <div class="panel panel-img">
-        <h3>Images: <span class="accent">label-preserving</span> for suitable transforms</h3>
+        <h3>Pictures: a small <span class="accent">rotation</span> changes nothing</h3>
         <div class="tile-stage">
           <svg viewBox="-80 -80 580 580" aria-label="A handwritten seven rotated in both directions keeps its label.">
             <g transform="translate(210 210)">
@@ -35,14 +35,14 @@ export const naiveSlide: SlideDef = {
             </g>
           </svg>
         </div>
-        <p class="verdict ok"><span class="tag">label</span> “7” <span class="check">✓ small rotations keep it a 7</span></p>
-        <p class="caveat">…but rotate a 6 by 180° and it reads as a 9</p>
+        <p class="verdict ok"><span class="tag">still a</span> “7” <span class="check">✓ so we get a free extra example</span></p>
+        <p class="caveat">…but turn a 6 upside down and it becomes a 9</p>
       </div>
       <div class="panel panel-tab">
-        <h3>Tabular regression: <span class="warn">no known label-safe transform</span></h3>
+        <h3>Tables: <span class="warn">no safe trick like that</span></h3>
         <div class="row-table" role="table" aria-label="Illustrative house row and a naively perturbed copy">
           <div class="rt-row rt-head" role="row">
-            <span role="columnheader">Floor area</span><span role="columnheader">Beds</span><span role="columnheader">Garage</span><span role="columnheader">Location</span><span role="columnheader" class="rt-target">Price&nbsp;(target)</span>
+            <span role="columnheader">Floor area</span><span role="columnheader">Beds</span><span role="columnheader">Garage</span><span role="columnheader">Area</span><span role="columnheader" class="rt-target">Price</span>
           </div>
           <div class="rt-row rt-orig" role="row">
             <span>92 m²</span><span>3</span><span>basic</span><span>zone B</span><span class="rt-target">£285,000</span>
@@ -51,15 +51,15 @@ export const naiveSlide: SlideDef = {
             <span class="cell-changed">110 m²</span><span>3</span><span>basic</span><span>zone B</span><span class="rt-target cell-bad">£285,000</span>
           </div>
         </div>
-        <p class="rt-note"><span class="tag tag-cyan">naive copy</span> floor area +20%, price copied over</p>
-        <p class="verdict bad">✗ Unjustified label: nothing tells us what this house would sell for</p>
-        <p class="illus">Illustrative example — invented values</p>
+        <p class="rt-note"><span class="tag tag-cyan">simple copy</span> house 20% bigger, same price</p>
+        <p class="verdict bad">✗ Wrong: we don’t know what a bigger house would cost</p>
+        <p class="illus">Illustration with made-up values</p>
       </div>
     </div>
     <div class="existing">
-      <div class="ex-item"><span class="ex-k">Interpolate rows</span> SMOTE-style, C-Mixup <span class="ex-cite">(Chawla et al., 2002; Yao et al., 2022)</span></div>
-      <div class="ex-item"><span class="ex-k">Generate rows</span> CTGAN, TabDDPM — target treated as just another column <span class="ex-cite">(Xu et al., 2019; Kotelnikov et al., 2023)</span></div>
-      <div class="ex-item ex-gap"><span class="ex-k">Authors’ critique</span> can help in places, but don’t keep each row’s <em>own</em> residual noise; can raise MSE in their benchmarks</div>
+      <div class="ex-item"><span class="ex-k">Other fix 1</span> Blend existing rows together <span class="ex-cite">(SMOTE, C-Mixup: Chawla et al., 2002; Yao et al., 2022)</span></div>
+      <div class="ex-item"><span class="ex-k">Other fix 2</span> Make up rows with a learned model <span class="ex-cite">(CTGAN, TabDDPM: Xu et al., 2019; Kotelnikov et al., 2023)</span></div>
+      <div class="ex-item ex-gap"><span class="ex-k">What the authors say</span> these can help, but they lose each row’s <em>own</em> noise, and in the authors’ tests they sometimes made results worse</div>
     </div>`,
   build: (root) => {
     const tl = gsap.timeline({ paused: true });

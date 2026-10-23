@@ -64,11 +64,11 @@ if (/TODO|PLACEHOLDER|Member [ABC]\b/.test(all)) fail('Unresolved TODO / PLACEHO
 ['Anik', 'Alvi', 'Atul'].forEach((n) => { if (!notesText.includes(n)) fail(`Speaker notes never mention ${n}`); });
 
 const need = (id: string, re: RegExp, what: string) => { if (!re.test(rendered[id] ?? '')) fail(`Slide "${id}" is missing ${what}`); };
-need('plan', /Original authors’ reported results/, 'the "Original authors’ reported results" label');
-need('plan', /not our group’s reproduced results/, 'the "not our group’s reproduced results" label');
-['title', 'problem', 'naive', 'mechanism', 'assumption'].forEach((id) => need(id, /illustrative/i, 'an "illustrative" label on its graphic'));
-need('demo', /not Table 1/, 'the "not Table 1" scope label');
-need('demo', /authors’ own notebook output/i, 'the authors’ reference row');
+need('plan', /reported by the paper’s authors/i, 'the "reported by the paper’s authors" label');
+need('plan', /not ours yet/, 'the "not ours yet" label');
+['title', 'problem', 'naive', 'mechanism', 'assumption'].forEach((id) => need(id, /illustrat/i, 'an "illustration" label on its graphic'));
+need('demo', /not the paper’s main results/, 'the "not the paper’s main results" scope label');
+need('demo', /Authors’ own saved result/, 'the authors’ reference row');
 const needText = (id: string, text: string, what: string) => { if (!(rendered[id] ?? '').includes(text)) fail(`Slide "${id}" is missing ${what}`); };
 machines.forEach((m) => {
   needText('demo', m.label, `the machine tag of ${m.owner}'s laptop`);
@@ -76,16 +76,16 @@ machines.forEach((m) => {
   needText('demo', m.gpu, `the GPU of ${m.owner}'s laptop`);
   needText('demo', m.ram, `the RAM of ${m.owner}'s laptop`);
 });
-need('demo', /Pinned by the authors/, 'the pinned-versions line');
-need('mechanism', /p = 0\.1/, 'the repo-default perturbation range');
-need('mechanism', /numeric feature/, 'the numeric-feature wording');
+need('demo', /Same library versions/, 'the library-versions line');
+need('mechanism', /up to ±10%/, 'the ±10% nudge range');
+need('mechanism', /Nudge one number/, 'the plain “nudge one number” wording');
 if (/garage finish \(|×\s*1\.45|garage finish ×/i.test(rendered.mechanism)) fail('Slide 4 still presents garage finish as the perturbed numeric feature');
 need('assumption', /not a guarantee/, 'the gate caveat');
 ids.filter((id) => id !== 'title' && id !== 'references').forEach((id) => {
   if (!slides.find((s) => s.id === id)?.source) fail(`Slide "${id}" has no source line`);
 });
 const refText = references.join(' ');
-['Mohebbi', 'Chawla', 'Yao', 'Xu', 'Kotelnikov', 'Spirtes', 'Wilcoxon', 'Pearl'].forEach((a) => {
+['Mohebbi', 'Chawla', 'Yao', 'Xu', 'Kotelnikov', 'Spirtes', 'Wilcoxon'].forEach((a) => {
   if (!refText.includes(a)) fail(`Reference list lacks ${a}`);
 });
 scope.datasets.forEach((d) => { if (!datasets[d]) fail(`Unknown dataset in scope: ${d}`); });
