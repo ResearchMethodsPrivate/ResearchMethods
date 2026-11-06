@@ -3,7 +3,8 @@
  *  THE ONE FILE TO EDIT.
  *
  *  WHAT IS CONFIRMED (keep this block honest):
- *   ✔ Presenters: exactly three — Anik, Alvi, Atul (that spelling).
+ *   ✔ Presenters: four — Anik, Alvi, Atul and Samim (that spelling). Samim
+ *     joined after Week 5 with the lecturer’s agreement (group size 4).
  *   ✔ Speaking split: Anik slides 1–3, Alvi 4–5, Atul 6–7 and 9–10; everyone
  *     speaks to their own row/card on slides 7 and 8.
  *   ✔ Group name "Triple A" and presentation date 23 October 2026.
@@ -20,7 +21,7 @@
  */
 import type { DatasetKey } from '../content/paper';
 
-export type MemberId = 'A' | 'B' | 'C';
+export type MemberId = 'A' | 'B' | 'C' | 'D';
 export type Status = 'confirmed' | 'proposed';
 
 export interface Member {
@@ -57,7 +58,7 @@ export const group: { name: string | null; date: string | null; module: string; 
   session: 'Week 5 · First interim presentation',
 };
 
-// ── 2. Team — exactly three confirmed presenters ────────────────────────────
+// ── 2. Team — four confirmed members ────────────────────────────
 export const members: Member[] = [
   {
     id: 'A',
@@ -92,8 +93,20 @@ export const members: Member[] = [
       'List of problems and differences',
       'Slides, timing and rehearsal',
     ],
+    checks: 'D',
+    crossCheck: 'Checks Samim’s statistics',
+  },
+  {
+    id: 'D',
+    name: 'Samim',
+    role: 'Statistics and code checks',
+    owns: [
+      'Statistical tests on plain vs CRDA results',
+      'Tests the two code questions we flagged',
+      'Runs the second dataset (Concrete Strength)',
+    ],
     checks: 'A',
-    crossCheck: 'Rebuilds Anik’s setup from his written steps',
+    crossCheck: 'Rebuilds Anik’s setup on his own Windows laptop',
   },
 ];
 
@@ -109,8 +122,8 @@ export const speaking: SpeakingSplit = {
   assumption: ['B'],
   plan: ['C'],
   demo: ['A', 'B', 'C'],
-  team: ['A', 'B', 'C'],
-  targets: ['C'],
+  team: ['A', 'B', 'C', 'D'],
+  targets: ['C', 'D'],
   references: ['C'],
 };
 
@@ -148,7 +161,7 @@ export const milestones: Milestone[] = [
     title: 'First CRDA comparison',
     doneWhen: 'Our improvement next to the paper’s table',
     evidence: 'Side-by-side table with p-values',
-    owners: ['B', 'C'],
+    owners: ['B', 'C', 'D'],
     due: 'Week 8',
   },
   {

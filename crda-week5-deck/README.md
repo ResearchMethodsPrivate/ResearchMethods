@@ -1,6 +1,6 @@
 # CRDA · Week 5 interim presentation
 
-Animated browser slide deck for **ECS7029P Research Methods — First Interim Presentation (Week 5)**, presented by **Anik, Alvi and Atul**.
+Animated browser slide deck for **ECS7029P Research Methods — First Interim Presentation (Week 5)**, presented by **Anik, Alvi and Atul**; **Samim** joined the group afterwards (group size 4, agreed with the lecturer) and is on the team slide. His laptop (Windows 11, i7-13620H, 16 GB) has not run the demo yet, so it is not in the slide-6 results.
 Paper: Mohebbi, Schulte, Li & Poupart (2026), *Counterfactual Residual Data Augmentation for Regression*, ICML 2026.
 
 Scope is **Week 5 only**: the problem the paper addresses, enough background to explain the method, the proposed replication and who does what, and targets before Week 9. The deck contains **no Table 1 replication results**. Its only results are our one-seed runs of the authors’ demo on three laptops (slide 6, evidence in `docs/demo-reports/`).

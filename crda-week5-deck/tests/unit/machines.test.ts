@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { authors, deviations, machines, matchesAuthors, pctChange } from '../../src/content/machines';
 
-test('each machine is one of the three presenters, once', () => {
+test('each machine belongs to a different presenter, once', () => {
   assert.deepEqual(machines.map((m) => m.owner).sort(), ['A', 'B', 'C']);
 });
 
