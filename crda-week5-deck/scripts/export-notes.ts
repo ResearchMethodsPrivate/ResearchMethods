@@ -59,7 +59,7 @@ const md = [
     `### ${r.i}. ${r.n.title} — ${r.speakers} — target ${r.target}s`,
     '',
     ...r.n.lines.map((l) =>
-      (l.startsWith('[') ? `**${l}**` : l).replace(/\{([ABC])\}/g, (_, m) => name(m)),
+      (l.startsWith('[') ? `**${l}**` : l).replace(/\{([ABCD])\}/g, (_, m) => name(m)),
     ).flatMap((l) => [l, '']),
   ]),
 ].join('\n');

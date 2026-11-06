@@ -121,6 +121,7 @@
 
 /* ── 7 · Team ──────────────────────────────────────────────── */
 .cards { display: grid; gap: 36px; }
+.cards-4 { grid-template-columns: repeat(4, 1fr); gap: 36px; }
 .cards-3 { grid-template-columns: repeat(3, 1fr); }
 .cards-2 { grid-template-columns: repeat(2, 1fr); }
 .card {
