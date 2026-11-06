@@ -20,8 +20,8 @@ const fail = (m: string) => errors.push(m);
 const warn = (m: string) => warnings.push(m);
 
 // ── Presenters ───────────────────────────────────────────────────────────────
-const expected = { A: 'Anik', B: 'Alvi', C: 'Atul' } as const;
-if (members.length !== 3) fail(`Expected exactly 3 presenters, found ${members.length}`);
+const expected = { A: 'Anik', B: 'Alvi', C: 'Atul', D: 'Samim' } as const;
+if (members.length !== 4) fail(`Expected exactly 4 members, found ${members.length}`);
 members.forEach((m) => {
   if (m.name !== expected[m.id]) fail(`Member ${m.id} should be "${expected[m.id]}", found "${m.name}"`);
   if (!members.some((o) => o.id === m.checks) || m.checks === m.id) fail(`${m.name}: invalid cross-check target "${m.checks}"`);
@@ -61,7 +61,7 @@ const rendered = Object.fromEntries(slides.map((s) => [s.id, s.html() + (s.sourc
 const notesText = Object.values(notes as Record<string, SlideNotes>).flatMap((n) => n.lines).join('\n');
 const all = Object.values(rendered).join('\n') + notesText;
 if (/TODO|PLACEHOLDER|Member [ABC]\b/.test(all)) fail('Unresolved TODO / PLACEHOLDER / "Member X" text on a slide or in the notes');
-['Anik', 'Alvi', 'Atul'].forEach((n) => { if (!notesText.includes(n)) fail(`Speaker notes never mention ${n}`); });
+['Anik', 'Alvi', 'Atul', 'Samim'].forEach((n) => { if (!notesText.includes(n)) fail(`Speaker notes never mention ${n}`); });
 
 const need = (id: string, re: RegExp, what: string) => { if (!re.test(rendered[id] ?? '')) fail(`Slide "${id}" is missing ${what}`); };
 need('plan', /reported by the paper’s authors/i, 'the "reported by the paper’s authors" label');
