@@ -1,7 +1,7 @@
 /**
  * Our own run of the authors' demo (demo/demonstration.ipynb, Energy Efficiency,
- * one seed, CPU only) on each presenter's laptop, 22 Oct 2026.
- * Source: the three reports in docs/demo-reports/ — raw values copied verbatim
+ * one seed, CPU only) on each member's laptop (22 Oct 2026; Samim's on 6 Nov 2026).
+ * Source: the four reports in docs/demo-reports/ — raw values copied verbatim
  * from each machine's results.csv. Nothing here is from the paper's Table 1.
  *
  * `authors` = the output stored in the authors' own notebook cells (cell 6 / 11).
@@ -68,9 +68,21 @@ export const machines: Machine[] = [
     mlp: { before: 0.0013208531242431085, after: 0.0006385091123391665, p: 0.0009765625 },
     xgb: { before: 0.001300772579836663, after: 0.0009294087500910523, p: 0.0419921875 },
   },
+  {
+    owner: 'D',
+    label: 'i7 · Windows',
+    cpu: 'Intel Core i7-13620H',
+    gpu: 'Intel UHD (built in)',
+    ram: '16 GB',
+    os: 'Windows 11 (build 26300)',
+    python: '3.11.18',
+    seconds: 159,
+    mlp: { before: 0.0013208531242431085, after: 0.0006385091123391672, p: 0.0009765625 },
+    xgb: { before: 0.001265737172655872, after: 0.0009523574719362728, p: 0.0322265625 },
+  },
 ];
 
-/** Library versions pinned by the authors' requirements.txt and used on all three machines. */
+/** Library versions pinned by the authors' requirements.txt and used on all four machines. */
 export const pinned = { torch: '2.7.0', scikitLearn: '1.7.0rc1', xgboost: '3.0.1', numpy: '2.2.6' };
 
 /** Percentage change in test MSE, as the repo defines it: 100·(aug − base)/base. */
@@ -88,5 +100,5 @@ export const matchesAuthors = (r: ModelResult, ref: ModelResult) =>
 /** Deviations found while getting the demo to run — first entries of the obstacle log. */
 export const deviations = [
   'A library version wouldn’t run on new macOS; a newer one gave the same results',
-  'Windows XGBoost differs, even for the plain model (0.00127 vs 0.00130); we don’t know why yet',
+  'Both Windows laptops give a different XGBoost result from the authors’; cause unknown',
 ];

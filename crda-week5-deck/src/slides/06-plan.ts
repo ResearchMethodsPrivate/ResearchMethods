@@ -11,7 +11,7 @@ const scopeTag = scope.status === 'confirmed' ? '' : ' <span class="tag-proposed
 
 const plan: [string, string, boolean?][] = [
   ['Set up the authors’ code', 'Python 3.11 and the exact library versions they list', true],
-  ['Run their demo', 'on all three of our laptops', true],
+  ['Run their demo', 'on all four of our laptops', true],
   [`Pick two small datasets${scopeTag}`, `${dsNames}, with two models (a neural network and XGBoost)`],
   ['Compare plain vs CRDA', `same data splits each time; ${scope.seeds} runs at first (the paper uses ${scope.paperSeeds})`],
   ['Compare with the paper’s table', 'do we see similar improvements?'],
