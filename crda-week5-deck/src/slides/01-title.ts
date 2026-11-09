@@ -38,7 +38,7 @@ export const titleSlide: SlideDef = {
           <p class="paper-meta">${paper.affiliations.join(' · ')} — <strong>ICML 2026</strong>, a leading machine-learning conference</p>
         </div>
         <div class="title-foot">
-          <span class="chip chip-amber">We ran the authors’ demo on 3 laptops · we have not yet repeated their main results</span>
+          <span class="chip chip-amber">We ran the authors’ demo on 4 laptops · we have not yet repeated their main results</span>
           <span class="group-line">${[team.members.map((m) => m.name).join(' · '), group.name, group.date].filter(Boolean).join(' — ')}</span>
         </div>
       </div>

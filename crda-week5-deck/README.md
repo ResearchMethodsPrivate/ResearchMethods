@@ -1,6 +1,6 @@
 # CRDA · Week 5 interim presentation
 
-Animated browser slide deck for **ECS7029P Research Methods — First Interim Presentation (Week 5)**, presented by **Anik, Alvi and Atul**; **Samim** joined the group afterwards (group size 4, agreed with the lecturer) and is on the team slide. His laptop (Windows 11, i7-13620H, 16 GB) has not run the demo yet, so it is not in the slide-6 results.
+Animated browser slide deck for **ECS7029P Research Methods — First Interim Presentation (Week 5)**, presented by **Anik, Alvi and Atul**; **Samim** joined the group afterwards (group size 4, agreed with the lecturer) and is on the team slide. His laptop (Windows 11, i7-13620H, 16 GB) ran the demo on 6 Nov 2026 and is the fourth row of the slide-6 results.
 Paper: Mohebbi, Schulte, Li & Poupart (2026), *Counterfactual Residual Data Augmentation for Regression*, ICML 2026.
 
 Scope is **Week 5 only**: the problem the paper addresses, enough background to explain the method, the proposed replication and who does what, and targets before Week 9. The deck contains **no Table 1 replication results**. Its only results are our one-seed runs of the authors’ demo on three laptops (slide 6, evidence in `docs/demo-reports/`).
@@ -99,7 +99,7 @@ If the group changes its mind about any of these, set the matching `*Status` bac
 
 ## Evidence
 
-- `docs/demo-reports/` — the three laptops' reports from running the authors' demo (22 Oct 2026): Anik (Mac, M2), Alvi (Windows, Ryzen 7 + RTX 3070), Atul (Mac, M5 Pro). The slide-6 numbers in `src/content/machines.ts` are copied from these, and `npm test` checks them.
+- `docs/demo-reports/` — the four laptops' reports from running the authors' demo (22 Oct 2026, Samim's 6 Nov): Anik (Mac, M2), Alvi (Windows, Ryzen 7 + RTX 3070), Atul (Mac, M5 Pro), Samim (Windows, i7-13620H). The slide-6 numbers in `src/content/machines.ts` are copied from these, and `npm test` checks them.
 
 - `docs/VISUAL_REVIEW.md` — what was rendered and inspected, what was fixed, and what is still unverified.
 - `docs/OPENUI_DECISION.md` — the OpenUI integration and the risks it brings.

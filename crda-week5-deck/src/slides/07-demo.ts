@@ -20,11 +20,11 @@ export const demoSlide: SlideDef = {
   id: 'demo',
   steps: machines.length + 1,
   className: 'slide-demo',
-  source: 'Our runs of the authors’ demo, 22 Oct 2026 (docs/demo-reports/) · authors’ numbers from their saved output',
+  source: 'Our runs of the authors’ demo, 22 Oct and 6 Nov 2026 · authors’ numbers from their saved output',
   html: () => `
     <header class="slide-head">
       <p class="kicker">06 — Our first check</p>
-      <h2>The authors’ demo runs on all three of our laptops</h2>
+      <h2>The authors’ demo runs on all four of our laptops</h2>
       <p class="head-chip"><span class="chip chip-amber">One run · one dataset · not the paper’s main results</span><span class="dm-key-inline">Each box: error before → after · −51.7% means the error roughly halves · p = chance the gain is just luck (under 0.05 passes)</span></p>
     </header>
     <div class="dm" role="table" aria-label="Authors’ demo results on each presenter’s laptop">
@@ -32,7 +32,7 @@ export const demoSlide: SlideDef = {
         <span role="columnheader">Laptop</span><span role="columnheader">Run time</span><span role="columnheader">Neural network (MLP)</span><span role="columnheader">XGBoost</span>
       </div>
       <div class="dm-row dm-ref" role="row">
-        <div class="dm-who"><p class="dm-name">Authors’ own saved result</p><p class="dm-hw">from their demo</p></div>
+        <div class="dm-who"><p class="dm-name">Authors’ own saved result</p></div>
         <span class="dm-time">—</span>
         <div class="dm-res"><p class="dm-mse">${mse(authors.mlp.before)} <span>→</span> ${mse(authors.mlp.after)}</p><p class="dm-delta">${fmtDelta(pctChange(authors.mlp))} <span>p = ${authors.mlp.p.toFixed(5)}</span></p></div>
         <div class="dm-res"><p class="dm-mse">${mse(authors.xgb.before)} <span>→</span> ${mse(authors.xgb.after)}</p><p class="dm-delta">${fmtDelta(pctChange(authors.xgb))} <span>p = ${authors.xgb.p.toFixed(3)}</span></p></div>
@@ -50,7 +50,7 @@ export const demoSlide: SlideDef = {
       </div>`).join('')}
     </div>
     <div class="dm-foot">
-      <p class="dm-pins"><span class="lbl">Same library versions on all three</span>torch ${pinned.torch} · scikit-learn ${pinned.scikitLearn} · xgboost ${pinned.xgboost} · numpy ${pinned.numpy}</p>
+      <p class="dm-pins"><span class="lbl">Same library versions on all four</span>torch ${pinned.torch} · scikit-learn ${pinned.scikitLearn} · xgboost ${pinned.xgboost} · numpy ${pinned.numpy}</p>
       <div class="dm-dev"><span class="lbl">Problems we hit</span><ul>${deviations.map((d) => `<li>${d}</li>`).join('')}</ul></div>
     </div>`,
   build: (root) => {

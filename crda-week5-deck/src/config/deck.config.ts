@@ -121,7 +121,7 @@ export const speaking: SpeakingSplit = {
   mechanism: ['B'],
   assumption: ['B'],
   plan: ['C'],
-  demo: ['A', 'B', 'C'],
+  demo: ['A', 'B', 'C', 'D'],
   team: ['A', 'B', 'C', 'D'],
   targets: ['C', 'D'],
   references: ['C'],
@@ -145,7 +145,7 @@ export const milestones: Milestone[] = [
   {
     title: 'Code set up and running',
     doneWhen: 'The authors’ demo runs on our laptops',
-    evidence: 'Exact versions and laptop details written down (3 laptops)',
+    evidence: 'Exact versions and laptop details written down (4 laptops)',
     owners: ['A'],
     due: 'Week 6',
     done: { on: '22 Oct' },
