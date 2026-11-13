@@ -1,0 +1,6 @@
+dataset,metric,mean,std
+EnergyEfficiency_sample_765,mse,0.0009675013237280992,6.454208927888178e-05
+EnergyEfficiency_sample_765,aug_mse,0.0007786155116237578,6.178809291394132e-05
+EnergyEfficiency_sample_765,delta_mse,-18.227523806989236,4.699861772824799
+EnergyEfficiency_sample_765,p_wilcoxon,0.024479166666666666,0.00787472122325597
+EnergyEfficiency_sample_765,should_proceed,0.8,0.10690449676496976
