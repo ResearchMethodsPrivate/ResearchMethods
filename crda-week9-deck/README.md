@@ -38,5 +38,5 @@ If a result file changes, update `results.ts`, the wording in `src/content/notes
 ## Still open
 
 - **Rehearsal:** the timing (about 9:20) is a model, not a stopwatch run. Rehearse with all four speakers; log the times in `docs/speaker-notes.md`.
-- **The 10-model test** (slide 7) is one dataset and one laptop (Alvi's, Energy Efficiency). The notes propose that Anik repeats it on a Mac and Samim on Concrete Strength (`results/scripts/run_plain_ensemble.py`); confirm that with them, and update `results.ts` and the slides when the results are in.
+- **How we report CRDA's gain in the final:** the paper's way, or like for like (the 10-model test, slide 7, on Energy Efficiency on two laptops and on Concrete Strength). Slide 8 lists it as a team decision.
 - **Speaker split** is suggested from each person's role (`speaking` in `src/config/deck.config.ts`).

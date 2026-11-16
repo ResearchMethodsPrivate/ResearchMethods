@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-16T17:16:48.835Z",
+  "generated": "2026-11-16T18:00:53.313Z",
   "browser": "Chromium 153.0.8010.12 (Playwright 1.63.0, headless)",
   "motionSeconds": {
     "title": {
@@ -49,8 +49,8 @@
     "averaging": {
       "intro": 1.551,
       "steps": [
-        1.25,
-        1.25,
+        1.5,
+        1.5,
         0.6
       ]
     },

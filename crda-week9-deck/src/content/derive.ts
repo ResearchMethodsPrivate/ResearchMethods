@@ -13,9 +13,9 @@ export const filtered = (model: Model) => {
   return r;
 };
 
-export const averaged = (model: Model): AveragingRun => {
-  const r = averaging.find((x) => x.model === model);
-  if (!r) throw new Error(`No 10-model test for ${model}`);
+export const averaged = (source: AveragingRun['source'], dataset: Dataset, model: Model): AveragingRun => {
+  const r = averaging.find((x) => x.source === source && x.dataset === dataset && x.model === model);
+  if (!r) throw new Error(`No 10-model test for ${source} / ${dataset} / ${model}`);
   return r;
 };
 
