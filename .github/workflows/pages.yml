@@ -1,4 +1,7 @@
-# Builds the Week 5 deck (crda-week5-deck/) and publishes it to GitHub Pages.
+# Builds the Week 5 deck (crda-week5-deck/) and the Week 9 deck (crda-week9-deck/)
+# and publishes both to GitHub Pages:
+#   <site>/         the Week 5 deck (unchanged URL)
+#   <site>/week9/   the Week 9 deck
 #   pull request -> install, validate, test and build only (nothing is published)
 #   push to main  -> the same, then deploy to Pages
 #   manual run    -> Actions tab > "Deploy deck to GitHub Pages" > Run workflow
@@ -10,10 +13,14 @@ on:
     branches: [main]
     paths:
       - 'crda-week5-deck/**'
+      - 'crda-week9-deck/**'
+      - 'results/**'
       - '.github/workflows/pages.yml'
   pull_request:
     paths:
       - 'crda-week5-deck/**'
+      - 'crda-week9-deck/**'
+      - 'results/**'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
 
@@ -27,11 +34,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: crda-week5-deck
     env:
-      # OpenUI's install script sends anonymous telemetry unless told not to.
+      # OpenUI's install script (Week 5 deck) sends anonymous telemetry unless told not to.
       OPENUI_TELEMETRY_DISABLED: '1'
       DO_NOT_TRACK: '1'
     steps:
@@ -41,18 +45,38 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: crda-week5-deck/package-lock.json
+          cache-dependency-path: |
+            crda-week5-deck/package-lock.json
+            crda-week9-deck/package-lock.json
 
-      - run: npm ci
-      - run: npm run validate:deck
-      - run: npm test
-      - run: npm run build
+      - name: Week 5 deck
+        working-directory: crda-week5-deck
+        run: |
+          npm ci
+          npm run validate:deck
+          npm test
+          npm run build
+
+      - name: Week 9 deck
+        working-directory: crda-week9-deck
+        run: |
+          npm ci
+          npm run validate:ready
+          npm test
+          npm run build
+
+      - name: Assemble site
+        if: github.event_name != 'pull_request'
+        run: |
+          mkdir -p _site/week9
+          cp -r crda-week5-deck/dist/. _site/
+          cp -r crda-week9-deck/dist/. _site/week9/
 
       - name: Upload site
         if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v5
         with:
-          path: crda-week5-deck/dist
+          path: _site
 
   deploy:
     needs: build

@@ -5,11 +5,10 @@
  *  ✔ Speaking split below follows each person's role (suggested in
  *    results/atul/week9_outline.md). Change it here and the notes, footer and
  *    timing model follow.
- *  ✘ The presentation date is NOT confirmed, so `group.date` is null: nothing is
- *    shown and `npm run validate:ready` fails until it is filled in.
+ *  ✔ Presentation date: 20 November 2026 (confirmed by Alvi, 16 Nov 2026).
  *
  *  `npm run validate:deck` — development checks.
- *  `npm run validate:ready` — presentation-ready (fails while the date is open).
+ *  `npm run validate:ready` — presentation-ready (fails while a team decision is open).
  */
 export type MemberId = 'A' | 'B' | 'C' | 'D';
 
@@ -21,7 +20,7 @@ export interface Member {
 
 export const group: { name: string; date: string | null; module: string; session: string } = {
   name: 'Triple A',
-  date: null,
+  date: '20 November 2026',
   module: 'ECS7029P Research Methods · 2026/27',
   session: 'Week 9 · Progress update',
 };
