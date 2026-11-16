@@ -23,18 +23,22 @@ Paper numbers: authors' saved `results.csv` for Energy Efficiency, 765 rows (the
 - This is one machine and one dataset subset. It is not an independent check until Anik repeats it.
 - `ours/_timing_1seed` runs (1 seed, used only to time the script) are not included.
 
-## alvi-windows-ryzen7 / EnergyEfficiency_n765_plain_10model: the “10 models” test
+## The “10 models” test (three runs)
 
 - **Question:** in the authors' code the plain score is the test error of **one** model, but the CRDA score is the test error of the **average of 10** cross-validation models. How much of CRDA's gain is just averaging?
-- **Test:** for the same 15 seeds, splits and tuned settings as Alvi's Table 1 run, also train the 10 cross-validation models on the *original* data (no CRDA) and score their average on the same test data (`results/scripts/run_plain_ensemble.py`). The CRDA numbers are taken from Alvi's finished run.
-- **Check:** the re-computed single plain error equals the one in Alvi's run on all 15 seeds, for both models (to 12 digits).
-- **Run:** 16 Nov 2026, Alvi's laptop (same environment as above). About 6 minutes per model.
+- **Test:** for the same seeds, splits and tuned settings as each laptop's Table 1 run, also train the 10 cross-validation models on the *original* data (no CRDA) and score their average on the same test data (`results/scripts/run_plain_ensemble.py`). The CRDA numbers come from that laptop's finished run.
+- **Check:** in all three runs the re-computed single plain error equals the one in the Table 1 run on all 15 seeds, for both models.
+- **Runs (16 Nov 2026):** `alvi-windows-ryzen7/EnergyEfficiency_n765_plain_10model/` (Windows, Energy Efficiency), `anik-mac-m2/EnergyEfficiency_n765_plain_10model/` (Mac, Energy Efficiency, the repeat), `samim-windows-i7-13620h/ConcreteCompressiveStrength_n1005_plain_10model/` (Windows, Concrete Strength).
 
-Mean over 15 seeds of the per-seed % change in test error:
+Mean over 15 seeds of the per-seed % change in test error. “On top” = CRDA vs the plain 10-model average (like for like).
 
-| Model | Plain, 10 models averaged, vs plain single | CRDA vs plain single (how the paper reports it) | CRDA vs plain 10 models (like for like) | Seeds where CRDA beats the plain 10-model average | Paired Wilcoxon p, CRDA vs plain 10 models |
-|---|---|---|---|---|---|
-| MLP | +0.1 % (p = 0.68) | −28.7 % | −28.2 % | 14 of 15 | 0.00012 |
-| XGBoost | −15.3 % (p = 0.002) | −21.7 % | −7.9 % | 12 of 15 | 0.0067 |
+| Run | Model | Plain 10-model average vs one plain model | CRDA vs one plain model (the paper's way) | CRDA on top of averaging | Seeds where CRDA beats the average | Paired Wilcoxon p, CRDA vs average |
+|---|---|---|---|---|---|---|
+| Alvi, Energy Efficiency | MLP | +0.1 % | −28.7 % | −28.2 % | 14 of 15 | 0.00012 |
+| Alvi, Energy Efficiency | XGBoost | −15.3 % | −21.7 % | −7.9 % | 12 of 15 | 0.0067 |
+| Anik (Mac), Energy Efficiency | MLP | +0.1 % | −32.2 % | −29.7 % | 14 of 15 | 0.0001 |
+| Anik (Mac), Energy Efficiency | XGBoost | −12.9 % | −18.2 % | −6.1 % | 10 of 15 | 0.064 |
+| Samim, Concrete Strength | MLP | −16.7 % | −24.2 % | −8.7 % | 14 of 15 | 0.0015 |
+| Samim, Concrete Strength | XGBoost | −14.4 % | −14.6 % | 0.0 % | 8 of 15 | 0.93 |
 
-Reading: for the neural network, averaging does nothing and CRDA's gain is real. For XGBoost, averaging 10 plain models already lowers the error by 15.3 %, so about two-thirds of the reported gain is averaging; CRDA still helps by a further 7.9 %. One dataset and one laptop: not yet repeated on a Mac or on Concrete Strength.
+Reading: much of CRDA's reported gain is averaging. For XGBoost it is most of the gain on Energy Efficiency (about 70 %) and all of it on Concrete Strength. For the neural network it is none on Energy Efficiency and about two thirds on Concrete Strength. CRDA's extra gain on top of averaging is clear for the neural network on both datasets, borderline for XGBoost on Energy Efficiency (clear on Alvi's laptop, not on the Mac), and absent for XGBoost on Concrete Strength.

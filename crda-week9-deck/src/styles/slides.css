@@ -134,20 +134,25 @@
 .takeaway strong { color: var(--amber); }
 
 /* 6b · The second catch */
-.score-how { display: grid; grid-template-columns: auto auto auto 1fr; gap: 34px; align-items: center; margin-bottom: 28px; padding: 24px 36px; border: 1px solid var(--panel-line); border-radius: var(--radius); background: var(--panel); }
-.how-box p { font-size: 26px; color: var(--ink); margin-top: 8px !important; }
+.score-how { display: grid; grid-template-columns: auto auto auto 1fr; gap: 34px; align-items: center; margin-bottom: 20px; padding: 14px 36px; border: 1px solid var(--panel-line); border-radius: var(--radius); background: var(--panel); }
+.how-box p { font-size: 24px; color: var(--ink); margin-top: 4px !important; }
 .how-models { display: flex; gap: 8px; height: 38px; align-items: center; }
 .how-models i { width: 30px; height: 30px; border-radius: 7px; border: 2px solid rgba(99, 227, 255, 0.7); background: var(--cyan-soft); display: block; }
 .how-vs { font-family: var(--f-mono); font-size: 26px; color: var(--ink-faint); }
 .how-note { font-size: 27px; color: var(--ink-dim); line-height: 1.3; padding-left: 34px; border-left: 1px solid var(--panel-line); }
-.av-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
-.avpanel { padding: 26px 34px 28px; }
-.avpanel h3 { font-family: var(--f-display); font-size: 38px; font-weight: 600; }
-.avpanel .rbar { grid-template-columns: 250px 1fr 100px; height: 54px; }
-.avpanel .rb-who { font-size: 25px; }
+.av-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.av-col { display: grid; gap: 14px; align-content: start; }
+.av-ds { font-family: var(--f-mono); font-size: 22px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); margin: 0 0 2px !important; }
+.avpanel { padding: 16px 28px; display: grid; gap: 2px; }
+.avpanel h3 { font-family: var(--f-display); font-size: 31px; font-weight: 600; }
+.avpanel .rbar { grid-template-columns: 228px 1fr 92px; height: 42px; }
+.avpanel .rb-who { font-size: 22px; }
+.avpanel .rb-val { font-size: 22px; }
 .c-avg { --c: var(--amber); }
-.like { margin-top: 20px !important; padding-top: 16px; border-top: 1px solid var(--panel-line); font-size: 27px; color: var(--ink-dim); }
-.like b { color: var(--ink); font-family: var(--f-display); font-size: 34px; margin-left: 8px; }
+.like { margin-top: 8px !important; padding-top: 10px; border-top: 1px solid var(--panel-line); font-size: 22px; color: var(--ink-dim); display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+.like .lbl { margin: 0; }
+.like b { color: var(--ink); font-family: var(--f-display); font-size: 30px; }
+.like-more { font-family: var(--f-mono); font-size: 18px; color: var(--ink-faint); }
 
 /* 7 · What is left */
 .next-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 40px; }

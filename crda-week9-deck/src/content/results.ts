@@ -55,10 +55,13 @@ export const filterOn: FilterRun[] = [
 export const perSeedSpread = { source: 'alvi', dataset: 'EnergyEfficiency', model: 'MLP', min: -66.60786116489237, max: 24.661639773593333 } as const;
 
 /**
- * The “10 models” test (results/alvi-windows-ryzen7/EnergyEfficiency_n765_plain_10model/): the plain model scored as an
- * average of 10 cross-validation models, like CRDA is. Means over 15 seeds of the per-seed % change in test error.
+ * The “10 models” test: the plain model scored as an average of 10 cross-validation models, like CRDA is.
+ * Folders: results/<name>-<laptop>/…_plain_10model/. Means over 15 seeds of the per-seed % change in test error.
+ * tests/unit/results.test.ts recomputes every value from those files.
  */
 export interface AveragingRun {
+  source: Exclude<Source, 'paper'>;
+  dataset: Dataset;
   model: Model;
   seeds: number;
   /** Plain 10-model average vs the plain single model. */
@@ -71,6 +74,11 @@ export interface AveragingRun {
   crdaBeatsAveraged: number;
 }
 export const averaging: AveragingRun[] = [
-  { model: 'MLP', seeds: 15, averagingVsSingle: 0.11853529198793265, crdaVsSingle: -28.692563028831536, crdaVsAveraged: -28.221184029507583, crdaBeatsAveraged: 14 },
-  { model: 'XGBoost', seeds: 15, averagingVsSingle: -15.33852212582614, crdaVsSingle: -21.687898399946086, crdaVsAveraged: -7.850147298358085, crdaBeatsAveraged: 12 },
+  { source: 'alvi', dataset: 'EnergyEfficiency', model: 'MLP', seeds: 15, averagingVsSingle: 0.11853529198793265, crdaVsSingle: -28.692563028831536, crdaVsAveraged: -28.221184029507583, crdaBeatsAveraged: 14 },
+  { source: 'alvi', dataset: 'EnergyEfficiency', model: 'XGBoost', seeds: 15, averagingVsSingle: -15.33852212582614, crdaVsSingle: -21.687898399946086, crdaVsAveraged: -7.850147298358085, crdaBeatsAveraged: 12 },
+  { source: 'anik', dataset: 'EnergyEfficiency', model: 'MLP', seeds: 15, averagingVsSingle: 0.11853529197472133, crdaVsSingle: -32.166430905497606, crdaVsAveraged: -29.69377129171991, crdaBeatsAveraged: 14 },
+  { source: 'anik', dataset: 'EnergyEfficiency', model: 'XGBoost', seeds: 15, averagingVsSingle: -12.881115231275142, crdaVsSingle: -18.22752380698924, crdaVsAveraged: -6.113528553589887, crdaBeatsAveraged: 10 },
+  { source: 'samim', dataset: 'ConcreteStrength', model: 'MLP', seeds: 15, averagingVsSingle: -16.676713461665532, crdaVsSingle: -24.244007239433575, crdaVsAveraged: -8.715698058668613, crdaBeatsAveraged: 14 },
+  { source: 'samim', dataset: 'ConcreteStrength', model: 'XGBoost', seeds: 15, averagingVsSingle: -14.39261011401122, crdaVsSingle: -14.583301888081902, crdaVsAveraged: 0.030909379663533507, crdaBeatsAveraged: 8 },
 ];
+

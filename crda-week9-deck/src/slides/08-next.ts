@@ -5,11 +5,11 @@ import { $, $$, hide } from '../lib/util';
 const found = [
   { t: 'CRDA’s gains reproduce', d: 'On average, in every run, within a few points of the paper.' },
   { t: 'Catch 1: rejected runs are kept', d: 'The paper’s table counts runs its own safety test would drop.' },
-  { t: 'Catch 2: XGBoost’s gain is mostly averaging', d: 'CRDA’s score averages 10 models; the plain score uses one.' },
+  { t: 'Catch 2: much of the gain is averaging', d: 'CRDA’s score averages 10 models, the plain score uses one. For XGBoost: most or all of the gain.' },
 ];
 
 const todo = [
-  { t: 'Repeat the 10-model test: Mac, Concrete Strength', who: 'Anik · Samim' },
+  { t: 'Decide how we report CRDA’s gain: the paper’s way or like for like', who: 'Everyone' },
   { t: 'Write up the statistics, check every number', who: 'Samim · Atul' },
   { t: 'Final slides: 12–15 min, 10–12 slides', who: 'Everyone' },
   { t: 'Rehearse to time', who: 'Everyone' },
@@ -36,7 +36,7 @@ export const nextSlide: SlideDef = {
         <p class="log-chip">Problem log: <b>17 entries</b> · 8 resolved · 4 tested · 5 open</p>
       </div>
     </div>
-    <p class="bottomline" data-part="bottom"><strong>Bottom line:</strong> CRDA works, but less than the paper’s XGBoost number suggests.</p>`,
+    <p class="bottomline" data-part="bottom"><strong>Bottom line:</strong> CRDA helps, but part of the paper’s headline gain is just averaging 10 models.</p>`,
   build: (root) => {
     const tl = gsap.timeline({ paused: true });
     const todoPanel = $(root, '[data-part="todo"]');
