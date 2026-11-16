@@ -40,7 +40,7 @@ export const notes = {
       '[Click 3 — card 3]',
       'Third, our first CRDA comparison is done, next to the paper’s table, with p-values.',
       '[Click 4 — card 4 and the question]',
-      'And the problem log has 17 entries so far. Two of them are the catches we will show. That takes us back to our question. Alvi will show how we ran it.',
+      'And the problem log has 19 entries so far. Two of them are the catches we will show. That takes us back to our question. Alvi will show how we ran it.',
     ],
   },
   method: {
@@ -119,7 +119,7 @@ export const notes = {
       '[{C}]',
       'To sum up. CRDA’s gains reproduce, on average in every run. Catch one: the paper’s table keeps runs its own safety test would reject. Catch two: much of the gain comes from averaging 10 models, not from CRDA itself. For XGBoost that is most of it, or all of it. And plain XGBoost still differs on Windows, for a reason we have not found.',
       '[Click — what we do before the final]',
-      'Before the final presentation on 11 December, we will decide how to report CRDA’s gain: the paper’s way, or like for like. Samim and I will write up the statistics and check every number. All four of us will make the final slides and rehearse to time. Our problem log has 17 entries: 8 resolved, 4 tested, 5 still open. Everything is in our group repository, so anyone can check our numbers. Thank you. Happy to take questions.',
+      'Before the final presentation on 11 December, we will decide how to report CRDA’s gain: the paper’s way, or like for like. Samim and I will write up the statistics and check every number. All four of us will make the final slides and rehearse to time. Our problem log has 19 entries: 8 resolved, 4 tested, 7 still open. Everything is in our group repository, so anyone can check our numbers. Thank you. Happy to take questions.',
     ],
   },
   references: {

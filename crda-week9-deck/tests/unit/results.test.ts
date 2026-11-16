@@ -169,13 +169,13 @@ test('“6–22 minutes per run” holds for every run log', () => {
   assert.ok(Math.max(...secs) / 60 < 23, `slowest ${Math.max(...secs)} s`);
 });
 
-test('problem-log counts on the slides (17 entries · 8 resolved · 4 tested · 5 open) match results/atul/problem_log.md', () => {
+test('problem-log counts on the slides (19 entries · 8 resolved · 4 tested · 7 open) match results/atul/problem_log.md', () => {
   const rows = readFileSync(join(RESULTS, 'atul', 'problem_log.md'), 'utf8').split(/\r?\n/).filter((l) => /^\| \d+ \|/.test(l));
   const status = rows.map((l) => l.split('|')[5].trim());
-  assert.equal(rows.length, 17);
+  assert.equal(rows.length, 19);
   assert.equal(status.filter((s) => s === 'Resolved').length, 8);
   assert.equal(status.filter((s) => s === 'Tested').length, 4);
-  assert.equal(status.filter((s) => s !== 'Resolved' && s !== 'Tested').length, 5);
+  assert.equal(status.filter((s) => s !== 'Resolved' && s !== 'Tested').length, 7);
 });
 
 /** Exact two-sided Wilcoxon signed-rank p-value for paired samples (no ties, no zeros), by enumerating all sign patterns. */

@@ -33,7 +33,7 @@ export const nextSlide: SlideDef = {
       <div class="panel npanel" data-part="todo">
         <h3>Before the final · 11 Dec</h3>
         ${todo.map((x) => `<div class="todo"><span>${x.t}</span><span class="owner">${x.who}</span></div>`).join('')}
-        <p class="log-chip">Problem log: <b>17 entries</b> · 8 resolved · 4 tested · 5 open</p>
+        <p class="log-chip">Problem log: <b>19 entries</b> · 8 resolved · 4 tested · 7 open</p>
       </div>
     </div>
     <p class="bottomline" data-part="bottom"><strong>Bottom line:</strong> CRDA helps, but part of the paper’s headline gain is just averaging 10 models.</p>`,
