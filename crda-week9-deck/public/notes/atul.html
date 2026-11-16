@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Atul's Week 9 Notes</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow column built for glancing at on a phone. Sticky jump bar, one block per slide
+   with short lines to say (click labels between them), then a short number sheet and Q&A. */
+:root {
+  --bg: #f3f5fa;
+  --surface: #ffffff;
+  --ink: #111827;
+  --dim: #4a5568;
+  --line: #d6dce9;
+  --accent: #0a6f8f;
+  --accent-soft: #dff2f8;
+  --violet: #5a44c4;
+  --amber: #8f5300;
+  --amber-soft: #fdf0d6;
+  --green: #17704a;
+  --green-soft: #def4e9;
+  --red: #a3273a;
+  --scale: 1;
+  --f-body: 'Atkinson Hyperlegible', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b1020; --surface: #141b30; --ink: #eef1f8; --dim: #aab4cc; --line: #2a3452;
+    --accent: #63e3ff; --accent-soft: #11313d; --violet: #b9a3ff; --amber: #ffc76e; --amber-soft: #3a2c10;
+    --green: #79e9bb; --green-soft: #12332a; --red: #ff8497; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b1020; --surface: #141b30; --ink: #eef1f8; --dim: #aab4cc; --line: #2a3452;
+  --accent: #63e3ff; --accent-soft: #11313d; --violet: #b9a3ff; --amber: #ffc76e; --amber-soft: #3a2c10;
+  --green: #79e9bb; --green-soft: #12332a; --red: #ff8497; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: calc(19px * var(--scale)); line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 56px;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.wrap { max-width: 44rem; margin-inline: auto; display: grid; gap: 22px; min-width: 0; }
+h1, h2, h3 { text-wrap: balance; line-height: 1.2; margin: 0; }
+h1 { font-size: 1.75em; padding-top: 18px; }
+h2 { font-size: 1.35em; }
+h3 { font-size: 0.78em; font-family: var(--f-mono); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); }
+p { margin: 0; }
+.sub { color: var(--dim); }
+.tools { display: flex; flex-wrap: wrap; gap: 8px; }
+button {
+  font: inherit; font-size: 0.85em; color: var(--ink); background: var(--surface);
+  border: 1.5px solid var(--line); border-radius: 10px; padding: 8px 14px; cursor: pointer;
+}
+button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 11; margin-inline: -16px; padding: 10px 16px;
+  background: var(--bg); border-bottom: 1px solid var(--line);
+  display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
+}
+nav::-webkit-scrollbar { display: none; }
+nav a {
+  flex: none; text-decoration: none; color: var(--ink); background: var(--surface);
+  border: 1.5px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: 0.85em; white-space: nowrap;
+}
+
+section { display: grid; gap: 14px; scroll-margin-top: 64px; min-width: 0; }
+.head { display: grid; gap: 8px; }
+.pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.pill {
+  font-family: var(--f-mono); font-size: 0.72em; letter-spacing: 0.02em; padding: 3px 10px; border-radius: 999px;
+  border: 1.5px solid var(--line); color: var(--dim); background: var(--surface);
+}
+.pill.in { color: var(--green); border-color: var(--green); background: var(--green-soft); }
+.pill.out { color: var(--amber); border-color: var(--amber); background: var(--amber-soft); }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: grid; gap: 12px; min-width: 0; }
+.lifeline { border-color: var(--accent); background: var(--accent-soft); }
+.lifeline strong { color: var(--accent); }
+
+ol.script { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+ol.script li { display: grid; gap: 2px; }
+.cue { font-family: var(--f-mono); font-size: 0.72em; letter-spacing: 0.04em; text-transform: uppercase; color: var(--violet); }
+.line { font-size: 1.12em; }
+
+dl { margin: 0; display: grid; gap: 10px; }
+dl > div { display: grid; gap: 2px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+dl > div:last-child { border-bottom: 0; padding-bottom: 0; }
+dt { font-weight: 700; }
+dd { margin: 0; }
+dt.num { font-family: var(--f-mono); font-weight: 500; font-size: 0.95em; color: var(--accent); font-variant-numeric: tabular-nums; }
+
+.example { background: var(--surface); border: 1px dashed var(--line); border-radius: 10px; padding: 12px; }
+.example b { color: var(--accent); font-variant-numeric: tabular-nums; }
+ul.avoid { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; }
+ul.avoid li::marker { color: var(--red); }
+.rows { display: grid; gap: 8px; }
+.rowcard { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; display: grid; gap: 2px; font-variant-numeric: tabular-nums; }
+.rowcard.mine { border-color: var(--accent); background: var(--accent-soft); }
+.rowcard .who { font-weight: 700; }
+
+.qa { display: grid; gap: 10px; }
+.qa article { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 4px; }
+.qa .q { font-weight: 700; }
+footer { color: var(--dim); font-size: 0.8em; }
+@media (min-width: 640px) { dl > div { grid-template-columns: 11rem 1fr; gap: 16px; } }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+</style>
+<style>:root{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header class="head">
+    <h1>Atul's Week 9 notes</h1>
+    <p class="sub">Slides 5, 8, 9. About 2.0 minutes of talking, in a talk of about 9 minutes. Say it in your own words; these lines are the simple version. 20 November 2026.</p>
+    <div class="tools">
+      <button id="smaller" type="button" aria-label="Smaller text">A−</button>
+      <button id="larger" type="button" aria-label="Larger text">A+</button>
+      <button id="awake" type="button" aria-pressed="false">Keep screen on</button>
+    </div>
+  </header>
+
+  <nav aria-label="Jump to"><a href="#s5">Slide 5</a><a href="#s8">Slide 8</a><a href="#s9">Slide 9</a><a href="#words">Words</a><a href="#numbers">Numbers</a><a href="#qa">Q&amp;A</a><a href="#avoid">Don't say</a></nav>
+
+  <section id="s5">
+    <div class="head">
+      <h2>Slide 5 · What matched</h2>
+      <div class="pills"><span class="pill in">start: &quot;Thanks, both.&quot;</span><span class="pill">≈ 57 s</span><span class="pill">3 clicks</span></div>
+    </div>
+    <div class="card lifeline"><p><strong>One line:</strong> Plain models match the paper, except XGBoost on the two Windows laptops.</p></div>
+    <div class="card"><ol class="script"><li><span class="cue">Start</span><p class="line">Thanks, both. I compared the plain models, without CRDA. This matters: if our plain models were different from the authors’, we could not trust any comparison of the gains.</p></li><li><span class="cue">Click 1</span><p class="line">The plain neural network matches the paper exactly, on every laptop and both datasets.</p></li><li><span class="cue">Click 2</span><p class="line">Plain XGBoost matches on Anik’s Mac, but it is higher on both Windows laptops: 3.6 percent on Alvi’s and 2.1 on Samim’s. The two Windows laptops give the same number as each other, so it is not random noise. It looks like a Windows effect, but we have not found the cause yet.</p></li><li><span class="cue">Click 3</span><p class="line">And the size of CRDA’s gain differs by a few points between laptops. That is expected. From one repeat to the next, the gain on Alvi’s run swings from minus 67 percent to plus 25. So a gap of three or four points between laptops is normal.</p></li></ol><div class="rows"><div class="rowcard mine"><p class="who">Plain neural network</p><p>Same as the paper on every laptop. Energy Efficiency 0.000527, Concrete 0.004224.</p></div><div class="rowcard mine"><p class="who">Plain XGBoost, Mac</p><p>Same as the paper.</p></div><div class="rowcard"><p class="who">Plain XGBoost, Windows</p><p>Higher: +3.6% (Alvi’s laptop), +2.1% (Samim’s laptop). Cause unknown.</p></div></div></div>
+    <div class="example">If a plain model were already 4% worse than the authors’, then comparing “how much CRDA helps” would not be fair. That is why we check the plain models first.</div>
+  </section>
+  <section id="s8">
+    <div class="head">
+      <h2>Slide 8 · What is left</h2>
+      <div class="pills"><span class="pill in">start: after you finish slide 7</span><span class="pill">≈ 57 s</span><span class="pill">1 click</span></div>
+    </div>
+    <div class="card lifeline"><p><strong>One line:</strong> Three findings, two catches, and four jobs before the final on 11 December.</p></div>
+    <div class="card"><ol class="script"><li><span class="cue">Start</span><p class="line">To sum up. CRDA’s gains reproduce, on average in every run. Catch one: the paper’s table keeps runs its own safety test would reject. Catch two: much of the gain comes from averaging 10 models, not from CRDA itself. For XGBoost that is most of it, or all of it. And plain XGBoost still differs on Windows, for a reason we have not found.</p></li><li><span class="cue">Click</span><p class="line">Before the final presentation on 11 December, we will decide how to report CRDA’s gain: the paper’s way, or like for like. Samim and I will write up the statistics and check every number. All four of us will make the final slides and rehearse to time. Our problem log has 17 entries: 8 resolved, 4 tested, 5 still open. Everything is in our group repository, so anyone can check our numbers. Thank you. Happy to take questions.</p></li></ol></div>
+    
+  </section>
+  <section id="s9">
+    <div class="head">
+      <h2>Slide 9 · References</h2>
+      <div class="pills"><span class="pill in">after your last line</span><span class="pill">≈ 4 s</span></div>
+    </div>
+    <div class="card lifeline"><p><strong>One line:</strong> Leave it on screen and take questions.</p></div>
+    <div class="card"><ol class="script"><li><span class="cue">Start</span><p class="line">Our sources are listed here. Happy to take questions.</p></li></ol></div>
+    
+  </section>
+
+  <section id="words">
+    <h2>Words in plain English</h2>
+    <div class="card"><dl><div><dt>Plain model</dt><dd>The same model without CRDA.</dd></div><div><dt>MLP / XGBoost</dt><dd>Two kinds of prediction model: a small neural network, and a set of decision trees.</dd></div><div><dt>Error (MSE)</dt><dd>The average size of the model’s mistakes on data it has not seen. Lower is better.</dd></div><div><dt>Safety test</dt><dd>CRDA’s own check. It is meant to switch CRDA off when it does not clearly help.</dd></div><div><dt>10-model average</dt><dd>Train 10 models on slightly different slices of the training data and average their predictions. Averaging usually lowers error by itself.</dd></div><div><dt>Problem log</dt><dd>Our shared list of every difference and problem we found: 17 entries.</dd></div></dl></div>
+  </section>
+
+  <section id="numbers">
+    <h2>Numbers that may come up</h2>
+    <div class="card"><dl><div><dt class="num">0.000527 · 0.004224</dt><dd>Plain neural-network error on Energy Efficiency and Concrete Strength. Identical to the paper’s on every laptop.</dd></div><div><dt class="num">+3.6% · +2.1%</dt><dd>How much higher plain XGBoost was on Windows: Alvi’s laptop (Energy Efficiency) and Samim’s (Concrete Strength).</dd></div><div><dt class="num">−67% to +25%</dt><dd>How far one repeat’s CRDA gain can swing on Alvi’s Energy Efficiency neural-network run.</dd></div><div><dt class="num">3–4 points</dt><dd>The usual gap between laptops in the size of the gain. Normal given that swing.</dd></div><div><dt class="num">17 · 8 · 4 · 5</dt><dd>Problem log: 17 entries, 8 resolved, 4 tested, 5 still open.</dd></div><div><dt class="num">11 Dec</dt><dd>Final presentation, Week 12: 12–15 minutes, 10–12 slides.</dd></div></dl></div>
+  </section>
+
+  <section id="qa" class="qa">
+    <h2>Likely questions</h2>
+    <article><p class="q">Why compare the plain models first?</p><p>If our plain models differed from the authors’, we could not trust any comparison of the gains.</p></article><article><p class="q">Why does plain XGBoost differ on Windows?</p><p>We do not know yet. Two different Windows laptops give the same number, so it is not random noise. The Mac matches the paper.</p></article><article><p class="q">Why does the gain differ between laptops?</p><p>A single repeat’s gain swings between about −67% and +25%, so a few points between laptops is expected.</p></article><article><p class="q">What are the two catches?</p><p>One: the paper’s table keeps runs its own safety test would reject. Two: CRDA’s score averages 10 models but the plain score uses one, and much of the gain is just that averaging. For XGBoost it is most or all of it.</p></article><article><p class="q">What is in the problem log?</p><p>Setup problems (all resolved), the Windows difference, the two catches, and how some numbers in the files are defined. 17 entries.</p></article><article><p class="q">What happens next?</p><p>We decide how to report CRDA’s gain in the final. Samim and I write up the statistics and check every number. All four make the final slides and rehearse.</p></article><article><p class="q">Where can people check your numbers?</p><p>Everything is in our group repository, in the results folder.</p></article>
+  </section>
+
+  <section id="avoid">
+    <h2>Don't say</h2>
+    <div class="card"><ul class="avoid"><li>That we know why Windows differs. Say “we do not know yet”.</li><li>That the paper is wrong. Say “its table is not like-for-like”.</li><li>New numbers that are not on the slides.</li></ul></div>
+  </section>
+
+  <footer>Every number comes from the group repository (results/) and is checked against the raw files by the deck's tests. The lines above are the deck's own speaker notes.</footer>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+  var scale = parseFloat(store('w9-atul-scale')) || 1;
+  function apply() { root.style.setProperty('--scale', String(scale)); }
+  apply();
+  function bump(d) { scale = Math.min(1.5, Math.max(0.85, Math.round((scale + d) * 100) / 100)); apply(); store('w9-atul-scale', String(scale)); }
+  document.getElementById('smaller').addEventListener('click', function () { bump(-0.1); });
+  document.getElementById('larger').addEventListener('click', function () { bump(0.1); });
+
+  var btn = document.getElementById('awake'), lock = null;
+  async function setAwake(on) {
+    try {
+      if (on) { lock = await navigator.wakeLock.request('screen'); lock.addEventListener('release', function () { btn.setAttribute('aria-pressed', 'false'); }); btn.setAttribute('aria-pressed', 'true'); }
+      else if (lock) { await lock.release(); lock = null; btn.setAttribute('aria-pressed', 'false'); }
+    } catch (e) { btn.setAttribute('aria-pressed', 'false'); btn.textContent = 'Keep screen on (not available here)'; }
+  }
+  btn.addEventListener('click', function () { setAwake(btn.getAttribute('aria-pressed') !== 'true'); });
+})();
+</script>
+
+</body>
+</html>

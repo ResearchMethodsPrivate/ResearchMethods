@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Alvi's Week 9 Notes</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow column built for glancing at on a phone. Sticky jump bar, one block per slide
+   with short lines to say (click labels between them), then a short number sheet and Q&A. */
+:root {
+  --bg: #f3f5fa;
+  --surface: #ffffff;
+  --ink: #111827;
+  --dim: #4a5568;
+  --line: #d6dce9;
+  --accent: #0a6f8f;
+  --accent-soft: #dff2f8;
+  --violet: #5a44c4;
+  --amber: #8f5300;
+  --amber-soft: #fdf0d6;
+  --green: #17704a;
+  --green-soft: #def4e9;
+  --red: #a3273a;
+  --scale: 1;
+  --f-body: 'Atkinson Hyperlegible', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b1020; --surface: #141b30; --ink: #eef1f8; --dim: #aab4cc; --line: #2a3452;
+    --accent: #63e3ff; --accent-soft: #11313d; --violet: #b9a3ff; --amber: #ffc76e; --amber-soft: #3a2c10;
+    --green: #79e9bb; --green-soft: #12332a; --red: #ff8497; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b1020; --surface: #141b30; --ink: #eef1f8; --dim: #aab4cc; --line: #2a3452;
+  --accent: #63e3ff; --accent-soft: #11313d; --violet: #b9a3ff; --amber: #ffc76e; --amber-soft: #3a2c10;
+  --green: #79e9bb; --green-soft: #12332a; --red: #ff8497; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: calc(19px * var(--scale)); line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 56px;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.wrap { max-width: 44rem; margin-inline: auto; display: grid; gap: 22px; min-width: 0; }
+h1, h2, h3 { text-wrap: balance; line-height: 1.2; margin: 0; }
+h1 { font-size: 1.75em; padding-top: 18px; }
+h2 { font-size: 1.35em; }
+h3 { font-size: 0.78em; font-family: var(--f-mono); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); }
+p { margin: 0; }
+.sub { color: var(--dim); }
+.tools { display: flex; flex-wrap: wrap; gap: 8px; }
+button {
+  font: inherit; font-size: 0.85em; color: var(--ink); background: var(--surface);
+  border: 1.5px solid var(--line); border-radius: 10px; padding: 8px 14px; cursor: pointer;
+}
+button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 11; margin-inline: -16px; padding: 10px 16px;
+  background: var(--bg); border-bottom: 1px solid var(--line);
+  display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
+}
+nav::-webkit-scrollbar { display: none; }
+nav a {
+  flex: none; text-decoration: none; color: var(--ink); background: var(--surface);
+  border: 1.5px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: 0.85em; white-space: nowrap;
+}
+
+section { display: grid; gap: 14px; scroll-margin-top: 64px; min-width: 0; }
+.head { display: grid; gap: 8px; }
+.pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.pill {
+  font-family: var(--f-mono); font-size: 0.72em; letter-spacing: 0.02em; padding: 3px 10px; border-radius: 999px;
+  border: 1.5px solid var(--line); color: var(--dim); background: var(--surface);
+}
+.pill.in { color: var(--green); border-color: var(--green); background: var(--green-soft); }
+.pill.out { color: var(--amber); border-color: var(--amber); background: var(--amber-soft); }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: grid; gap: 12px; min-width: 0; }
+.lifeline { border-color: var(--accent); background: var(--accent-soft); }
+.lifeline strong { color: var(--accent); }
+
+ol.script { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+ol.script li { display: grid; gap: 2px; }
+.cue { font-family: var(--f-mono); font-size: 0.72em; letter-spacing: 0.04em; text-transform: uppercase; color: var(--violet); }
+.line { font-size: 1.12em; }
+
+dl { margin: 0; display: grid; gap: 10px; }
+dl > div { display: grid; gap: 2px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+dl > div:last-child { border-bottom: 0; padding-bottom: 0; }
+dt { font-weight: 700; }
+dd { margin: 0; }
+dt.num { font-family: var(--f-mono); font-weight: 500; font-size: 0.95em; color: var(--accent); font-variant-numeric: tabular-nums; }
+
+.example { background: var(--surface); border: 1px dashed var(--line); border-radius: 10px; padding: 12px; }
+.example b { color: var(--accent); font-variant-numeric: tabular-nums; }
+ul.avoid { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; }
+ul.avoid li::marker { color: var(--red); }
+.rows { display: grid; gap: 8px; }
+.rowcard { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; display: grid; gap: 2px; font-variant-numeric: tabular-nums; }
+.rowcard.mine { border-color: var(--accent); background: var(--accent-soft); }
+.rowcard .who { font-weight: 700; }
+
+.qa { display: grid; gap: 10px; }
+.qa article { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 4px; }
+.qa .q { font-weight: 700; }
+footer { color: var(--dim); font-size: 0.8em; }
+@media (min-width: 640px) { dl > div { grid-template-columns: 11rem 1fr; gap: 16px; } }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+</style>
+<style>:root{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header class="head">
+    <h1>Alvi's Week 9 notes</h1>
+    <p class="sub">Slides 3, 4, 7. About 3.6 minutes of talking, in a talk of about 9 minutes. Say it in your own words; these lines are the simple version. 20 November 2026.</p>
+    <div class="tools">
+      <button id="smaller" type="button" aria-label="Smaller text">A−</button>
+      <button id="larger" type="button" aria-label="Larger text">A+</button>
+      <button id="awake" type="button" aria-pressed="false">Keep screen on</button>
+    </div>
+  </header>
+
+  <nav aria-label="Jump to"><a href="#s3">Slide 3</a><a href="#s4">Slide 4</a><a href="#s7">Slide 7</a><a href="#words">Words</a><a href="#numbers">Numbers</a><a href="#qa">Q&amp;A</a><a href="#avoid">Don't say</a></nav>
+
+  <section id="s3">
+    <div class="head">
+      <h2>Slide 3 · What we ran</h2>
+      <div class="pills"><span class="pill in">start: &quot;Thanks, Anik.&quot;</span><span class="pill">≈ 63 s</span><span class="pill">2 clicks</span></div>
+    </div>
+    <div class="card lifeline"><p><strong>One line:</strong> Same code and settings as the paper’s main table, on four laptops, 15 repeats of every run.</p></div>
+    <div class="card"><ol class="script"><li><span class="cue">Start</span><p class="line">Thanks, Anik. We wanted our runs as close to the paper’s as possible, so that any difference means something. We used the authors’ code unchanged, and copied the settings from their saved files for the main table. That means 15 repeats of every run. A repeat means we run the whole experiment again, with a different random split of the data into training and test. Doing it 15 times shows how much the result moves. We also used the biggest data subset, and their two models, a neural network and XGBoost, each with and without CRDA.</p></li><li><span class="cue">Click 1</span><p class="line">Then we split the work. I ran Energy Efficiency on my Windows laptop. Anik ran the same again on his Mac, as an independent check. Samim ran Concrete Strength and the safety-test experiment. Atul built the comparison table and the problem log.</p></li><li><span class="cue">Click 2</span><p class="line">In total, eight full runs and 120 experiments, six to 22 minutes each, on ordinary laptops with no graphics card.</p></li></ol></div>
+    
+  </section>
+  <section id="s4">
+    <div class="head">
+      <h2>Slide 4 · Results</h2>
+      <div class="pills"><span class="pill in">after your slide 3</span><span class="pill out">end: “Samim, can we trust that this is more than luck?”</span><span class="pill">≈ 58 s</span><span class="pill">3 clicks</span><span class="pill out">shared slide</span></div>
+    </div>
+    <div class="card lifeline"><p><strong>One line:</strong> CRDA lowered the error in every run, close to the paper. Samim shows it is not luck.</p></div>
+    <div class="card"><ol class="script"><li><span class="cue">Start</span><p class="line">Here are the results. Each bar shows how much lower the error got with CRDA. Error here means how far the predictions are from the true values, on data the model has not seen. So if the plain error is 100 and CRDA’s is 72, the bar says 28 percent. Longer is better. The striped bar is the paper, from its own 15 repeats.</p></li><li><span class="cue">Click 1</span><p class="line">On Energy Efficiency, for the neural network, the paper reports 28 percent. I got 29, and Anik got 32. For XGBoost, the paper reports 21, I got 22, and Anik got 18. So we are close to the paper, but not identical.</p></li><li><span class="cue">Click 2</span><p class="line">On Concrete Strength, Samim’s runs show 24 percent against the paper’s 27 for the neural network, and 15 against 12 for XGBoost. Again close, and the same direction. Samim, can we trust that this is more than luck?</p></li></ol></div>
+    <div class="example">Say the plain error is <b>100</b> and CRDA’s is <b>72</b>. The bar says <b>28%</b>: the error got 28% lower. Made-up numbers.</div>
+  </section>
+  <section id="s7">
+    <div class="head">
+      <h2>Slide 7 · The second catch</h2>
+      <div class="pills"><span class="pill in">start: &quot;Thanks, Samim.&quot;</span><span class="pill">≈ 96 s</span><span class="pill">3 clicks</span></div>
+    </div>
+    <div class="card lifeline"><p><strong>One line:</strong> Much of CRDA’s gain is just averaging 10 models. For XGBoost, most or all of it. For the neural network: none on Energy Efficiency, about two thirds on Concrete.</p></div>
+    <div class="card"><ol class="script"><li><span class="cue">Start</span><p class="line">Thanks, Samim. The second catch is one we tested on both datasets. In the authors’ code, the plain score comes from one model. But the CRDA score is the average of 10 models. Averaging usually lowers error by itself. So we scored the plain model the same way: ten plain models, averaged. I ran it on Energy Efficiency, Anik repeated it on his Mac, and Samim ran Concrete Strength. In every case the single plain error matched our earlier runs exactly.</p></li><li><span class="cue">Click 1</span><p class="line">On Energy Efficiency, for the neural network, averaging ten plain models changes nothing, so CRDA’s gain of about 29 percent is real. Anik’s Mac agrees. For XGBoost, averaging alone lowers the error by 15 percent, out of a gain of 22. On top of averaging, CRDA adds 8 percent on my laptop, and 6 on Anik’s Mac, where that is not clearly more than luck.</p></li><li><span class="cue">Click 2</span><p class="line">Concrete Strength shows it more strongly. For the neural network, averaging alone gives 17 percent out of 24, so CRDA adds 9 on top, which is clear. For XGBoost, averaging alone gives 14 percent, and CRDA’s whole gain is 15. On top of averaging, CRDA adds nothing.</p></li><li><span class="cue">Click 3</span><p class="line">So, like for like, CRDA adds less than the paper’s way of scoring suggests. The paper’s headline numbers mix CRDA’s own gain with the gain from averaging. For XGBoost that is most of it, or all of it. We will say which version we report in the final.</p></li></ol><div class="rows"><div class="rowcard mine"><p class="who">Energy Efficiency, neural network</p><p>Averaging alone: +0.1% (nothing). CRDA: −28.7%. CRDA on top of averaging: −28.2% (Mac: −29.7%).</p></div><div class="rowcard"><p class="who">Energy Efficiency, XGBoost</p><p>Averaging alone: −15.3%. CRDA: −21.7%. On top of averaging: −7.9% (Mac: −6.1%, not clearly more than luck).</p></div><div class="rowcard"><p class="who">Concrete Strength, neural network (Samim)</p><p>Averaging alone: −16.7%. CRDA: −24.2%. On top of averaging: −8.7%, which is clear.</p></div><div class="rowcard"><p class="who">Concrete Strength, XGBoost (Samim)</p><p>Averaging alone: −14.4%. CRDA: −14.6%. On top of averaging: 0.0%. Nothing.</p></div></div></div>
+    <div class="example">Roughly, XGBoost on Energy Efficiency: plain single model <b>100</b> → average of 10 plain models <b>85</b> → CRDA average of 10 <b>78</b>. Averaging alone gets most of the way. Made-up round numbers that follow the real percentages.</div>
+  </section>
+
+  <section id="words">
+    <h2>Words in plain English</h2>
+    <div class="card"><dl><div><dt>Repeat (seed)</dt><dd>Running the whole experiment again with a different random split of the data into training and test. We did 15.</dd></div><div><dt>Error (MSE)</dt><dd>The average size of the model’s mistakes on data it has not seen. Lower is better.</dd></div><div><dt>Plain model</dt><dd>The same model without CRDA.</dd></div><div><dt>MLP / XGBoost</dt><dd>Two kinds of prediction model: a small neural network, and a set of decision trees.</dd></div><div><dt>10-model average</dt><dd>Train 10 models on slightly different slices of the training data and average their predictions. Averaging usually lowers error by itself.</dd></div></dl></div>
+  </section>
+
+  <section id="numbers">
+    <h2>Numbers that may come up</h2>
+    <div class="card"><dl><div><dt class="num">15 repeats</dt><dd>The paper’s setting. We copied it from the authors’ saved files.</dd></div><div><dt class="num">765 · 1,005 rows</dt><dd>The biggest data subset for Energy Efficiency and Concrete Strength, as in the paper’s main table.</dd></div><div><dt class="num">8 runs · 120</dt><dd>Eight full runs of 15 repeats each.</dd></div><div><dt class="num">6–22 min</dt><dd>How long one run took on a laptop. No graphics card used.</dd></div><div><dt class="num">28 · 29 · 32</dt><dd>Energy Efficiency neural network, error lower by: paper, you, Anik.</dd></div><div><dt class="num">21 · 22 · 18</dt><dd>Energy Efficiency XGBoost: paper, you, Anik.</dd></div><div><dt class="num">27 → 24 · 12 → 15</dt><dd>Concrete Strength: paper → Samim, neural network and XGBoost.</dd></div><div><dt class="num">+0.1% · −15.3%</dt><dd>Energy Efficiency: averaging 10 plain models, neural network and XGBoost, versus one plain model.</dd></div><div><dt class="num">−16.7% · −14.4%</dt><dd>Concrete Strength (Samim): the same for the neural network and XGBoost.</dd></div><div><dt class="num">−28.2% · −7.9%</dt><dd>Energy Efficiency: CRDA on top of averaging, neural network and XGBoost (Mac: −29.7%, −6.1%).</dd></div><div><dt class="num">−8.7% · 0.0%</dt><dd>Concrete Strength: CRDA on top of averaging, neural network and XGBoost.</dd></div><div><dt class="num">p = 0.007 · 0.064</dt><dd>XGBoost on Energy Efficiency, CRDA on top of averaging: clear on your laptop, not clearly on the Mac.</dd></div><div><dt class="num">about 70% · 100%</dt><dd>Share of XGBoost’s gain that is averaging: Energy Efficiency, Concrete Strength.</dd></div></dl></div>
+  </section>
+
+  <section id="qa" class="qa">
+    <h2>Likely questions</h2>
+    <article><p class="q">Why 15 repeats?</p><p>It is what the paper used, so our numbers compare directly.</p></article><article><p class="q">What is a repeat?</p><p>We run the whole experiment again on a different random split of the data. It shows how much the answer moves.</p></article><article><p class="q">Why do you, Anik and the paper differ?</p><p>Small differences are normal. From one repeat to the next the gain swings from about −67% to +25%, so a few points between laptops is expected.</p></article><article><p class="q">How do you know your 10-model test is fair?</p><p>I re-computed the single plain error and it matches our earlier saved runs exactly on all 15 repeats, for both models. So the split, the settings and the code path are the same.</p></article><article><p class="q">So is CRDA useless for XGBoost?</p><p>Not useless, but on Concrete Strength it adds nothing on top of averaging, and on Energy Efficiency it adds 6 to 8 percent. The paper’s headline mixes both effects.</p></article><article><p class="q">Does that hold on other datasets or laptops?</p><p>We checked two datasets and two kinds of laptop. The XGBoost pattern is the same everywhere: averaging explains most or all of the gain. The neural network differs by dataset.</p></article><article><p class="q">Why is the neural network different?</p><p>On Energy Efficiency, averaging 10 plain neural networks did not lower the error, so the gain is CRDA’s. On Concrete Strength, averaging alone gives 17 of the 24 percent. We do not know why it depends on the dataset.</p></article><article><p class="q">Why does Windows differ for plain XGBoost?</p><p>We do not know yet. Both Windows laptops give the same number, and the Mac matches the paper.</p></article>
+  </section>
+
+  <section id="avoid">
+    <h2>Don't say</h2>
+    <div class="card"><ul class="avoid"><li>That CRDA is useless. Say “it adds less than the paper’s way of scoring suggests”.</li><li>That it holds for every dataset. We tested two.</li><li>Why Windows differs. Say “we do not know yet”.</li><li>Exact digits. Round: 28, 29, 32; 21, 22, 18.</li></ul></div>
+  </section>
+
+  <footer>Every number comes from the group repository (results/) and is checked against the raw files by the deck's tests. The lines above are the deck's own speaker notes.</footer>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+  var scale = parseFloat(store('w9-alvi-scale')) || 1;
+  function apply() { root.style.setProperty('--scale', String(scale)); }
+  apply();
+  function bump(d) { scale = Math.min(1.5, Math.max(0.85, Math.round((scale + d) * 100) / 100)); apply(); store('w9-alvi-scale', String(scale)); }
+  document.getElementById('smaller').addEventListener('click', function () { bump(-0.1); });
+  document.getElementById('larger').addEventListener('click', function () { bump(0.1); });
+
+  var btn = document.getElementById('awake'), lock = null;
+  async function setAwake(on) {
+    try {
+      if (on) { lock = await navigator.wakeLock.request('screen'); lock.addEventListener('release', function () { btn.setAttribute('aria-pressed', 'false'); }); btn.setAttribute('aria-pressed', 'true'); }
+      else if (lock) { await lock.release(); lock = null; btn.setAttribute('aria-pressed', 'false'); }
+    } catch (e) { btn.setAttribute('aria-pressed', 'false'); btn.textContent = 'Keep screen on (not available here)'; }
+  }
+  btn.addEventListener('click', function () { setAwake(btn.getAttribute('aria-pressed') !== 'true'); });
+})();
+</script>
+
+</body>
+</html>

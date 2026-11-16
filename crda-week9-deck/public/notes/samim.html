@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Samim's Week 9 Notes</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow column built for glancing at on a phone. Sticky jump bar, one block per slide
+   with short lines to say (click labels between them), then a short number sheet and Q&A. */
+:root {
+  --bg: #f3f5fa;
+  --surface: #ffffff;
+  --ink: #111827;
+  --dim: #4a5568;
+  --line: #d6dce9;
+  --accent: #0a6f8f;
+  --accent-soft: #dff2f8;
+  --violet: #5a44c4;
+  --amber: #8f5300;
+  --amber-soft: #fdf0d6;
+  --green: #17704a;
+  --green-soft: #def4e9;
+  --red: #a3273a;
+  --scale: 1;
+  --f-body: 'Atkinson Hyperlegible', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b1020; --surface: #141b30; --ink: #eef1f8; --dim: #aab4cc; --line: #2a3452;
+    --accent: #63e3ff; --accent-soft: #11313d; --violet: #b9a3ff; --amber: #ffc76e; --amber-soft: #3a2c10;
+    --green: #79e9bb; --green-soft: #12332a; --red: #ff8497; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b1020; --surface: #141b30; --ink: #eef1f8; --dim: #aab4cc; --line: #2a3452;
+  --accent: #63e3ff; --accent-soft: #11313d; --violet: #b9a3ff; --amber: #ffc76e; --amber-soft: #3a2c10;
+  --green: #79e9bb; --green-soft: #12332a; --red: #ff8497; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: calc(19px * var(--scale)); line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 56px;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.wrap { max-width: 44rem; margin-inline: auto; display: grid; gap: 22px; min-width: 0; }
+h1, h2, h3 { text-wrap: balance; line-height: 1.2; margin: 0; }
+h1 { font-size: 1.75em; padding-top: 18px; }
+h2 { font-size: 1.35em; }
+h3 { font-size: 0.78em; font-family: var(--f-mono); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); }
+p { margin: 0; }
+.sub { color: var(--dim); }
+.tools { display: flex; flex-wrap: wrap; gap: 8px; }
+button {
+  font: inherit; font-size: 0.85em; color: var(--ink); background: var(--surface);
+  border: 1.5px solid var(--line); border-radius: 10px; padding: 8px 14px; cursor: pointer;
+}
+button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 11; margin-inline: -16px; padding: 10px 16px;
+  background: var(--bg); border-bottom: 1px solid var(--line);
+  display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
+}
+nav::-webkit-scrollbar { display: none; }
+nav a {
+  flex: none; text-decoration: none; color: var(--ink); background: var(--surface);
+  border: 1.5px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: 0.85em; white-space: nowrap;
+}
+
+section { display: grid; gap: 14px; scroll-margin-top: 64px; min-width: 0; }
+.head { display: grid; gap: 8px; }
+.pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.pill {
+  font-family: var(--f-mono); font-size: 0.72em; letter-spacing: 0.02em; padding: 3px 10px; border-radius: 999px;
+  border: 1.5px solid var(--line); color: var(--dim); background: var(--surface);
+}
+.pill.in { color: var(--green); border-color: var(--green); background: var(--green-soft); }
+.pill.out { color: var(--amber); border-color: var(--amber); background: var(--amber-soft); }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: grid; gap: 12px; min-width: 0; }
+.lifeline { border-color: var(--accent); background: var(--accent-soft); }
+.lifeline strong { color: var(--accent); }
+
+ol.script { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+ol.script li { display: grid; gap: 2px; }
+.cue { font-family: var(--f-mono); font-size: 0.72em; letter-spacing: 0.04em; text-transform: uppercase; color: var(--violet); }
+.line { font-size: 1.12em; }
+
+dl { margin: 0; display: grid; gap: 10px; }
+dl > div { display: grid; gap: 2px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+dl > div:last-child { border-bottom: 0; padding-bottom: 0; }
+dt { font-weight: 700; }
+dd { margin: 0; }
+dt.num { font-family: var(--f-mono); font-weight: 500; font-size: 0.95em; color: var(--accent); font-variant-numeric: tabular-nums; }
+
+.example { background: var(--surface); border: 1px dashed var(--line); border-radius: 10px; padding: 12px; }
+.example b { color: var(--accent); font-variant-numeric: tabular-nums; }
+ul.avoid { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; }
+ul.avoid li::marker { color: var(--red); }
+.rows { display: grid; gap: 8px; }
+.rowcard { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; display: grid; gap: 2px; font-variant-numeric: tabular-nums; }
+.rowcard.mine { border-color: var(--accent); background: var(--accent-soft); }
+.rowcard .who { font-weight: 700; }
+
+.qa { display: grid; gap: 10px; }
+.qa article { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 4px; }
+.qa .q { font-weight: 700; }
+footer { color: var(--dim); font-size: 0.8em; }
+@media (min-width: 640px) { dl > div { grid-template-columns: 11rem 1fr; gap: 16px; } }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+</style>
+<style>:root{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header class="head">
+    <h1>Samim's Week 9 notes</h1>
+    <p class="sub">Slides 4, 6. About 1.7 minutes of talking, in a talk of about 9 minutes. Say it in your own words; these lines are the simple version. 20 November 2026.</p>
+    <div class="tools">
+      <button id="smaller" type="button" aria-label="Smaller text">A−</button>
+      <button id="larger" type="button" aria-label="Larger text">A+</button>
+      <button id="awake" type="button" aria-pressed="false">Keep screen on</button>
+    </div>
+  </header>
+
+  <nav aria-label="Jump to"><a href="#s4">Slide 4</a><a href="#s6">Slide 6</a><a href="#words">Words</a><a href="#numbers">Numbers</a><a href="#qa">Q&amp;A</a><a href="#avoid">Don't say</a></nav>
+
+  <section id="s4">
+    <div class="head">
+      <h2>Slide 4 · Results</h2>
+      <div class="pills"><span class="pill in">start: after Alvi asks you</span><span class="pill out">end: then Atul takes slide 5</span><span class="pill">≈ 26 s</span><span class="pill">3 clicks</span><span class="pill out">shared slide</span></div>
+    </div>
+    <div class="card lifeline"><p><strong>One line:</strong> CRDA lowered the error in every run, close to the paper. Samim shows it is not luck.</p></div>
+    <div class="card"><ol class="script"><li><span class="cue">Click 3</span><p class="line">Yes. A p-value is the chance of seeing a result like this by luck alone, and below 0.05 is the usual bar. On Concrete Strength, every one of the 15 repeats improved, for both models. A paired Wilcoxon test gives p equals 0.00006, the smallest value possible with 15 repeats. On Energy Efficiency, 12 to 14 of the 15 repeats improved. So CRDA’s gain is real.</p></li></ol></div>
+    <div class="example">Flip a coin 15 times and get heads every time: that is about as unlikely as it gets. Every one of 15 repeats improving is that kind of result. p = 2 ÷ 2¹⁵ = 0.00006.</div>
+  </section>
+  <section id="s6">
+    <div class="head">
+      <h2>Slide 6 · The first catch</h2>
+      <div class="pills"><span class="pill in">start: after Atul</span><span class="pill">≈ 78 s</span><span class="pill">3 clicks</span></div>
+    </div>
+    <div class="card lifeline"><p><strong>One line:</strong> The paper’s table keeps runs its own safety test would reject. The gains stay similar, but the numbers are not like-for-like.</p></div>
+    <div class="card"><ol class="script"><li><span class="cue">Start</span><p class="line">Now the first catch. CRDA has a built-in safety test. It is meant to switch CRDA off when it does not clearly help. Each square here is one repeat. In the paper’s main table that test is switched off, so all 15 repeats count, even ones where the test would have said no.</p></li><li><span class="cue">Click 1</span><p class="line">When we switch the test on, the authors’ code throws away the repeats it rejects: two out of 15 for the neural network, four out of 15 for XGBoost. It does this silently. The run still finishes as normal, so you would not know unless you read the log.</p></li><li><span class="cue">Click 2</span><p class="line">Does that change the answer? Not much. With the test off, the gain is 29 percent for the neural network and 22 for XGBoost. With it on, it is 32 and 20. But the second set averages over fewer runs. In plain words: on those repeats the test said, CRDA did not clearly help here, so do not use it. The paper’s table counts them anyway.</p></li><li><span class="cue">Click 3</span><p class="line">So the paper’s conclusion survives, but its averages include runs that its own test would reject. That is why we say the numbers are not like-for-like.</p></li></ol><div class="rows"><div class="rowcard"><p class="who">Neural network</p><p>Test off: −28.7% over 15 repeats. Test on: −31.6% over the 13 that were kept (2 dropped).</p></div><div class="rowcard"><p class="who">XGBoost</p><p>Test off: −21.7% over 15 repeats. Test on: −19.8% over the 11 that were kept (4 dropped).</p></div></div></div>
+    <div class="example">Imagine 15 repeats. The safety test says “CRDA does not clearly help here” on 4 of them and the code drops those. The average is then over the 11 that are left.</div>
+  </section>
+
+  <section id="words">
+    <h2>Words in plain English</h2>
+    <div class="card"><dl><div><dt>p-value</dt><dd>The chance of seeing a result like this by luck alone. Below 0.05 is the usual bar.</dd></div><div><dt>Wilcoxon test</dt><dd>A test that checks, repeat by repeat, whether one set of errors is lower than another. “Paired” means each repeat is compared with itself.</dd></div><div><dt>Safety test</dt><dd>CRDA’s own check. It is meant to switch CRDA off when it does not clearly help.</dd></div><div><dt>Repeat (seed)</dt><dd>Running the whole experiment again with a different random split of the data into training and test. We did 15.</dd></div><div><dt>Plain model</dt><dd>The same model without CRDA.</dd></div></dl></div>
+  </section>
+
+  <section id="numbers">
+    <h2>Numbers that may come up</h2>
+    <div class="card"><dl><div><dt class="num">15 of 15</dt><dd>Repeats that improved on Concrete Strength, for both models.</dd></div><div><dt class="num">p = 0.00006</dt><dd>Paired Wilcoxon test. It is the smallest value possible with 15 repeats: 2 ÷ 2¹⁵.</dd></div><div><dt class="num">0.05</dt><dd>The usual bar for “unlikely to be luck”.</dd></div><div><dt class="num">12 to 14 of 15</dt><dd>Repeats that improved on Energy Efficiency, across Alvi’s and Anik’s runs.</dd></div><div><dt class="num">2 of 15 · 4 of 15</dt><dd>Repeats the code dropped with the safety test on: neural network and XGBoost.</dd></div><div><dt class="num">13 · 11</dt><dd>Repeats kept: neural network and XGBoost.</dd></div><div><dt class="num">29 · 22 → 32 · 20</dt><dd>Gain with the test off, then on: neural network, XGBoost. The second pair averages over fewer runs.</dd></div></dl></div>
+  </section>
+
+  <section id="qa" class="qa">
+    <h2>Likely questions</h2>
+    <article><p class="q">What is a p-value?</p><p>The chance of seeing a result like this by luck alone. Under 0.05 is the usual bar. Ours is 0.00006.</p></article><article><p class="q">Why exactly 0.00006?</p><p>With 15 repeats that all improve, that is the smallest p the test can give: 2 ÷ 2¹⁵. It means “every single repeat improved”.</p></article><article><p class="q">What is the Wilcoxon test?</p><p>It compares two sets of errors repeat by repeat and checks whether one is lower. It does not assume the errors follow a bell curve.</p></article><article><p class="q">What is the safety test?</p><p>CRDA’s own check. If CRDA does not clearly help on a repeat, the method is meant to be switched off.</p></article><article><p class="q">Why does the paper turn it off?</p><p>Its main-table settings have the filter off, so every repeat counts. We do not know the authors’ reason.</p></article><article><p class="q">Does that make the paper wrong?</p><p>No. The gains with the test on are similar. But the averages are over different runs, so they are not like-for-like.</p></article><article><p class="q">How do you know the code drops runs?</p><p>Its logs print an error line for each dropped repeat, and the run still finishes normally. Two for the neural network, four for XGBoost.</p></article>
+  </section>
+
+  <section id="avoid">
+    <h2>Don't say</h2>
+    <div class="card"><ul class="avoid"><li>That the paper’s conclusion is wrong. Say “survives, but not like-for-like”.</li><li>That the safety test is a mistake. It is meant to switch CRDA off.</li><li>That p = 0.00006 means “a huge effect”. It means “not luck”.</li></ul></div>
+  </section>
+
+  <footer>Every number comes from the group repository (results/) and is checked against the raw files by the deck's tests. The lines above are the deck's own speaker notes.</footer>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+  var scale = parseFloat(store('w9-samim-scale')) || 1;
+  function apply() { root.style.setProperty('--scale', String(scale)); }
+  apply();
+  function bump(d) { scale = Math.min(1.5, Math.max(0.85, Math.round((scale + d) * 100) / 100)); apply(); store('w9-samim-scale', String(scale)); }
+  document.getElementById('smaller').addEventListener('click', function () { bump(-0.1); });
+  document.getElementById('larger').addEventListener('click', function () { bump(0.1); });
+
+  var btn = document.getElementById('awake'), lock = null;
+  async function setAwake(on) {
+    try {
+      if (on) { lock = await navigator.wakeLock.request('screen'); lock.addEventListener('release', function () { btn.setAttribute('aria-pressed', 'false'); }); btn.setAttribute('aria-pressed', 'true'); }
+      else if (lock) { await lock.release(); lock = null; btn.setAttribute('aria-pressed', 'false'); }
+    } catch (e) { btn.setAttribute('aria-pressed', 'false'); btn.textContent = 'Keep screen on (not available here)'; }
+  }
+  btn.addEventListener('click', function () { setAwake(btn.getAttribute('aria-pressed') !== 'true'); });
+})();
+</script>
+
+</body>
+</html>
