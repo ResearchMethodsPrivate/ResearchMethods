@@ -38,7 +38,7 @@ export const safetySlide: SlideDef = {
   source: 'Energy Efficiency, 765 rows · test off: Alvi’s run · test on: Samim’s run, dropped repeats from his logs',
   html: () => `
     <header class="slide-head">
-      <p class="kicker">05 — The catch</p>
+      <p class="kicker">05 — The first catch</p>
       <h2>The paper’s table keeps runs its own safety test rejects</h2>
     </header>
     <div class="seeds">${MODELS.map(row).join('')}</div>

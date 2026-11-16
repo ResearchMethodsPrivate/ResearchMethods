@@ -53,3 +53,24 @@ export const filterOn: FilterRun[] = [
 
 /** One example of how much a single repeat can move: Alvi's Energy Efficiency neural-network run. */
 export const perSeedSpread = { source: 'alvi', dataset: 'EnergyEfficiency', model: 'MLP', min: -66.60786116489237, max: 24.661639773593333 } as const;
+
+/**
+ * The “10 models” test (results/alvi-windows-ryzen7/EnergyEfficiency_n765_plain_10model/): the plain model scored as an
+ * average of 10 cross-validation models, like CRDA is. Means over 15 seeds of the per-seed % change in test error.
+ */
+export interface AveragingRun {
+  model: Model;
+  seeds: number;
+  /** Plain 10-model average vs the plain single model. */
+  averagingVsSingle: number;
+  /** CRDA vs the plain single model (how the paper reports it). */
+  crdaVsSingle: number;
+  /** CRDA vs the plain 10-model average (like for like). */
+  crdaVsAveraged: number;
+  /** Seeds where CRDA beats the plain 10-model average. */
+  crdaBeatsAveraged: number;
+}
+export const averaging: AveragingRun[] = [
+  { model: 'MLP', seeds: 15, averagingVsSingle: 0.11853529198793265, crdaVsSingle: -28.692563028831536, crdaVsAveraged: -28.221184029507583, crdaBeatsAveraged: 14 },
+  { model: 'XGBoost', seeds: 15, averagingVsSingle: -15.33852212582614, crdaVsSingle: -21.687898399946086, crdaVsAveraged: -7.850147298358085, crdaBeatsAveraged: 12 },
+];

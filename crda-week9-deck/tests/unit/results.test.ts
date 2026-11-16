@@ -9,7 +9,7 @@ import assert from 'node:assert/strict';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { gapPct, ourRunCount, run, signed } from '../../src/content/derive';
-import { filterOn, perSeedSpread, runs, type Run, type Source } from '../../src/content/results';
+import { averaging, filterOn, perSeedSpread, runs, type Run, type Source } from '../../src/content/results';
 
 const RESULTS = resolve(process.cwd(), '..', 'results');
 const PAPER = resolve(process.cwd(), 'tests', 'fixtures', 'paper');
@@ -169,11 +169,77 @@ test('“6–22 minutes per run” holds for every run log', () => {
   assert.ok(Math.max(...secs) / 60 < 23, `slowest ${Math.max(...secs)} s`);
 });
 
-test('problem-log counts on the slides (17 entries · 8 resolved · 3 tested · 6 open) match results/atul/problem_log.md', () => {
+test('problem-log counts on the slides (17 entries · 8 resolved · 4 tested · 5 open) match results/atul/problem_log.md', () => {
   const rows = readFileSync(join(RESULTS, 'atul', 'problem_log.md'), 'utf8').split(/\r?\n/).filter((l) => /^\| \d+ \|/.test(l));
   const status = rows.map((l) => l.split('|')[5].trim());
   assert.equal(rows.length, 17);
   assert.equal(status.filter((s) => s === 'Resolved').length, 8);
-  assert.equal(status.filter((s) => s === 'Tested').length, 3);
-  assert.equal(status.filter((s) => s !== 'Resolved' && s !== 'Tested').length, 6);
+  assert.equal(status.filter((s) => s === 'Tested').length, 4);
+  assert.equal(status.filter((s) => s !== 'Resolved' && s !== 'Tested').length, 5);
+});
+
+/** Exact two-sided Wilcoxon signed-rank p-value for paired samples (no ties, no zeros), by enumerating all sign patterns. */
+const wilcoxonExact = (a: number[], b: number[]) => {
+  const d = a.map((x, i) => x - b[i]);
+  const order = d.map((v, i) => [Math.abs(v), i] as const).sort((x, y) => x[0] - y[0]).map(([, i]) => i);
+  const rank = new Array<number>(d.length);
+  order.forEach((i, r) => { rank[i] = r + 1; });
+  const wPlus = d.reduce((s, v, i) => s + (v > 0 ? rank[i] : 0), 0);
+  const total = (d.length * (d.length + 1)) / 2;
+  const w = Math.min(wPlus, total - wPlus);
+  // count sign patterns with rank-sum <= w
+  const counts = new Array(total + 1).fill(0);
+  counts[0] = 1;
+  for (let r = 1; r <= d.length; r++) for (let s = total; s >= r; s--) counts[s] += counts[s - r];
+  let le = 0;
+  for (let s = 0; s <= w; s++) le += counts[s];
+  return Math.min(1, (2 * le) / 2 ** d.length);
+};
+
+test('the 10-model test: the single plain error is reproduced exactly and every number on slide 7 matches the files', () => {
+  for (const a of averaging) {
+    const m = a.model === 'MLP' ? 'mlp' : 'xgboost';
+    const csv = readFileSync(join(RESULTS, 'alvi-windows-ryzen7', 'EnergyEfficiency_n765_plain_10model', `${m}.csv`), 'utf8').trim().split(/\r?\n/);
+    const head = csv[0].split(',');
+    const rows = csv.slice(1).map((l) => Object.fromEntries(l.split(',').map((v, i) => [head[i], +v])) as Record<string, number>);
+    assert.equal(rows.length, 15);
+    // the check: our re-computed single plain error equals the one in Alvi's Table 1 run, seed by seed
+    const table1 = seedsOf(files({ source: 'alvi', dataset: 'EnergyEfficiency', model: a.model }).interim);
+    rows.forEach((r, i) => {
+      assert.equal(String(r.seed), table1[i].seed);
+      assert.ok(close(r.plain_single_mse, table1[i].mse, 1e-11), `${a.model} seed ${r.seed}: single plain error`);
+      assert.ok(close(r.crda_10model_mse, table1[i].aug, 1e-11), `${a.model} seed ${r.seed}: CRDA error`);
+    });
+    assert.ok(close(mean(rows.map((r) => r.pct_10model_vs_single)), a.averagingVsSingle));
+    assert.ok(close(mean(rows.map((r) => r.pct_crda_vs_single)), a.crdaVsSingle));
+    assert.ok(close(mean(rows.map((r) => r.pct_crda_vs_10model)), a.crdaVsAveraged));
+    assert.equal(rows.filter((r) => r.pct_crda_vs_10model < 0).length, a.crdaBeatsAveraged);
+    assert.ok(close(a.crdaVsSingle, run('alvi', 'EnergyEfficiency', a.model).change), 'same CRDA change as in the Table 1 run');
+  }
+  const m = averaging.find((a) => a.model === 'MLP')!;
+  const x = averaging.find((a) => a.model === 'XGBoost')!;
+  // numbers said in the notes
+  assert.equal(m.averagingVsSingle.toFixed(1), '0.1');
+  assert.equal(Math.round(-m.crdaVsSingle), 29);
+  assert.equal(Math.round(-x.averagingVsSingle), 15);
+  assert.equal(Math.round(-x.crdaVsSingle), 22);
+  assert.equal(Math.round(-m.crdaVsAveraged), 28);
+  assert.equal(Math.round(-x.crdaVsAveraged), 8);
+  assert.equal(m.crdaBeatsAveraged + ' ' + x.crdaBeatsAveraged, '14 12');
+  // "about two thirds" of XGBoost's gain is averaging: 15.3 of 21.7
+  assert.ok(x.averagingVsSingle / x.crdaVsSingle > 0.65 && x.averagingVsSingle / x.crdaVsSingle < 0.75);
+});
+
+test('the 10-model test: paired Wilcoxon p-values (XGBoost 0.007 said in the notes)', () => {
+  const get = (model: 'mlp' | 'xgboost') => {
+    const csv = readFileSync(join(RESULTS, 'alvi-windows-ryzen7', 'EnergyEfficiency_n765_plain_10model', `${model}.csv`), 'utf8').trim().split(/\r?\n/);
+    const head = csv[0].split(',');
+    const rows = csv.slice(1).map((l) => Object.fromEntries(l.split(',').map((v, i) => [head[i], +v])) as Record<string, number>);
+    return { single: rows.map((r) => r.plain_single_mse), avg: rows.map((r) => r.plain_10model_mse), crda: rows.map((r) => r.crda_10model_mse) };
+  };
+  const x = get('xgboost');
+  assert.equal(wilcoxonExact(x.crda, x.avg).toFixed(3), '0.007');
+  assert.equal(wilcoxonExact(x.avg, x.single).toFixed(3), '0.002');
+  const m = get('mlp');
+  assert.equal(wilcoxonExact(m.crda, m.avg).toFixed(5), '0.00012');
 });

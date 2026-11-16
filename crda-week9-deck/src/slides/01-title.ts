@@ -36,7 +36,7 @@ export const titleSlide: SlideDef = {
         </div>
         <div class="answer-row">
           <span class="answer-ico warn">!</span>
-          <div><p class="answer-main">The paper’s main table keeps runs its own safety test rejects</p><p class="answer-sub">so its averages are not like-for-like</p></div>
+          <div><p class="answer-main">Two catches in how the paper scores CRDA</p><p class="answer-sub">rejected runs are kept, and the CRDA score averages 10 models</p></div>
         </div>
       </aside>
     </div>`,

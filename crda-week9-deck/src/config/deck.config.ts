@@ -42,6 +42,7 @@ export const speaking: SpeakingSplit = {
   results: ['B', 'D'],
   matched: ['C'],
   safety: ['D'],
+  averaging: ['B'],
   next: ['C'],
   references: ['C'],
 };

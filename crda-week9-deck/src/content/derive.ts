@@ -1,5 +1,5 @@
 /** Lookups and wording helpers over results.ts, so slides never repeat a number by hand. */
-import { filterOn, runs, type Dataset, type Model, type Run, type Source } from './results';
+import { averaging, filterOn, runs, type AveragingRun, type Dataset, type Model, type Run, type Source } from './results';
 
 export const run = (source: Source, dataset: Dataset, model: Model): Run => {
   const r = runs.find((x) => x.source === source && x.dataset === dataset && x.model === model);
@@ -10,6 +10,12 @@ export const run = (source: Source, dataset: Dataset, model: Model): Run => {
 export const filtered = (model: Model) => {
   const r = filterOn.find((x) => x.model === model);
   if (!r) throw new Error(`No filter-on run for ${model}`);
+  return r;
+};
+
+export const averaged = (model: Model): AveragingRun => {
+  const r = averaging.find((x) => x.model === model);
+  if (!r) throw new Error(`No 10-model test for ${model}`);
   return r;
 };
 
