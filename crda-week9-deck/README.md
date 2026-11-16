@@ -31,13 +31,12 @@ If a result file changes, update `results.ts`, the wording in `src/content/notes
 | `npm test` | Data tests: every number on the slides against the raw files |
 | `npm run test:browser` | Real-browser tests: steps, offline, no console errors, back-navigation, speaker view, print mode |
 | `npm run validate:deck` | Click cues in the notes match the slides, speaker split, sources, timing (8:00–10:00) |
-| `npm run validate:ready` | The same, and fails while the **presentation date** is not set (`group.date` in `src/config/deck.config.ts`) |
+| `npm run validate:ready` | The same, and fails while a team decision is open (the presentation date, `group.date` in `src/config/deck.config.ts`, is set: 20 November 2026) |
 | `npm run qa:visual` | Screenshots of every step at 1920×1080 (and two smaller sizes) in `docs/visual-qa/`; measures animation time for the timing model |
 | `npm run notes` | `docs/speaker-notes.md`: the script with a timing model |
 
 ## Still open
 
-- **Presentation date:** not confirmed, so it is not shown and `validate:ready` fails until it is set.
 - **Rehearsal:** the timing (about 8:40) is a model, not a stopwatch run. Rehearse with all four speakers; log the times in `docs/speaker-notes.md`.
 - **The “10 models” question** (the CRDA score averages 10 models, the plain score uses one) is untested. The slides say so; update them when Alvi has a result.
 - **Speaker split** is suggested from each person's role (`speaking` in `src/config/deck.config.ts`).
