@@ -1,0 +1,10 @@
+run                                              n  median delta %  improved   gate   wilcoxon p
+------------------------------------------------------------------------------------------------
+ConcreteCompressiveStrength\mlp_20261116-150718  15        -21.9262     15/15<   15/15  6.10352e-05
+    file: ours\ConcreteCompressiveStrength\mlp_20261116-150718\interim_results\ConcreteCompressiveStrength_sample_1005_interim_results.csv
+ConcreteCompressiveStrength\xgboost_20261116-152955  15        -14.5121     15/15<   14/15  6.10352e-05
+    file: ours\ConcreteCompressiveStrength\xgboost_20261116-152955\interim_results\ConcreteCompressiveStrength_sample_1005_interim_results.csv
+EnergyEfficiency_with_filter\mlp_20261116-154300  13        -36.0950     11/13<   13/13    0.0012207
+    file: ours\EnergyEfficiency_with_filter\mlp_20261116-154300\interim_results\EnergyEfficiency_sample_765_interim_results.csv
+EnergyEfficiency_with_filter\xgboost_20261116-155905  11        -22.1419      9/11<   11/11   0.00976562
+    file: ours\EnergyEfficiency_with_filter\xgboost_20261116-155905\interim_results\EnergyEfficiency_sample_765_interim_results.csv
