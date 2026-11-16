@@ -57,7 +57,9 @@ need('results', /Paper/, 'the “Paper” legend');
 need('results', /p = 0\.00006/, 'the paired-test p-value');
 need('matched', /Windows/, 'the Windows finding');
 need('safety', /not like-for-like/, 'the like-for-like caveat');
-need('next', /not yet tested/, 'the “not yet tested” label on the 10-model question');
+need('averaging', /10 models/, 'the 10-model explanation');
+need('averaging', /One dataset, one laptop/, 'the one-dataset-one-laptop caveat');
+need('next', /Catch 2/, 'the second catch');
 ids.filter((id) => id !== 'title' && id !== 'references').forEach((id) => {
   if (!slides.find((s) => s.id === id)?.source) fail(`Slide "${id}" has no source line`);
 });

@@ -27,7 +27,7 @@ const targets = [
     title: 'Problem log',
     tag: '✓ Kept up to date',
     sum: '17 differences and problems written down.',
-    proof: '8 resolved · 3 tested · 6 still open',
+    proof: '8 resolved · 4 tested · 5 still open',
   },
 ];
 

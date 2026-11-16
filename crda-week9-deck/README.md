@@ -2,7 +2,7 @@
 
 Animated browser slide deck for **ECS7029P Research Methods, Week 9 progress update** (8–10 minutes), presented by **Anik, Alvi, Atul and Samim** (group Triple A). It reports our re-run of *Counterfactual Residual Data Augmentation for Regression* (Mohebbi et al., ICML 2026) at the paper's Table 1 settings. The Week 5 deck is in [`../crda-week5-deck/`](../crda-week5-deck/).
 
-Eight slides: title and short answer · where we are · what we ran · results · what matched · the catch (safety test) · what is left · references.
+Nine slides: title and short answer · where we are · what we ran · results · what matched · the first catch (safety test) · the second catch (10-model averaging) · what is left · references.
 
 ## Run it
 
@@ -37,6 +37,6 @@ If a result file changes, update `results.ts`, the wording in `src/content/notes
 
 ## Still open
 
-- **Rehearsal:** the timing (about 8:40) is a model, not a stopwatch run. Rehearse with all four speakers; log the times in `docs/speaker-notes.md`.
-- **The “10 models” question** (the CRDA score averages 10 models, the plain score uses one) is untested. The slides say so; update them when Alvi has a result.
+- **Rehearsal:** the timing (about 9:20) is a model, not a stopwatch run. Rehearse with all four speakers; log the times in `docs/speaker-notes.md`.
+- **The 10-model test** (slide 7) is one dataset and one laptop (Alvi's, Energy Efficiency). The notes propose that Anik repeats it on a Mac and Samim on Concrete Strength (`results/scripts/run_plain_ensemble.py`); confirm that with them, and update `results.ts` and the slides when the results are in.
 - **Speaker split** is suggested from each person's role (`speaking` in `src/config/deck.config.ts`).
