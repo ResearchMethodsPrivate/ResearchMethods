@@ -1,0 +1,31 @@
+Traceback (most recent call last):
+  File "/Users/anikhossain/CRDA/demo/run_plain_ensemble.py", line 28, in <module>
+    from src.baseline import BaselineRegressor
+  File "/Users/anikhossain/CRDA/src/baseline.py", line 11, in <module>
+    from .utils.const import MODEL_REGISTRY  # maps name -> (cls, params)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/anikhossain/CRDA/src/utils/const.py", line 10, in <module>
+    from xgboost import XGBRegressor
+  File "/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/xgboost/__init__.py", line 6, in <module>
+    from . import tracker  # noqa
+    ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/xgboost/tracker.py", line 9, in <module>
+    from .core import _LIB, _check_call, _deprecate_positional_args, make_jcargs
+  File "/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/xgboost/core.py", line 295, in <module>
+    _LIB = _load_lib()
+           ^^^^^^^^^^^
+  File "/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/xgboost/core.py", line 257, in _load_lib
+    raise XGBoostError(
+xgboost.core.XGBoostError: 
+XGBoost Library (libxgboost.dylib) could not be loaded.
+Likely causes:
+  * OpenMP runtime is not installed
+    - vcomp140.dll or libgomp-1.dll for Windows
+    - libomp.dylib for Mac OSX
+    - libgomp.so for Linux and other UNIX-like OSes
+    Mac OSX users: Run `brew install libomp` to install OpenMP runtime.
+
+  * You are running 32-bit Python on a 64-bit OS
+
+Error message(s): ["dlopen(/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/xgboost/lib/libxgboost.dylib, 0x0006): Library not loaded: @rpath/libomp.dylib\n  Referenced from: <948FC7F9-7446-3923-BB9F-85890E78C765> /Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/xgboost/lib/libxgboost.dylib\n  Reason: tried: '/opt/homebrew/opt/libomp/lib/libomp.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/opt/homebrew/opt/libomp/lib/libomp.dylib' (no such file), '/opt/homebrew/opt/libomp/lib/libomp.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/opt/homebrew/opt/libomp/lib/libomp.dylib' (no such file)"]
+
