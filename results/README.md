@@ -22,3 +22,19 @@ Paper numbers: authors' saved `results.csv` for Energy Efficiency, 765 rows (the
 - The `std` columns are not comparable: our code's `std` is a standard error over seeds, and the authors' saved values are larger. Compare the means.
 - This is one machine and one dataset subset. It is not an independent check until Anik repeats it.
 - `ours/_timing_1seed` runs (1 seed, used only to time the script) are not included.
+
+## alvi-windows-ryzen7 / EnergyEfficiency_n765_plain_10model: the “10 models” test
+
+- **Question:** in the authors' code the plain score is the test error of **one** model, but the CRDA score is the test error of the **average of 10** cross-validation models. How much of CRDA's gain is just averaging?
+- **Test:** for the same 15 seeds, splits and tuned settings as Alvi's Table 1 run, also train the 10 cross-validation models on the *original* data (no CRDA) and score their average on the same test data (`results/scripts/run_plain_ensemble.py`). The CRDA numbers are taken from Alvi's finished run.
+- **Check:** the re-computed single plain error equals the one in Alvi's run on all 15 seeds, for both models (to 12 digits).
+- **Run:** 16 Nov 2026, Alvi's laptop (same environment as above). About 6 minutes per model.
+
+Mean over 15 seeds of the per-seed % change in test error:
+
+| Model | Plain, 10 models averaged, vs plain single | CRDA vs plain single (how the paper reports it) | CRDA vs plain 10 models (like for like) | Seeds where CRDA beats the plain 10-model average | Paired Wilcoxon p, CRDA vs plain 10 models |
+|---|---|---|---|---|---|
+| MLP | +0.1 % (p = 0.68) | −28.7 % | −28.2 % | 14 of 15 | 0.00012 |
+| XGBoost | −15.3 % (p = 0.002) | −21.7 % | −7.9 % | 12 of 15 | 0.0067 |
+
+Reading: for the neural network, averaging does nothing and CRDA's gain is real. For XGBoost, averaging 10 plain models already lowers the error by 15.3 %, so about two-thirds of the reported gain is averaging; CRDA still helps by a further 7.9 %. One dataset and one laptop: not yet repeated on a Mac or on Concrete Strength.
