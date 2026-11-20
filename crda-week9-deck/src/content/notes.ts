@@ -25,7 +25,7 @@ export const notes = {
     seconds: 40,
     lines: [
       '[Words appear, then the short answer]',
-      'Hi, we’re group Triple A: Anik, Alvi, Atul and Samim. In Week 5 we said we would re-run a paper called CRDA. It is a way to help a model learn when you only have a little data. It makes extra training examples by nudging one input number a little, and keeping the same prediction mistake, so the new example keeps its real-world noise.',
+      'Hi, we’re the Fantastic Four: Anik, Alvi, Atul and Samim. Four people, four laptops. In Week 5 we said we would re-run a paper called CRDA. It is a way to help a model learn when you only have a little data. It makes extra training examples by nudging one input number a little, and keeping the same prediction mistake, so the new example keeps its real-world noise.',
       'The authors say it lowers the error a lot. Today’s question: do those gains hold up when we run their code ourselves? The short answer is on the right: mostly yes, with two catches in how the paper scores it.',
     ],
   },

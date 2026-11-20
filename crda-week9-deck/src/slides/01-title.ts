@@ -21,7 +21,8 @@ export const titleSlide: SlideDef = {
         <p class="paper-line"><strong>Counterfactual Residual Data Augmentation for Regression</strong>Mohebbi, Schulte, Li and Poupart · ICML 2026</p>
         <div class="title-foot">
           <span class="chip">4 laptops · 2 datasets · 15 repeats of every run</span>
-          <span class="group-line">${[team.members.map((m) => m.name).join(' · '), group.name, group.date].filter(Boolean).join(' — ')}</span>
+          <span class="group-badge"><span class="group-four">4</span>The ${group.name}</span>
+          <span class="group-line">${[team.members.map((m) => m.name).join(' · '), group.date].filter(Boolean).join(' — ')}</span>
         </div>
       </div>
       <aside class="answer panel">

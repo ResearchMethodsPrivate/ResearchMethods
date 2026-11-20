@@ -1,7 +1,7 @@
 /**
  * Everything team-specific for the Week 9 progress update.
  *
- *  ✔ Presenters: Anik, Alvi, Atul, Samim (that spelling), group "Triple A".
+ *  ✔ Presenters: Anik, Alvi, Atul, Samim (that spelling), group "Fantastic Four" (renamed from Triple A when Samim joined).
  *  ✔ Speaking split below follows each person's role (suggested in
  *    results/atul/week9_outline.md). Change it here and the notes, footer and
  *    timing model follow.
@@ -19,7 +19,7 @@ export interface Member {
 }
 
 export const group: { name: string; date: string | null; module: string; session: string } = {
-  name: 'Triple A',
+  name: 'Fantastic Four',
   date: '20 November 2026',
   module: 'ECS7029P Research Methods · 2026/27',
   session: 'Week 9 · Progress update',
