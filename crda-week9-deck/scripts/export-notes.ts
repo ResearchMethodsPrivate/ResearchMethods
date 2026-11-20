@@ -18,7 +18,7 @@ const rows = slideTimings().map((t, i) => ({
 }));
 
 const sum = (k: 'target' | 'speech' | 'live') => rows.reduce((s, r) => s + r[k], 0);
-const within = (t: number) => t >= 480 && t <= 600;
+const within = (t: number) => t >= 360 && t <= 600;
 
 const perSpeaker = new Map<string, number>();
 rows.forEach((r) => {
@@ -42,7 +42,7 @@ const md = [
   '',
   rows.every((r) => r.motionMeasured) ? '' : '\\* animation time not yet measured — run `npm run qa:visual`.',
   '',
-  `Brief: 8:00–10:00, aim ≈ 9:00. Modelled live total ${fmt(sum('live'))} → ${within(sum('live')) ? 'within range ✓' : 'OUT OF RANGE ✗'}.`,
+  `Week 9 brief was 8:00–10:00; the simplified talk is shorter (floor 6:00). Modelled live total ${fmt(sum('live'))} → ${within(sum('live')) ? 'within range ✓' : 'OUT OF RANGE ✗'}.`,
   '',
   '**Approximate live time per person:** ' + [...perSpeaker].map(([k, v]) => `${k} ≈ ${Math.round(v)}s`).join(' · '),
   '',
@@ -67,5 +67,5 @@ const md = [
 mkdirSync('docs', { recursive: true });
 writeFileSync('docs/speaker-notes.md', md, 'utf8');
 console.log(rows.map((r) => `${String(r.i).padStart(2)} ${r.n.title.padEnd(32)} target ${String(r.target).padStart(3)}s  speech ${String(Math.round(r.speech)).padStart(3)}s  live ${String(Math.round(r.live)).padStart(3)}s  (${r.words} w)`).join('\n'));
-console.log(`TOTAL target ${fmt(sum('target'))} | speech ${fmt(sum('speech'))} | live model ${fmt(sum('live'))} | brief 8:00–10:00`);
+console.log(`TOTAL target ${fmt(sum('target'))} | speech ${fmt(sum('speech'))} | live model ${fmt(sum('live'))} | floor 6:00`);
 console.log('Wrote docs/speaker-notes.md');

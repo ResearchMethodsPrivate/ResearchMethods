@@ -5,36 +5,16 @@ import { $, $$, hide } from '../lib/util';
 
 /** The four targets we set in the Week 5 presentation, with what actually happened. */
 const targets = [
-  {
-    title: 'Code set up and running',
-    tag: '✓ Done 22 Oct',
-    sum: 'The authors’ demo runs on all four of our laptops.',
-    proof: 'Exact versions and laptop details written down',
-  },
-  {
-    title: 'Plain-model results saved',
-    tag: '✓ Done 13–16 Nov',
-    sum: 'Both models, both datasets, 15 repeats each.',
-    proof: 'Settings, results and logs for every run',
-  },
-  {
-    title: 'First CRDA comparison',
-    tag: '✓ Done 16 Nov',
-    sum: 'Our results next to the paper’s table.',
-    proof: 'Side-by-side table with p-values',
-  },
-  {
-    title: 'Problem log',
-    tag: '✓ Kept up to date',
-    sum: '19 differences and problems written down.',
-    proof: '8 resolved · 4 tested · 7 still open',
-  },
+  { title: 'Code running', tag: '✓ Done', sum: 'On all four laptops.' },
+  { title: 'Results saved', tag: '✓ Done', sum: 'Two models, two datasets, 15 repeats.' },
+  { title: 'Compared with the paper', tag: '✓ Done', sum: 'Side by side, in one table.' },
+  { title: 'Problem list', tag: '✓ Done', sum: '19 problems and differences written down.' },
 ];
 
 export const progressSlide: SlideDef = {
   id: 'progress',
   steps: targets.length,
-  source: 'Week 5 targets: our Week 5 presentation · dates from the files in results/ and the group’s problem log',
+  source: 'Our four Week 5 promises · evidence: the group repository, results/',
   html: () => `
     <header class="slide-head">
       <p class="kicker">01 — Where we are</p>
@@ -46,12 +26,12 @@ export const progressSlide: SlideDef = {
           <p class="pc-top"><span class="pc-k">${i + 1}</span><span class="pc-tag">${t.tag}</span></p>
           <p class="pc-title">${t.title}</p>
           <p class="pc-sum">${t.sum}</p>
-          <p class="pc-proof"><span class="lbl">Proof</span>${t.proof}</p>
+          
         </article>`).join('')}
     </div>
     <div class="rq">
       <div><span class="rq-k">Our research question</span><p class="rq-q">${researchQuestion}</p></div>
-      <p class="rq-a"><strong>Short answer: mostly yes.</strong>With two catches, coming up.</p>
+      <p class="rq-a"><strong>Mostly yes.</strong>With two catches, coming up.</p>
     </div>`,
   build: (root) => {
     const tl = gsap.timeline({ paused: true });

@@ -20,7 +20,7 @@ export const titleSlide: SlideDef = {
         </h1>
         <p class="paper-line"><strong>Counterfactual Residual Data Augmentation for Regression</strong>Mohebbi, Schulte, Li and Poupart · ICML 2026</p>
         <div class="title-foot">
-          <span class="chip">4 laptops · 2 datasets · 15 repeats of every run</span>
+          <span class="chip">4 laptops · 2 datasets · 15 repeats</span>
           <span class="group-badge"><span class="group-four">4</span>The ${group.name}</span>
           <span class="group-line">${[team.members.map((m) => m.name).join(' · '), group.date].filter(Boolean).join(' — ')}</span>
         </div>
@@ -29,15 +29,15 @@ export const titleSlide: SlideDef = {
         <p class="answer-k">Short answer</p>
         <div class="answer-row">
           <span class="answer-ico ok">✓</span>
-          <div><p class="answer-main">Plain models match the paper</p><p class="answer-sub">XGBoost on Windows is a few percent off</p></div>
+          <div><p class="answer-main">Plain models match the paper</p><p class="answer-sub">except XGBoost on Windows</p></div>
         </div>
         <div class="answer-row">
           <span class="answer-ico ok">✓</span>
-          <div><p class="answer-main">${allImproved ? `CRDA lowers the error in all ${ourRunCount} runs` : 'CRDA lowers the error in most of our runs'}</p><p class="answer-sub">on average, and by about what the paper reports</p></div>
+          <div><p class="answer-main">${allImproved ? `CRDA helps in all ${ourRunCount} runs` : 'CRDA helps in most of our runs'}</p><p class="answer-sub">about as much as the paper says</p></div>
         </div>
         <div class="answer-row">
           <span class="answer-ico warn">!</span>
-          <div><p class="answer-main">Two catches in how the paper scores CRDA</p><p class="answer-sub">rejected runs are kept, and the CRDA score averages 10 models</p></div>
+          <div><p class="answer-main">Two catches in how the paper scores it</p><p class="answer-sub">the next slides show both</p></div>
         </div>
       </aside>
     </div>`,

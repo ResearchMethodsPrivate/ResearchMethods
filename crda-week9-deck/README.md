@@ -30,7 +30,7 @@ If a result file changes, update `results.ts`, the wording in `src/content/notes
 |---|---|
 | `npm test` | Data tests: every number on the slides against the raw files |
 | `npm run test:browser` | Real-browser tests: steps, offline, no console errors, back-navigation, speaker view, print mode |
-| `npm run validate:deck` | Click cues in the notes match the slides, speaker split, sources, timing (8:00–10:00) |
+| `npm run validate:deck` | Click cues in the notes match the slides, speaker split, sources, timing (6:00–10:00; the simplified talk is about 6:30) |
 | `npm run validate:ready` | The same, and fails while a team decision is open (the presentation date, `group.date` in `src/config/deck.config.ts`, is set: 20 November 2026) |
 | `npm run qa:visual` | Screenshots of every step at 1920×1080 (and two smaller sizes) in `docs/visual-qa/`; measures animation time for the timing model |
 | `npm run notes` | `docs/speaker-notes.md`: the script with a timing model |

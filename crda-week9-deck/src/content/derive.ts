@@ -19,6 +19,14 @@ export const averaged = (source: AveragingRun['source'], dataset: Dataset, model
   return r;
 };
 
+/** How much of CRDA's gain (error points) is just averaging 10 models, and how much is CRDA's own. */
+export const gainSplit = (source: AveragingRun['source'], dataset: Dataset, model: Model) => {
+  const a = averaged(source, dataset, model);
+  const total = -a.crdaVsSingle;
+  const averagingPart = Math.max(0, Math.min(total, -a.averagingVsSingle));
+  return { total, averaging: averagingPart, own: total - averagingPart };
+};
+
 /** Ours = everything that is not the paper. */
 export const ours = runs.filter((r) => r.source !== 'paper');
 

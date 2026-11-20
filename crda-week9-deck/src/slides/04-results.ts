@@ -50,10 +50,10 @@ export const resultsSlide: SlideDef = {
           ${bars('ConcreteStrength', 'XGBoost', ['paper', 'samim'])}
         </div>
         <div class="stats-box" data-part="stats">
-          <p class="stats-k">Is the gain real? · Samim’s test</p>
+          <p class="stats-k">Is it just luck?</p>
           <p class="stats-big">${allImproved ? 'All <b>15 of 15</b> repeats improved' : 'Most repeats improved'}, for both models</p>
           <div class="dots15">${'<i></i>'.repeat(15)}</div>
-          <p class="stats-small">Paired Wilcoxon test: p = 0.00006, the smallest value possible with 15 repeats.</p>
+          <p class="stats-small">Very unlikely: p = 0.00006. Under 0.05 counts as “not luck”.</p>
         </div>
       </div>
     </div>`,
