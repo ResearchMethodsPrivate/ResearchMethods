@@ -18,7 +18,7 @@ const row = ({ model, name }: { model: Model; name: string }) => {
     <div class="sq-wrap">${Array.from({ length: total }, (_, i) => `<span class="sq ${f.droppedPositions.includes(i) ? 'drop' : ''}">✕</span>`).join('')}</div>
     <p class="seed-count">
       <span class="c-before">All ${total} count<small>as in the paper’s table</small></span>
-      <span class="c-after">${f.seeds} of ${total} kept<small>${f.droppedPositions.length} dropped by the test</small></span>
+      <span class="c-after">${f.seeds} of ${total} kept<small>${f.droppedPositions.length} dropped by the check</small></span>
     </p>
   </div>`;
 };
@@ -35,19 +35,19 @@ const cell = (model: Model) => {
 export const safetySlide: SlideDef = {
   id: 'safety',
   steps: 3,
-  source: 'Energy Efficiency, 765 rows · test off: Alvi’s run · test on: Samim’s run, dropped repeats from his logs',
+  source: 'Energy Efficiency · check off: Alvi’s run · check on: Samim’s run',
   html: () => `
     <header class="slide-head">
       <p class="kicker">05 — The first catch</p>
-      <h2>The paper’s table keeps runs its own safety test rejects</h2>
+      <h2>The paper counts runs its own safety check rejects</h2>
     </header>
     <div class="seeds">${MODELS.map(row).join('')}</div>
-    <p class="seed-key">Each square is one repeat. The safety test is meant to switch CRDA off when it does not clearly help.</p>
+    <p class="seed-key">Each square is one repeat. The safety check should switch CRDA off when it does not clearly help.</p>
     <div class="cmp-table" data-part="cmp">
-      <p class="h"></p><p class="h">Test off · the paper’s table</p><p class="h">Test on · rejected runs dropped</p>
+      <p class="h"></p><p class="h">Check off · the paper’s way</p><p class="h">Check on · rejected runs dropped</p>
       ${MODELS.map((m) => cell(m.model)).join('')}
     </div>
-    <p class="takeaway" data-part="take"><strong>The gains stay similar, but the numbers are not like-for-like.</strong> With the test on, the code drops runs without any warning and still finishes normally.</p>`,
+    <p class="takeaway" data-part="take"><strong>Same story either way, but the two sets of numbers cannot be compared fairly.</strong> The code drops rejected runs quietly.</p>`,
   build: (root) => {
     const tl = gsap.timeline({ paused: true });
     const cmp = $(root, '[data-part="cmp"]');

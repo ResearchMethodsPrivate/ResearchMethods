@@ -124,7 +124,7 @@ footer { color: var(--dim); font-size: 0.8em; }
 <div class="wrap">
   <header class="head">
     <h1>Anik's Week 9 notes</h1>
-    <p class="sub">Slides 1, 2. About 1.4 minutes of talking, in a talk of about 9 minutes. Say it in your own words; these lines are the simple version. 20 November 2026.</p>
+    <p class="sub">Slides 1, 2. About 0.9 minutes of talking. Say it in your own words; these lines are the simple version.</p>
     <div class="tools">
       <button id="smaller" type="button" aria-label="Smaller text">A−</button>
       <button id="larger" type="button" aria-label="Larger text">A+</button>
@@ -137,43 +137,43 @@ footer { color: var(--dim); font-size: 0.8em; }
   <section id="s1">
     <div class="head">
       <h2>Slide 1 · Opening</h2>
-      <div class="pills"><span class="pill in">first words</span><span class="pill">≈ 43 s</span></div>
+      <div class="pills"><span class="pill in">first words</span><span class="pill">≈ 27 s</span></div>
     </div>
-    <div class="card lifeline"><p><strong>One line:</strong> We re-ran a paper called CRDA to see if its gains hold up. Short answer: mostly yes, with two catches.</p></div>
-    <div class="card"><ol class="script"><li><span class="cue">Start</span><p class="line">Hi, we’re the Fantastic Four: Anik, Alvi, Atul and Samim. Four people, four laptops. In Week 5 we said we would re-run a paper called CRDA. It is a way to help a model learn when you only have a little data. It makes extra training examples by nudging one input number a little, and keeping the same prediction mistake, so the new example keeps its real-world noise.</p></li><li><span class="cue">Then</span><p class="line">The authors say it lowers the error a lot. Today’s question: do those gains hold up when we run their code ourselves? The short answer is on the right: mostly yes, with two catches in how the paper scores it.</p></li></ol></div>
+    <div class="card lifeline"><p><strong>One line:</strong> We tested a paper called CRDA. Short answer: it mostly works, with two catches.</p></div>
+    <div class="card"><ol class="script"><li><span class="cue">Start</span><p class="line">Hi, we’re the Fantastic Four: Anik, Alvi, Atul and Samim. Four people, four laptops.</p></li><li><span class="cue">Then</span><p class="line">Our topic is a paper called CRDA. It makes extra practice data for a model, when you only have a little. The authors say it works well.</p></li><li><span class="cue">Then</span><p class="line">Our question: does it still work when we run their code ourselves? The short answer is on the right. Yes, mostly. But we found two catches.</p></li></ol></div>
     
   </section>
   <section id="s2">
     <div class="head">
       <h2>Slide 2 · Where we are</h2>
-      <div class="pills"><span class="pill in">after the title</span><span class="pill out">end: &quot;Alvi will show how we ran it.&quot;</span><span class="pill">≈ 41 s</span><span class="pill">4 clicks</span></div>
+      <div class="pills"><span class="pill in">after the title</span><span class="pill out">end: “Alvi will show how we tested it.”</span><span class="pill">≈ 26 s</span><span class="pill">4 clicks</span></div>
     </div>
-    <div class="card lifeline"><p><strong>One line:</strong> We did all four things we promised in Week 5. Now the question: do the gains hold up?</p></div>
-    <div class="card"><ol class="script"><li><span class="cue">Click 1</span><p class="line">In Week 5 we set four targets, and we have met all of them. First, the code is set up: the authors’ demo runs on all four of our laptops, with exact versions written down.</p></li><li><span class="cue">Click 2</span><p class="line">Second, the plain-model results are saved: both models, both datasets, 15 repeats each, with the settings and results files for every run.</p></li><li><span class="cue">Click 3</span><p class="line">Third, our first CRDA comparison is done, next to the paper’s table, with p-values.</p></li><li><span class="cue">Click 4</span><p class="line">And the problem log has 19 entries so far. Two of them are the catches we will show. That takes us back to our question. Alvi will show how we ran it.</p></li></ol></div>
+    <div class="card lifeline"><p><strong>One line:</strong> We kept all four Week 5 promises. Now: does CRDA work?</p></div>
+    <div class="card"><ol class="script"><li><span class="cue">Click 1</span><p class="line">In Week 5 we made four promises. One: get the code running. Done, on all four laptops.</p></li><li><span class="cue">Click 2</span><p class="line">Two: save the results. Done. Two models, two datasets, fifteen repeats each.</p></li><li><span class="cue">Click 3</span><p class="line">Three: compare with the paper. Done.</p></li><li><span class="cue">Click 4</span><p class="line">Four: keep a list of problems. We have nineteen. So, back to our question: does CRDA work? Mostly yes, with two catches. Alvi will show how we tested it.</p></li></ol></div>
     
   </section>
 
   <section id="words">
     <h2>Words in plain English</h2>
-    <div class="card"><dl><div><dt>CRDA</dt><dd>A way to make extra training rows. Nudge one input number a little, and keep the same prediction mistake, so the new row keeps real-world noise.</dd></div><div><dt>Regression</dt><dd>Predicting a number, like how much heating a building needs.</dd></div><div><dt>Error (MSE)</dt><dd>The average size of the model’s mistakes on data it has not seen. Lower is better.</dd></div><div><dt>Repeat (seed)</dt><dd>Running the whole experiment again with a different random split of the data into training and test. We did 15.</dd></div><div><dt>Plain model</dt><dd>The same model without CRDA.</dd></div></dl></div>
+    <div class="card"><dl><div><dt>CRDA</dt><dd>A way to make extra practice data for a model, when you only have a little.</dd></div><div><dt>Error</dt><dd>How wrong the predictions are. Lower is better.</dd></div><div><dt>Repeat</dt><dd>Running the experiment again on a different random split of the data. We did 15.</dd></div><div><dt>Plain model</dt><dd>The same model without CRDA.</dd></div></dl></div>
   </section>
 
   <section id="numbers">
     <h2>Numbers that may come up</h2>
-    <div class="card"><dl><div><dt class="num">4 laptops · 2 datasets</dt><dd>Alvi, Anik, Atul and Samim each ran on their own laptop. The two datasets are Energy Efficiency and Concrete Strength.</dd></div><div><dt class="num">15 repeats</dt><dd>Every run was repeated 15 times on different random splits, like the paper.</dd></div><div><dt class="num">8 runs · 120</dt><dd>Eight full runs, each of 15 repeats: 120 experiments.</dd></div><div><dt class="num">22 Oct · 13–16 Nov</dt><dd>When targets 1 and 2–3 were done. Target 4 is the problem log.</dd></div><div><dt class="num">19 · 8 · 4 · 7</dt><dd>Problem log: 19 entries, 8 resolved, 4 tested, 7 still open.</dd></div><div><dt class="num">11 Dec</dt><dd>The final presentation: 12–15 minutes, 10–12 slides.</dd></div></dl></div>
+    <div class="card"><dl><div><dt class="num">4 laptops</dt><dd>One each: Alvi, Anik, Atul and Samim.</dd></div><div><dt class="num">2 datasets</dt><dd>Energy Efficiency and Concrete Strength.</dd></div><div><dt class="num">15 repeats</dt><dd>Every run was repeated 15 times.</dd></div><div><dt class="num">19</dt><dd>Problems and differences in our list: 8 fixed, 4 tested, 7 still open.</dd></div></dl></div>
   </section>
 
   <section id="qa" class="qa">
     <h2>Likely questions</h2>
-    <article><p class="q">What is CRDA?</p><p>A way to make extra training rows when you only have a little data. It nudges one input number a little and keeps the same prediction mistake, so the new row keeps real-world noise.</p></article><article><p class="q">Why re-run a paper?</p><p>To check that its results hold up when other people run the code. That is what reproducibility means.</p></article><article><p class="q">Did you reproduce it?</p><p>Mostly. The gains show up in every run, close to the paper’s. We found two catches in how the paper scores it. The details are on slides 6 and 7.</p></article><article><p class="q">What did you promise in Week 5?</p><p>Four things: code running, plain-model results, a first comparison with the paper, and a problem log. All four are done.</p></article><article><p class="q">Why four laptops?</p><p>To see whether the operating system matters. Two are Windows and two are Macs.</p></article><article><p class="q">What is left?</p><p>Deciding how we report CRDA’s gain (the paper’s way or like for like), writing up the statistics, the final slides, and rehearsing. The final is on 11 December.</p></article>
+    <article><p class="q">What is CRDA?</p><p>A way to make extra practice data for a model when you only have a little.</p></article><article><p class="q">Why test a paper?</p><p>To check that its results hold up when other people run the code.</p></article><article><p class="q">So did it work?</p><p>Mostly yes. It helped in every run. But we found two catches in how the paper scores it.</p></article><article><p class="q">What did you promise in Week 5?</p><p>Get the code running, save results, compare with the paper, keep a problem list. All done.</p></article>
   </section>
 
   <section id="avoid">
     <h2>Don't say</h2>
-    <div class="card"><ul class="avoid"><li>That we “reproduced the paper exactly”. Say “mostly yes, with two catches”.</li><li>That CRDA does not work. It does, just less than one headline number suggests.</li><li>The details of the catches. Say “coming up”; Samim and Alvi cover them.</li></ul></div>
+    <div class="card"><ul class="avoid"><li>That we “proved” anything. Say “mostly yes, with two catches”.</li><li>The details of the catches. Say “coming up”.</li></ul></div>
   </section>
 
-  <footer>Every number comes from the group repository (results/) and is checked against the raw files by the deck's tests. The lines above are the deck's own speaker notes.</footer>
+  <footer>Every number comes from our group repository and is checked against the raw files. The lines above are the deck's own speaker notes.</footer>
 </div>
 
 <script>

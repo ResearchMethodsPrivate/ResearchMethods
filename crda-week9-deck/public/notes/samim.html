@@ -124,7 +124,7 @@ footer { color: var(--dim); font-size: 0.8em; }
 <div class="wrap">
   <header class="head">
     <h1>Samim's Week 9 notes</h1>
-    <p class="sub">Slides 4, 6. About 1.7 minutes of talking, in a talk of about 9 minutes. Say it in your own words; these lines are the simple version. 20 November 2026.</p>
+    <p class="sub">Slides 4, 6. About 1.1 minutes of talking. Say it in your own words; these lines are the simple version.</p>
     <div class="tools">
       <button id="smaller" type="button" aria-label="Smaller text">A−</button>
       <button id="larger" type="button" aria-label="Larger text">A+</button>
@@ -137,43 +137,43 @@ footer { color: var(--dim); font-size: 0.8em; }
   <section id="s4">
     <div class="head">
       <h2>Slide 4 · Results</h2>
-      <div class="pills"><span class="pill in">start: after Alvi asks you</span><span class="pill out">end: then Atul takes slide 5</span><span class="pill">≈ 26 s</span><span class="pill">3 clicks</span><span class="pill out">shared slide</span></div>
+      <div class="pills"><span class="pill in">start: after Alvi asks you</span><span class="pill out">end: then Atul takes slide 5</span><span class="pill">≈ 16 s</span><span class="pill">3 clicks</span><span class="pill out">shared slide</span></div>
     </div>
-    <div class="card lifeline"><p><strong>One line:</strong> CRDA lowered the error in every run, close to the paper. Samim shows it is not luck.</p></div>
-    <div class="card"><ol class="script"><li><span class="cue">Click 3</span><p class="line">Yes. A p-value is the chance of seeing a result like this by luck alone, and below 0.05 is the usual bar. On Concrete Strength, every one of the 15 repeats improved, for both models. A paired Wilcoxon test gives p equals 0.00006, the smallest value possible with 15 repeats. On Energy Efficiency, 12 to 14 of the 15 repeats improved. So CRDA’s gain is real.</p></li></ol></div>
-    <div class="example">Flip a coin 15 times and get heads every time: that is about as unlikely as it gets. Every one of 15 repeats improving is that kind of result. p = 2 ÷ 2¹⁵ = 0.00006.</div>
+    <div class="card lifeline"><p><strong>One line:</strong> CRDA helped in every run, close to the paper. Samim shows it is not luck.</p></div>
+    <div class="card"><ol class="script"><li><span class="cue">Click 3</span><p class="line">No. On Concrete Strength, all fifteen repeats got better, for both models. The chance of that happening by luck is tiny. We call it p equals 0.00006. Anything under 0.05 counts as not luck. So the gain is real.</p></li></ol></div>
+    <div class="example">Getting heads 15 times in a row. That is how unlikely “all 15 got better, by luck” is.</div>
   </section>
   <section id="s6">
     <div class="head">
       <h2>Slide 6 · The first catch</h2>
-      <div class="pills"><span class="pill in">start: after Atul</span><span class="pill">≈ 78 s</span><span class="pill">3 clicks</span></div>
+      <div class="pills"><span class="pill in">start: after Atul</span><span class="pill">≈ 49 s</span><span class="pill">3 clicks</span></div>
     </div>
-    <div class="card lifeline"><p><strong>One line:</strong> The paper’s table keeps runs its own safety test would reject. The gains stay similar, but the numbers are not like-for-like.</p></div>
-    <div class="card"><ol class="script"><li><span class="cue">Start</span><p class="line">Now the first catch. CRDA has a built-in safety test. It is meant to switch CRDA off when it does not clearly help. Each square here is one repeat. In the paper’s main table that test is switched off, so all 15 repeats count, even ones where the test would have said no.</p></li><li><span class="cue">Click 1</span><p class="line">When we switch the test on, the authors’ code throws away the repeats it rejects: two out of 15 for the neural network, four out of 15 for XGBoost. It does this silently. The run still finishes as normal, so you would not know unless you read the log.</p></li><li><span class="cue">Click 2</span><p class="line">Does that change the answer? Not much. With the test off, the gain is 29 percent for the neural network and 22 for XGBoost. With it on, it is 32 and 20. But the second set averages over fewer runs. In plain words: on those repeats the test said, CRDA did not clearly help here, so do not use it. The paper’s table counts them anyway.</p></li><li><span class="cue">Click 3</span><p class="line">So the paper’s conclusion survives, but its averages include runs that its own test would reject. That is why we say the numbers are not like-for-like.</p></li></ol><div class="rows"><div class="rowcard"><p class="who">Neural network</p><p>Test off: −28.7% over 15 repeats. Test on: −31.6% over the 13 that were kept (2 dropped).</p></div><div class="rowcard"><p class="who">XGBoost</p><p>Test off: −21.7% over 15 repeats. Test on: −19.8% over the 11 that were kept (4 dropped).</p></div></div></div>
-    <div class="example">Imagine 15 repeats. The safety test says “CRDA does not clearly help here” on 4 of them and the code drops those. The average is then over the 11 that are left.</div>
+    <div class="card lifeline"><p><strong>One line:</strong> The paper counts runs its own safety check would reject.</p></div>
+    <div class="card"><ol class="script"><li><span class="cue">Start</span><p class="line">Now the first catch. CRDA has a safety check. It should switch CRDA off when it does not clearly help. Each square here is one repeat. In the paper’s main table, the check is off. So all fifteen repeats count, even the ones the check would reject.</p></li><li><span class="cue">Click 1</span><p class="line">When we switch the check on, the code throws away the rejected repeats. Two for the neural network, four for XGBoost. It does this quietly, and the run still looks fine.</p></li><li><span class="cue">Click 2</span><p class="line">Does that change the answer? Not much. The gains are about the same. But the two sets of numbers use different runs, so we cannot compare them fairly.</p></li><li><span class="cue">Click 3</span><p class="line">So the paper is not wrong. But its numbers include runs that its own check would reject.</p></li></ol><div class="rows"><div class="rowcard"><p class="who">Neural network</p><p>Check on: 2 of 15 repeats dropped.</p></div><div class="rowcard"><p class="who">XGBoost</p><p>Check on: 4 of 15 repeats dropped.</p></div></div></div>
+    <div class="example">15 repeats. The check rejects 4. The code drops them quietly and averages the other 11.</div>
   </section>
 
   <section id="words">
     <h2>Words in plain English</h2>
-    <div class="card"><dl><div><dt>p-value</dt><dd>The chance of seeing a result like this by luck alone. Below 0.05 is the usual bar.</dd></div><div><dt>Wilcoxon test</dt><dd>A test that checks, repeat by repeat, whether one set of errors is lower than another. “Paired” means each repeat is compared with itself.</dd></div><div><dt>Safety test</dt><dd>CRDA’s own check. It is meant to switch CRDA off when it does not clearly help.</dd></div><div><dt>Repeat (seed)</dt><dd>Running the whole experiment again with a different random split of the data into training and test. We did 15.</dd></div><div><dt>Plain model</dt><dd>The same model without CRDA.</dd></div></dl></div>
+    <div class="card"><dl><div><dt>p-value</dt><dd>The chance a result is just luck. Under 0.05 counts as not luck.</dd></div><div><dt>Safety check</dt><dd>CRDA’s own check. It should switch CRDA off when it does not clearly help.</dd></div><div><dt>Repeat</dt><dd>Running the experiment again on a different random split of the data. We did 15.</dd></div><div><dt>Plain model</dt><dd>The same model without CRDA.</dd></div></dl></div>
   </section>
 
   <section id="numbers">
     <h2>Numbers that may come up</h2>
-    <div class="card"><dl><div><dt class="num">15 of 15</dt><dd>Repeats that improved on Concrete Strength, for both models.</dd></div><div><dt class="num">p = 0.00006</dt><dd>Paired Wilcoxon test. It is the smallest value possible with 15 repeats: 2 ÷ 2¹⁵.</dd></div><div><dt class="num">0.05</dt><dd>The usual bar for “unlikely to be luck”.</dd></div><div><dt class="num">12 to 14 of 15</dt><dd>Repeats that improved on Energy Efficiency, across Alvi’s and Anik’s runs.</dd></div><div><dt class="num">2 of 15 · 4 of 15</dt><dd>Repeats the code dropped with the safety test on: neural network and XGBoost.</dd></div><div><dt class="num">13 · 11</dt><dd>Repeats kept: neural network and XGBoost.</dd></div><div><dt class="num">29 · 22 → 32 · 20</dt><dd>Gain with the test off, then on: neural network, XGBoost. The second pair averages over fewer runs.</dd></div></dl></div>
+    <div class="card"><dl><div><dt class="num">15 of 15</dt><dd>Repeats that got better on Concrete Strength, both models.</dd></div><div><dt class="num">p = 0.00006</dt><dd>The chance this is luck. Under 0.05 counts as not luck.</dd></div><div><dt class="num">2 of 15 · 4 of 15</dt><dd>Repeats dropped with the safety check on: neural network, XGBoost.</dd></div></dl></div>
   </section>
 
   <section id="qa" class="qa">
     <h2>Likely questions</h2>
-    <article><p class="q">What is a p-value?</p><p>The chance of seeing a result like this by luck alone. Under 0.05 is the usual bar. Ours is 0.00006.</p></article><article><p class="q">Why exactly 0.00006?</p><p>With 15 repeats that all improve, that is the smallest p the test can give: 2 ÷ 2¹⁵. It means “every single repeat improved”.</p></article><article><p class="q">What is the Wilcoxon test?</p><p>It compares two sets of errors repeat by repeat and checks whether one is lower. It does not assume the errors follow a bell curve.</p></article><article><p class="q">What is the safety test?</p><p>CRDA’s own check. If CRDA does not clearly help on a repeat, the method is meant to be switched off.</p></article><article><p class="q">Why does the paper turn it off?</p><p>Its main-table settings have the filter off, so every repeat counts. We do not know the authors’ reason.</p></article><article><p class="q">Does that make the paper wrong?</p><p>No. The gains with the test on are similar. But the averages are over different runs, so they are not like-for-like.</p></article><article><p class="q">How do you know the code drops runs?</p><p>Its logs print an error line for each dropped repeat, and the run still finishes normally. Two for the neural network, four for XGBoost.</p></article>
+    <article><p class="q">What is a p-value?</p><p>The chance a result is just luck. Ours is 0.00006, far under 0.05.</p></article><article><p class="q">What is the safety check?</p><p>CRDA’s own check. It should switch CRDA off when it does not clearly help.</p></article><article><p class="q">Why does the paper turn it off?</p><p>Its main table has it off, so every repeat counts. We do not know the reason.</p></article><article><p class="q">Does that make the paper wrong?</p><p>No. The gains with the check on are about the same. But the numbers cannot be compared fairly.</p></article><article><p class="q">How do you know the code drops runs?</p><p>Its logs print an error for each dropped repeat, and the run still finishes.</p></article>
   </section>
 
   <section id="avoid">
     <h2>Don't say</h2>
-    <div class="card"><ul class="avoid"><li>That the paper’s conclusion is wrong. Say “survives, but not like-for-like”.</li><li>That the safety test is a mistake. It is meant to switch CRDA off.</li><li>That p = 0.00006 means “a huge effect”. It means “not luck”.</li></ul></div>
+    <div class="card"><ul class="avoid"><li>That the paper’s conclusion is wrong.</li><li>That p = 0.00006 means a “huge effect”. It means “not luck”.</li></ul></div>
   </section>
 
-  <footer>Every number comes from the group repository (results/) and is checked against the raw files by the deck's tests. The lines above are the deck's own speaker notes.</footer>
+  <footer>Every number comes from our group repository and is checked against the raw files. The lines above are the deck's own speaker notes.</footer>
 </div>
 
 <script>

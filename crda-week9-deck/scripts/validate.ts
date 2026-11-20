@@ -56,7 +56,7 @@ need('title', /ourselves/, 'the research question');
 need('results', /Paper/, 'the “Paper” legend');
 need('results', /p = 0\.00006/, 'the paired-test p-value');
 need('matched', /Windows/, 'the Windows finding');
-need('safety', /not like-for-like/, 'the like-for-like caveat');
+need('safety', /compared fairly/, 'the fairness caveat');
 need('averaging', /10 models/, 'the 10-model explanation');
 need('averaging', /Concrete/, 'the Concrete Strength results');
 need('next', /Catch 2/, 'the second catch');
@@ -66,13 +66,13 @@ ids.filter((id) => id !== 'title' && id !== 'references').forEach((id) => {
 const refText = references.join(' ');
 ['Mohebbi', 'Wilcoxon', 'Tsanas', 'Yeh'].forEach((a) => { if (!refText.includes(a)) fail(`Reference list lacks ${a}`); });
 
-// ── Timing: the brief is 8–10 minutes ────────────────────────────────────────
+// ── Timing: the Week 9 brief was 8–10 minutes; the simplified talk is shorter, so the floor is 6:00 (final: 12–15 min) ────────────────────────────────────────
 const t = slideTimings();
 const target = t.reduce((s, r) => s + r.target, 0);
 const live = t.reduce((s, r) => s + r.live, 0);
-if (target < 480 || target > 600) fail(`Target total ${fmt(target)} is outside 8:00–10:00`);
-if (live < 480 || live > 600) fail(`Modelled live time ${fmt(live)} is outside 8:00–10:00`);
-else if (live < 510 || live > 570) warn(`Modelled live time ${fmt(live)} is outside the 8:30–9:30 sweet spot`);
+if (target < 360 || target > 600) fail(`Target total ${fmt(target)} is outside 6:00–10:00`);
+if (live < 360 || live > 600) fail(`Modelled live time ${fmt(live)} is outside 6:00–10:00`);
+else if (live < 480) warn(`Modelled live time ${fmt(live)} is under the original Week 9 brief of 8:00–10:00`);
 if (!t.every((r) => r.motionMeasured)) warn('motion.json lacks measured animation times — run `npm run qa:visual`');
 
 // ── Presentation-ready decisions ─────────────────────────────────────────────

@@ -8,7 +8,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
-import { gapPct, ourRunCount, run, signed } from '../../src/content/derive';
+import { gainSplit, gapPct, ourRunCount, run, signed } from '../../src/content/derive';
 import { averaging, filterOn, perSeedSpread, runs, type Run, type Source } from '../../src/content/results';
 
 const RESULTS = resolve(process.cwd(), '..', 'results');
@@ -259,6 +259,20 @@ test('the 10-model test: the rounded numbers said in the notes and shown on slid
   // "most of it" for XGBoost on Energy Efficiency (about 70 %)
   const x = get('alvi', ee, 'XGBoost');
   assert.ok(x.averagingVsSingle / x.crdaVsSingle > 0.65 && x.averagingVsSingle / x.crdaVsSingle < 0.75);
+});
+
+test('slide 7: the split of each gain into averaging and CRDA’s own, as shown and said (15 of 22 and so on)', () => {
+  const show = (s: 'alvi' | 'samim', d: Run['dataset'], m: Run['model']) => {
+    const g = gainSplit(s, d, m);
+    return `${Math.round(g.averaging)} of ${Math.round(g.total)}`;
+  };
+  assert.equal(show('alvi', 'EnergyEfficiency', 'MLP'), '0 of 29');
+  assert.equal(show('alvi', 'EnergyEfficiency', 'XGBoost'), '15 of 22');
+  assert.equal(show('samim', 'ConcreteStrength', 'MLP'), '17 of 24');
+  assert.equal(show('samim', 'ConcreteStrength', 'XGBoost'), '14 of 15');
+  for (const g of [gainSplit('alvi', 'EnergyEfficiency', 'MLP'), gainSplit('samim', 'ConcreteStrength', 'XGBoost')]) {
+    assert.ok(g.averaging >= 0 && g.own >= 0 && close(g.averaging + g.own, g.total));
+  }
 });
 
 test('the 10-model test: paired Wilcoxon p-values (CRDA vs the plain 10-model average)', () => {

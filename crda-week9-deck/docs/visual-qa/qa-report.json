@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-20T10:14:09.841Z",
+  "generated": "2026-11-20T10:40:46.459Z",
   "browser": "Chromium 153.0.8010.12 (Playwright 1.63.0, headless)",
   "motionSeconds": {
     "title": {
@@ -33,9 +33,9 @@
     "matched": {
       "intro": 0.601,
       "steps": [
-        0.82,
+        0.7,
         0.94,
-        0.94
+        0.7
       ]
     },
     "safety": {
@@ -47,17 +47,17 @@
       ]
     },
     "averaging": {
-      "intro": 1.551,
+      "intro": 1.851,
       "steps": [
-        1.5,
-        1.5,
+        1.41,
+        1.41,
         0.6
       ]
     },
     "next": {
       "intro": 2.001,
       "steps": [
-        2.17
+        2.03
       ]
     },
     "references": {
