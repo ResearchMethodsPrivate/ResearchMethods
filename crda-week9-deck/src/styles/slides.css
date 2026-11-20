@@ -15,6 +15,8 @@
 .paper-line { font-size: 30px; color: var(--ink-dim); line-height: 1.4; margin-bottom: 44px !important; }
 .paper-line strong { display: block; color: var(--ink); font-size: 34px; font-weight: 600; font-family: var(--f-display); }
 .title-foot { display: flex; flex-direction: column; gap: 22px; align-items: flex-start; }
+.group-badge { display: inline-flex; align-items: center; gap: 16px; font-family: var(--f-display); font-size: 38px; font-weight: 650; letter-spacing: -0.01em; color: var(--ink); }
+.group-four { width: 52px; height: 52px; border-radius: 50%; border: 3px solid var(--cyan); color: var(--cyan); display: grid; place-items: center; font-family: var(--f-display); font-size: 32px; font-weight: 700; line-height: 1; }
 .group-line { font-family: var(--f-mono); font-size: 24px; color: var(--ink-dim); letter-spacing: 0.04em; }
 .answer { padding: 34px 40px 26px; }
 .answer-k { font-family: var(--f-mono); font-size: 22px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cyan); margin-bottom: 8px !important; }

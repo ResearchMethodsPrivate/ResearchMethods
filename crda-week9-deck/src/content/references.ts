@@ -24,7 +24,7 @@ export const referenceGroups: { title: string; items: string[] }[] = [
     title: 'Statistics and our results',
     items: [
       'Wilcoxon, F. (1945) ‘Individual comparisons by ranking methods’, <em>Biometrics Bulletin</em>, 1(6), pp. 80–83.',
-      'Triple A (2026) <em>CRDA reproduction: raw results, logs and problem log</em> [data files]. Group repository, <code>results/</code> folder (Alvi, Anik, Samim; 13–16 November 2026).',
+      'Fantastic Four (2026) <em>CRDA reproduction: raw results, logs and problem log</em> [data files]. Group repository, <code>results/</code> folder (Alvi, Anik, Samim; 13–16 November 2026).',
     ],
   },
 ];
