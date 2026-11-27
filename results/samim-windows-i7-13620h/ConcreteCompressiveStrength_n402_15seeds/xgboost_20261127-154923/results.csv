@@ -1,0 +1,6 @@
+dataset,metric,mean,std
+ConcreteCompressiveStrength_sample_402,mse,0.004859280728058766,0.00032665915397956345
+ConcreteCompressiveStrength_sample_402,aug_mse,0.004331819942466111,0.0003648588185176873
+ConcreteCompressiveStrength_sample_402,delta_mse,-11.675329652506406,3.0821254184197113
+ConcreteCompressiveStrength_sample_402,p_wilcoxon,0.0015625,0.0002827136189280257
+ConcreteCompressiveStrength_sample_402,should_proceed,1.0,0.0
