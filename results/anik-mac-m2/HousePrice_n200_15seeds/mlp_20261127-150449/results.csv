@@ -1,0 +1,6 @@
+dataset,metric,mean,std
+HousePrice_sample_200,mse,0.0010206246291155027,0.00011674049653587026
+HousePrice_sample_200,aug_mse,0.0005719088110626285,7.057208055940735e-05
+HousePrice_sample_200,delta_mse,-40.56621484072568,4.999737183786245
+HousePrice_sample_200,p_wilcoxon,0.00234375,0.00047460382522965293
+HousePrice_sample_200,should_proceed,1.0,0.0

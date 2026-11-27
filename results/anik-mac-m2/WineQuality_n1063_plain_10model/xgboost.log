@@ -1,0 +1,18 @@
+
+=== 2026-11-27T15:39:33 /Users/anikhossain/Downloads/ResearchMethods/results/scripts/run_plain_ensemble.py xgboost WineQuality 1063 /Users/anikhossain/Downloads/ResearchMethods/results/anik-mac-m2/WineQuality_n1063_15seeds/xgboost_20261127-153441/interim_results/WineQuality_sample_1063_interim_results.csv /Users/anikhossain/Downloads/ResearchMethods/results/anik-mac-m2/WineQuality_n1063_plain_10model/xgboost.csv
+seed 985772: single 0.020474465375 (run 0.020474465375) | plain 10-model 0.019847336037 | CRDA 0.0203082521439 | 4s
+seed 305711: single 0.0243622609997 (run 0.0243622609997) | plain 10-model 0.0232147848827 | CRDA 0.0229462222591 | 6s
+seed 435829: single 0.018503144682 (run 0.018503144682) | plain 10-model 0.0184114396944 | CRDA 0.0190663513532 | 7s
+seed 117952: single 0.0221014529429 (run 0.0221014529429) | plain 10-model 0.0218253076962 | CRDA 0.0221385049026 | 9s
+seed 963395: single 0.0219840040896 (run 0.0219840040896) | plain 10-model 0.0215604721332 | CRDA 0.0217181915026 | 11s
+seed 152315: single 0.0198021197541 (run 0.0198021197541) | plain 10-model 0.0194573957598 | CRDA 0.0193298152 | 14s
+seed 882371: single 0.0212336848362 (run 0.0212336848362) | plain 10-model 0.0219198720551 | CRDA 0.0215639090406 | 15s
+seed 359783: single 0.0230671634205 (run 0.0230671634205) | plain 10-model 0.0244577998921 | CRDA 0.0242468024535 | 17s
+seed 304137: single 0.0200406331914 (run 0.0200406331914) | plain 10-model 0.0204208504529 | CRDA 0.0203881896611 | 18s
+seed 122579: single 0.0163648238328 (run 0.0163648238328) | plain 10-model 0.0162569474512 | CRDA 0.0163860965041 | 20s
+seed 610581: single 0.0194536167218 (run 0.0194536167218) | plain 10-model 0.019806329713 | CRDA 0.0201080918107 | 22s
+seed 448242: single 0.0197561750455 (run 0.0197561750455) | plain 10-model 0.0201641024076 | CRDA 0.0207616294349 | 23s
+seed 374564: single 0.0189882085624 (run 0.0189882085624) | plain 10-model 0.0189009849722 | CRDA 0.0186259033086 | 25s
+seed 735831: single 0.0183557563167 (run 0.0183557563167) | plain 10-model 0.0181175833733 | CRDA 0.0180545254719 | 28s
+seed 736326: single 0.0241134178067 (run 0.0241134178067) | plain 10-model 0.0236765463023 | CRDA 0.0236702398692 | 30s
+Wrote /Users/anikhossain/Downloads/ResearchMethods/results/anik-mac-m2/WineQuality_n1063_plain_10model/xgboost.csv

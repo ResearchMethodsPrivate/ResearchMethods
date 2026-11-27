@@ -1,0 +1,6 @@
+dataset,metric,mean,std
+WineQuality_sample_1063,mse,0.022912014709919843,0.0009125967229871327
+WineQuality_sample_1063,aug_mse,0.022835415757078443,0.001334578039697938
+WineQuality_sample_1063,delta_mse,-0.34139397839040836,3.407982602701152
+WineQuality_sample_1063,p_wilcoxon,0.00546875,0.0023281974061926925
+WineQuality_sample_1063,should_proceed,1.0,0.0
