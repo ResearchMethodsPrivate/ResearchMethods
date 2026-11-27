@@ -1,0 +1,76 @@
+
+=== 2026-11-27T15:07:45 /Users/anikhossain/Downloads/ResearchMethods/results/scripts/run_plain_ensemble.py mlp HousePrice 200 /Users/anikhossain/Downloads/ResearchMethods/results/anik-mac-m2/HousePrice_n200_15seeds/mlp_20261127-150449/interim_results/HousePrice_sample_200_interim_results.csv /Users/anikhossain/Downloads/ResearchMethods/results/anik-mac-m2/HousePrice_n200_plain_10model/mlp.csv
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+seed 985772: single 0.000962573760898 (run 0.000962573760898) | plain 10-model 0.000701305281141 | CRDA 0.000532367945042 | 6s
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+seed 305711: single 0.000593319910876 (run 0.000593319910876) | plain 10-model 0.000747215695806 | CRDA 0.000530329279978 | 9s
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+seed 435829: single 0.00118328591927 (run 0.00118328591927) | plain 10-model 0.000565651265269 | CRDA 0.000836476967466 | 12s
+seed 117952: single 0.0014554305563 (run 0.0014554305563) | plain 10-model 0.000254324920409 | CRDA 0.000287968376535 | 16s
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+seed 963395: single 0.000498565715078 (run 0.000498565715078) | plain 10-model 0.000337102363076 | CRDA 0.000316123473261 | 18s
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+seed 152315: single 0.000743127794193 (run 0.000743127794193) | plain 10-model 0.00071168616707 | CRDA 0.000368105379473 | 20s
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+seed 882371: single 0.000974554114914 (run 0.000974554114914) | plain 10-model 0.00079460801987 | CRDA 0.000528035048374 | 23s
+seed 359783: single 0.00100102371499 (run 0.00100102371499) | plain 10-model 0.000896379022773 | CRDA 0.000590075329435 | 27s
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+seed 304137: single 0.000731090701848 (run 0.000731090701848) | plain 10-model 0.000678787215865 | CRDA 0.000432183965634 | 29s
+seed 122579: single 0.00117605705511 (run 0.00117605705511) | plain 10-model 0.000349546612782 | CRDA 0.000486999222853 | 31s
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+seed 610581: single 0.00149486797671 (run 0.00149486797671) | plain 10-model 0.000662663052384 | CRDA 0.000647455042688 | 34s
+seed 448242: single 0.000841084206191 (run 0.000841084206191) | plain 10-model 0.000618372061775 | CRDA 0.000399099992764 | 36s
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+seed 374564: single 0.00101142818003 (run 0.00101142818003) | plain 10-model 0.000878548296011 | CRDA 0.000887251634025 | 39s
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+seed 735831: single 0.000437687432746 (run 0.000437687432746) | plain 10-model 0.000390308946302 | CRDA 0.000396073243056 | 41s
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+/Users/anikhossain/CRDA/.venv/lib/python3.11/site-packages/sklearn/neural_network/_multilayer_perceptron.py:780: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (1000) reached and the optimization hasn't converged yet.
+  warnings.warn(
+seed 736326: single 0.00220527239758 (run 0.00220527239758) | plain 10-model 0.00221061431241 | CRDA 0.00134008726536 | 44s
+Wrote /Users/anikhossain/Downloads/ResearchMethods/results/anik-mac-m2/HousePrice_n200_plain_10model/mlp.csv
