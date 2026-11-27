@@ -8,8 +8,8 @@
 .reveal .title-team { font-size: 36px; margin-top: 40px; }
 .reveal .title-date { font-family: var(--f-mono); font-size: 26px; color: var(--cyan); }
 
-.reveal blockquote.rq { margin: 0 0 56px; width: 100%; box-shadow: none; background: none; padding: 6px 0 6px 40px;
-  border-left: 5px solid var(--cyan); font-family: var(--f-display); font-size: 56px; line-height: 1.2; font-style: normal; }
+.reveal blockquote.rq { margin: 0 0 56px; width: 100%; box-shadow: none; background: none; padding: 6px 0;
+  font-family: var(--f-display); font-size: 56px; line-height: 1.2; font-style: normal; }
 
 .cards { display: grid; gap: 32px; }
 .cards.two { grid-template-columns: 1fr 1fr; }
