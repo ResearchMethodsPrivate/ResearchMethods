@@ -1,0 +1,18 @@
+
+=== 2026-11-27T15:56:04 D:\MSc Advanced Computer Science\Research Methods\Assignment 2\ResearchMethods\results\scripts\run_plain_ensemble.py xgboost EnergyEfficiency 459 D:\MSc Advanced Computer Science\Research Methods\Assignment 2\ResearchMethods\results\alvi-windows-ryzen7\EnergyEfficiency_n459_15seeds\xgboost_20261127-154733\interim_results\EnergyEfficiency_sample_459_interim_results.csv D:\MSc Advanced Computer Science\Research Methods\Assignment 2\ResearchMethods\results\alvi-windows-ryzen7\EnergyEfficiency_n459_plain_10model\xgboost.csv
+seed 985772: single 0.00162336383036 (run 0.00162336383036) | plain 10-model 0.00143092944283 | CRDA 0.00106570509728 | 26s
+seed 305711: single 0.0011837899951 (run 0.0011837899951) | plain 10-model 0.00131877867842 | CRDA 0.00157519439863 | 28s
+seed 435829: single 0.00268656443921 (run 0.00268656443921) | plain 10-model 0.0019265860653 | CRDA 0.0019218809046 | 29s
+seed 117952: single 0.0012716079894 (run 0.0012716079894) | plain 10-model 0.00151165270802 | CRDA 0.00125075959161 | 32s
+seed 963395: single 0.00119593626431 (run 0.00119593626431) | plain 10-model 0.000884515629618 | CRDA 0.000768906980709 | 34s
+seed 152315: single 0.00170489144368 (run 0.00170489144368) | plain 10-model 0.00181700325425 | CRDA 0.00171708073805 | 36s
+seed 882371: single 0.000813486070268 (run 0.000813486070268) | plain 10-model 0.000838652947687 | CRDA 0.000783003160806 | 37s
+seed 359783: single 0.00173564858736 (run 0.00173564858736) | plain 10-model 0.00128491066778 | CRDA 0.00138159287351 | 39s
+seed 304137: single 0.00222741392931 (run 0.00222741392931) | plain 10-model 0.00203620373794 | CRDA 0.00230250429098 | 40s
+seed 122579: single 0.00178589879985 (run 0.00178589879985) | plain 10-model 0.00168591649349 | CRDA 0.00157035379849 | 42s
+seed 610581: single 0.00201901866534 (run 0.00201901866534) | plain 10-model 0.000921718225958 | CRDA 0.000895393931791 | 44s
+seed 448242: single 0.00182565547693 (run 0.00182565547693) | plain 10-model 0.00202097899269 | CRDA 0.00184788439693 | 45s
+seed 374564: single 0.00127976611186 (run 0.00127976611186) | plain 10-model 0.0014179739243 | CRDA 0.00106221114259 | 47s
+seed 735831: single 0.00219908355969 (run 0.00219908355969) | plain 10-model 0.001971516173 | CRDA 0.00220582327319 | 49s
+seed 736326: single 0.00200052945155 (run 0.00200052945155) | plain 10-model 0.00165342493711 | CRDA 0.00169934107017 | 51s
+Wrote D:\MSc Advanced Computer Science\Research Methods\Assignment 2\ResearchMethods\results\alvi-windows-ryzen7\EnergyEfficiency_n459_plain_10model\xgboost.csv

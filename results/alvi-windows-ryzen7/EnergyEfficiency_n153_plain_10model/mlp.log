@@ -1,0 +1,18 @@
+
+=== 2026-11-27T15:08:05 D:\MSc Advanced Computer Science\Research Methods\Assignment 2\ResearchMethods\results\scripts\run_plain_ensemble.py mlp EnergyEfficiency 153 D:\MSc Advanced Computer Science\Research Methods\Assignment 2\ResearchMethods\results\alvi-windows-ryzen7\EnergyEfficiency_n153_15seeds\mlp_20261127-150043\interim_results\EnergyEfficiency_sample_153_interim_results.csv D:\MSc Advanced Computer Science\Research Methods\Assignment 2\ResearchMethods\results\alvi-windows-ryzen7\EnergyEfficiency_n153_plain_10model\mlp.csv
+seed 985772: single 0.0108819978633 (run 0.0108819978633) | plain 10-model 0.00851680058553 | CRDA 0.00755347887648 | 21s
+seed 305711: single 0.00447117025802 (run 0.00447117025802) | plain 10-model 0.00366970723071 | CRDA 0.00339388569251 | 22s
+seed 435829: single 0.00682413174098 (run 0.00682413174098) | plain 10-model 0.00472400852461 | CRDA 0.00290843775543 | 23s
+seed 117952: single 0.00547912913717 (run 0.00547912913717) | plain 10-model 0.00376487922587 | CRDA 0.00616926826658 | 24s
+seed 963395: single 0.00297642192919 (run 0.00297642192919) | plain 10-model 0.00272861675223 | CRDA 0.00249755344141 | 25s
+seed 152315: single 0.00467264991791 (run 0.00467264991791) | plain 10-model 0.00597492294199 | CRDA 0.00631114447683 | 26s
+seed 882371: single 0.004081921429 (run 0.004081921429) | plain 10-model 0.00315597170184 | CRDA 0.00315815687733 | 28s
+seed 359783: single 0.00698959698919 (run 0.00698959698919) | plain 10-model 0.00793625484568 | CRDA 0.00591908815026 | 29s
+seed 304137: single 0.0081018821176 (run 0.0081018821176) | plain 10-model 0.00340978250031 | CRDA 0.00254156059142 | 30s
+seed 122579: single 0.00552250017632 (run 0.00552250017632) | plain 10-model 0.00324910839856 | CRDA 0.00228685671398 | 31s
+seed 610581: single 0.00534955007873 (run 0.00534955007873) | plain 10-model 0.00469059879604 | CRDA 0.00572560302885 | 32s
+seed 448242: single 0.0041670881937 (run 0.0041670881937) | plain 10-model 0.00226870952388 | CRDA 0.00154383034244 | 33s
+seed 374564: single 0.00571717822187 (run 0.00571717822187) | plain 10-model 0.00507950376697 | CRDA 0.00416134549666 | 34s
+seed 735831: single 0.00635265242466 (run 0.00635265242466) | plain 10-model 0.00723329652749 | CRDA 0.00804884811105 | 35s
+seed 736326: single 0.00587101281688 (run 0.00587101281688) | plain 10-model 0.00347935292539 | CRDA 0.00344893180935 | 36s
+Wrote D:\MSc Advanced Computer Science\Research Methods\Assignment 2\ResearchMethods\results\alvi-windows-ryzen7\EnergyEfficiency_n153_plain_10model\mlp.csv
