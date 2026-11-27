@@ -6,7 +6,7 @@ Anik's independent repeat of Alvi's Energy Efficiency runs at the paper's Table 
 - **Machine:** Mac with Apple M2 (8 cores), 8 GB RAM, macOS 14.6.1 (arm64).
 - **Code:** https://github.com/mhmohebbi/CRDA at `811e82ef29f34488384bffaa2fccf7775810345e`, unmodified. Added only `demo/run_table1.py`, copied from `results/scripts/run_table1.py`.
 - **Environment:** Python 3.11.5 (python.org build), torch 2.7.0, scikit-learn 1.7.0rc1, xgboost 3.0.1, numpy 2.2.6, Graphviz `dot` 14.1.2.
-- **Settings:** same as Alvi's (15 seeds, `sample_sizes=[765]`, `hyperparam_tune=True`, `ignore_filter=True`, ±10 %, weight 0.9, `random_seed=0`).
+- **Settings:** same as Alvi's (15 seeds, `sample_sizes=[765]`, `hyperparam_tune=True`, `ignore_filter=True`, `random_seed=0`). The code tunes the CRDA settings (features, augmentation size, weight, perturbation range) for every seed; see [`../README.md`](../README.md) and `params/`. *(Corrected 27 Nov 2026.)*
 - **Commands** (from `demo/`): `python run_table1.py mlp 15 EnergyEfficiency 765` and `python run_table1.py xgboost 15 EnergyEfficiency 765`.
 - **Run time:** MLP 403.86 s, XGBoost 364.89 s (`Total time taken` in the logs).
 

@@ -6,7 +6,7 @@ Samim's Week 9 runs: Concrete Strength at the paper's Table 1 settings, then the
 - **Machine:** Windows 11 Home (build 26300), Intel Core i7-13620H, 16 GB RAM, Intel UHD graphics (not used).
 - **Code:** https://github.com/mhmohebbi/CRDA at `811e82ef29f34488384bffaa2fccf7775810345e`, unmodified. Added only `demo/run_table1.py`, copied from `results/scripts/run_table1.py`.
 - **Environment:** Python 3.11.18 (uv), torch 2.7.0+cpu, scikit-learn 1.7.0rc1, xgboost 3.0.1, numpy 2.2.6, Graphviz `dot` 12.2.1.
-- **Settings:** 15 seeds, `sample_sizes=[1005]` (Concrete) and `[765]` (Energy Efficiency, the paper's largest subset), `hyperparam_tune=True`, ±10 %, augmented-data weight 0.9, `random_seed=0`. The first two runs use the Table 1 setting `ignore_filter=True`; the last two add `--no-ignore-filter`, leaving the filter **on**.
+- **Settings:** 15 seeds, `sample_sizes=[1005]` (Concrete) and `[765]` (Energy Efficiency, the paper's largest subset), `hyperparam_tune=True`, `random_seed=0`. The code tunes the CRDA settings (features, augmentation size, weight, perturbation range) for every seed; see [`../README.md`](../README.md) and `params/` *(corrected 27 Nov 2026)*. The first two runs use the Table 1 setting `ignore_filter=True`; the last two add `--no-ignore-filter`, leaving the filter **on**.
 - **Commands** (from `demo/`):
   - `python run_table1.py mlp 15 ConcreteCompressiveStrength 1005`
   - `python run_table1.py xgboost 15 ConcreteCompressiveStrength 1005`
