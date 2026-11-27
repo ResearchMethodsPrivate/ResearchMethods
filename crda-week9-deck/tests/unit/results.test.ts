@@ -154,10 +154,12 @@ test('per-seed spread example is Alvi’s Energy Efficiency neural-network run',
 
 test('“6–22 minutes per run” holds for every run log', () => {
   const secs: number[] = [];
+  // The claim is about the Week 9 runs (765 and 1005 rows). Week 12 added other sizes.
+  const week12 = /_n(?!765_|1005_)\d+_/;
   const walk = (dir: string) => {
     for (const e of readdirSync(dir, { withFileTypes: true })) {
       const p = join(dir, e.name);
-      if (e.isDirectory()) { if (!['params', 'interim_results', 'causal_graphs', 'correlation_matrices'].includes(e.name)) walk(p); }
+      if (e.isDirectory()) { if (!['params', 'interim_results', 'causal_graphs', 'correlation_matrices'].includes(e.name) && !week12.test(e.name)) walk(p); }
       else if (/^table1-.*\.log$/.test(e.name) && !/1seed/.test(e.name)) {
         for (const m of readFileSync(p, 'utf8').matchAll(/Total time taken: ([\d.]+) seconds/g)) secs.push(+m[1]);
       }

@@ -1,6 +1,6 @@
 # Hypotheses and analysis plan
 
-Written 27 November 2026, **before the new runs** listed at the end. Status: proposed, to be confirmed by the team before anyone starts those runs.
+Written 27 November 2026, **before the new runs** listed at the end. Status: agreed by all four on 27 November 2026, before the new runs started (as confirmed by Alvi).
 
 **What we already knew when writing this:** the Table 1 results for four cells (Energy Efficiency 765 rows and Concrete Strength 1005 rows, MLP and XGBoost) and the 10-model test on them. For those four, these hypotheses are **not** set in advance. They are set in advance only for the 30 new cells.
 
