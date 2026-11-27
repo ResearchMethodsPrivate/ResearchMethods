@@ -1,0 +1,18 @@
+
+=== 2026-11-27T15:21:32 /Users/atulmathur/ResearchMethods/results/scripts/run_plain_ensemble.py xgboost 294_satellite_image 1287 /Users/atulmathur/ResearchMethods/results/atul-mac-m5-pro/294_satellite_image_n1287_15seeds/xgboost_20261127-151544/interim_results/294_satellite_image_sample_1287_interim_results.csv /Users/atulmathur/ResearchMethods/results/atul-mac-m5-pro/294_satellite_image_n1287_plain_10model/xgboost.csv
+seed 985772: single 0.0167929473148 (run 0.0167929473148) | plain 10-model 0.0163753940261 | CRDA 0.0161528492617 | 5s
+seed 305711: single 0.0217900041218 (run 0.0217900041218) | plain 10-model 0.0211489975137 | CRDA 0.0212390875614 | 7s
+seed 435829: single 0.0186583590669 (run 0.0186583590669) | plain 10-model 0.0196262523079 | CRDA 0.0200690412224 | 9s
+seed 117952: single 0.0156806215961 (run 0.0156806215961) | plain 10-model 0.0139468376311 | CRDA 0.0137623722487 | 11s
+seed 963395: single 0.0196399028478 (run 0.0196399028478) | plain 10-model 0.0182677364725 | CRDA 0.0189107940205 | 13s
+seed 152315: single 0.015703840223 (run 0.015703840223) | plain 10-model 0.0156649799935 | CRDA 0.0152811873511 | 16s
+seed 882371: single 0.0191924237271 (run 0.0191924237271) | plain 10-model 0.0172606418795 | CRDA 0.0176743550483 | 18s
+seed 359783: single 0.0177632594183 (run 0.0177632594183) | plain 10-model 0.0162165905145 | CRDA 0.0170130493317 | 20s
+seed 304137: single 0.0175190474636 (run 0.0175190474636) | plain 10-model 0.0151086228267 | CRDA 0.0147473783109 | 21s
+seed 122579: single 0.018353260702 (run 0.018353260702) | plain 10-model 0.0173867820261 | CRDA 0.0175116132899 | 24s
+seed 610581: single 0.0199237271981 (run 0.0199237271981) | plain 10-model 0.0179129663037 | CRDA 0.0179483223174 | 26s
+seed 448242: single 0.0154729036289 (run 0.0154729036289) | plain 10-model 0.0151269770532 | CRDA 0.0143863500962 | 28s
+seed 374564: single 0.0174449691736 (run 0.0174449691736) | plain 10-model 0.0166836882375 | CRDA 0.0169027320125 | 30s
+seed 735831: single 0.0159881885684 (run 0.0159881885684) | plain 10-model 0.0157794505496 | CRDA 0.0161359895653 | 33s
+seed 736326: single 0.0167023546951 (run 0.0167023546951) | plain 10-model 0.0173737466314 | CRDA 0.0168723156098 | 35s
+Wrote /Users/atulmathur/ResearchMethods/results/atul-mac-m5-pro/294_satellite_image_n1287_plain_10model/xgboost.csv

@@ -1,0 +1,6 @@
+dataset,metric,mean,std
+294_satellite_image_sample_1287,mse,0.0177750539830326,0.00047206224261950216
+294_satellite_image_sample_1287,aug_mse,0.01697382914985696,0.0005321908416192
+294_satellite_image_sample_1287,delta_mse,-4.537309909161452,1.4652370810369943
+294_satellite_image_sample_1287,p_wilcoxon,0.0010416666666666667,6.510416666666667e-05
+294_satellite_image_sample_1287,should_proceed,1.0,0.0

@@ -1,0 +1,6 @@
+dataset,metric,mean,std
+ParkinsonsTelemonitoring_sample_1175,mse,0.0007856492598912197,2.6691070276067154e-05
+ParkinsonsTelemonitoring_sample_1175,aug_mse,0.0007199846649899033,3.1682525927517186e-05
+ParkinsonsTelemonitoring_sample_1175,delta_mse,-8.399820264425273,2.473321465139284
+ParkinsonsTelemonitoring_sample_1175,p_wilcoxon,0.0010416666666666667,6.510416666666667e-05
+ParkinsonsTelemonitoring_sample_1175,should_proceed,1.0,0.0
