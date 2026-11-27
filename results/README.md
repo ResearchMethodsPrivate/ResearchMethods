@@ -7,7 +7,7 @@ Each folder is one machine. Files are copied unedited from the authors' code (`r
 - **Run:** 13 Nov 2026, 10:57–11:25, Alvi's laptop (Windows 11, AMD Ryzen 7 5800H), CPU only.
 - **Code:** https://github.com/mhmohebbi/CRDA at `811e82ef29f34488384bffaa2fccf7775810345e`, unmodified. Added only `scripts/run_table1.py` (here).
 - **Environment:** Python 3.11.15, torch 2.7.0+cpu, scikit-learn 1.7.0rc1, xgboost 3.0.1, numpy 2.2.6.
-- **Settings** (copied from the authors' saved `experiments/EnergyEfficiency/*/config.json`): 15 seeds, `sample_sizes=[765]` (the paper's largest subset), `hyperparam_tune=True`, `ignore_filter=True`, up to 5 features perturbed, ±10%, augmented-data weight 0.9, `random_seed=0`.
+- **Settings** (copied from the authors' saved `experiments/EnergyEfficiency/*/config.json`): 15 seeds, `sample_sizes=[765]` (the paper's largest subset), `hyperparam_tune=True`, `ignore_filter=True`, `random_seed=0`. Because `hyperparam_tune=True`, the code also tunes the CRDA settings for every seed (Optuna, up to 30 trials): 1–5 features perturbed, augmentation size 0.5–1.5, augmented-data weight 0.25–1.0, perturbation range from ±10 % to ±100 %. The chosen values are saved in each run's `params/` folder, so the config defaults (5 features, ±10 %, weight 0.9) are **not** what was used. *(Corrected 27 Nov 2026.)*
 - **Command:** from `demo/`: `python run_table1.py <mlp|xgboost> 15 EnergyEfficiency 765`
 - **Run time:** MLP 984 s, XGBoost 646 s.
 

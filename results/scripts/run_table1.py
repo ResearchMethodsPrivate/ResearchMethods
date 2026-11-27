@@ -1,8 +1,10 @@
 """Our reproduction of the paper's Table 1 settings for one dataset and one model.
 Settings copied from the authors' saved config.json in experiments/<dataset>/ :
   num_seeds=15 (we pass fewer), hyperparam_tune=True, ignore_filter=True,
-  sample_sizes=[largest subset], max 5 features, +-10%, aug weight 0.9 (Config defaults).
-Run from inside demo/:  python run_table1.py <mlp|xgboost> <num_seeds> <EnergyEfficiency|ConcreteCompressiveStrength> <sample_size> [--no-ignore-filter]
+  sample_sizes=[the subset size you pass].
+With hyperparam_tune=True the authors' code tunes the CRDA settings for every seed (features perturbed,
+augmentation size, augmented-data weight, perturbation range), so the Config defaults are not used.
+Run from inside demo/:  python run_table1.py <mlp|xgboost> <num_seeds> <dataset file name without .csv> <sample_size> [--no-ignore-filter]
 """
 import os
 import sys
